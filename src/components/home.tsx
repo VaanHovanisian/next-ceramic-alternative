@@ -1,11 +1,10 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { Catalog } from "./catalog";
 
-interface Props {
-  className?: string;
-}
-
-export const Home: React.FC<Props> = (props) => {
-  const { className } = props;
-  return <div className={cn("", className)}></div>;
+export const Home = () => {
+  return (
+    <>
+      <Catalog />
+    </>
+  );
 };
