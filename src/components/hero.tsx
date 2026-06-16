@@ -9,21 +9,19 @@ interface Props {
   imageSrc?: string;
   title?: string;
   text?: string;
+  color?: string;
 }
 
-export const Hero: React.FC<Props> = ({ className, imageSrc, title, text }) => {
+export const Hero: React.FC<Props> = (props) => {
+  const { className, imageSrc, title, text, color } = props;
   return (
-    <section
-      className={cn("grid h-150 grid-cols-[1100px_642px_1fr]", className)}
-    >
-      <div className="relative bg-neutral-100">
-        <Image
-          src={imageSrc || "/hero.jpg"}
-          alt={title || "BAT TRANG"}
-          fill
-          className="object-cover h-full w-full"
-        />
-      </div>
+    <section className={cn("grid min-h-screen", className)}>
+      {/* <Image
+        src={imageSrc || "/hero.jpg"}
+        alt={title || "BAT TRANG"}
+        fill
+        className="object-cover h-full w-full"
+      /> */}
 
       <div className="bg-[#8B7A74] flex flex-col  items-center justify-center text-center text-white px-8">
         <p className="mb-4 text-sm">Handcrafted in Vietnam since 1650</p>
@@ -38,8 +36,6 @@ export const Hero: React.FC<Props> = ({ className, imageSrc, title, text }) => {
           SHOP NOW
         </Button>
       </div>
-
-      <div></div>
     </section>
   );
 =======
