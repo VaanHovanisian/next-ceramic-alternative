@@ -2,6 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { Container } from "./container";
 
 interface Props {
   className?: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const Hero: React.FC<Props> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { className, imageSrc, title, text, color } = props;
   return (
     <section className={cn("grid min-h-screen", className)}>
@@ -21,20 +23,21 @@ export const Hero: React.FC<Props> = (props) => {
         fill
         className="object-cover h-full w-full"
       /> */}
+      <Container className="flex">
+        <div className="bg-[#8B7A74] flex flex-col  items-center justify-center text-center text-white px-8">
+          <p className="mb-4 text-sm">Handcrafted in Vietnam since 1650</p>
 
-      <div className="bg-[#8B7A74] flex flex-col  items-center justify-center text-center text-white px-8">
-        <p className="mb-4 text-sm">Handcrafted in Vietnam since 1650</p>
+          <h1 className="mb-8 text-5xl font-semibold leading-tight">
+            {title || "BAT TRANG"}
+            <br />
+            {text || "DINNER SET"}
+          </h1>
 
-        <h1 className="mb-8 text-5xl font-semibold leading-tight">
-          {title || "BAT TRANG"}
-          <br />
-          {text || "DINNER SET"}
-        </h1>
-
-        <Button className="bg-white px-8 py-3 text-black cursor-pointer hover:bg-[#A67C52] hover:text-white transition-colors duration-300">
-          SHOP NOW
-        </Button>
-      </div>
+          <Button className="bg-white px-8 py-3 text-black cursor-pointer hover:bg-[#A67C52] hover:text-white transition-colors duration-300">
+            SHOP NOW
+          </Button>
+        </div>
+      </Container>
     </section>
   );
 };
