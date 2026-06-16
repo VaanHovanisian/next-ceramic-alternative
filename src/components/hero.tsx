@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+<<<<<<< HEAD
 import { Button } from "./ui/button";
 import Image from "next/image";
 
@@ -41,4 +42,14 @@ export const Hero: React.FC<Props> = ({ className, imageSrc, title, text }) => {
       <div></div>
     </section>
   );
+=======
+
+interface Props {
+  className?: string;
+}
+
+export const Hero: React.FC<Props> = (props) => {
+  const { className } = props;
+  return <div className={cn("", className)}></div>;
+>>>>>>> Tagavor
 };
