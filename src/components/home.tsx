@@ -1,9 +1,9 @@
 import React from "react";
+import { Catalog } from "./catalog";
 import { cn } from "@/lib/utils";
 import { Hero } from "./hero";
-import { PlateServices } from "./plate-services";
+import { PlateServises } from "./plate-servises";
 import { Post } from "./post";
-import { Catalog } from "./catalog";
 
 interface Props {
   className?: string;
@@ -14,7 +14,7 @@ export const Home: React.FC<Props> = (props) => {
   return (
     <div className={cn("", className)}>
       <Hero />
-      <PlateServices />
+      <PlateServises />
       <Post />
       <Catalog />
     </div>
