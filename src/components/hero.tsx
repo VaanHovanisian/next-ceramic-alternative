@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import Image from "next/image";
 import { Container } from "./container";
 
 interface Props {
@@ -15,21 +16,23 @@ export const Hero: React.FC<Props> = (props) => {
   const { className, desctopImgUrl, mobileImgUrl, children, color } = props;
   return (
     <section
-      className={cn(" flex flex-col md:flex-row md:min-h-screen", className)}
+      className={cn(
+        "flex flex-col md:flex-row relative md:min-h-screen",
+        className,
+      )}
     >
       <picture>
         <source media="(min-width: 768px)" srcSet={desctopImgUrl} />
         <img
-          className="md:absolute inset-0 object-cover w-full h-full -z-1"
+          className="md:absolute inset-0 w-full h-full -z-1 object-cover"
           src={mobileImgUrl}
           alt=""
         />
       </picture>
-
       <Container className="md:min-h-screen w-full flex">
         <div
           style={{ backgroundColor: color }}
-          className="bg-[#8B7A74] flex flex-col min-h-full w-full md:w-fit items-center justify-center text-center text-white px-8"
+          className="min-h-full flex w-full md:w-fit flex-col items-center justify-center text-center text-white px-8"
         >
           <svg
             width="86"
