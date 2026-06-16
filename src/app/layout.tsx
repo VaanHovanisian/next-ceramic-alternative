@@ -15,9 +15,9 @@ const garamond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Next Ceramic",
-  description: "The best ceramic on the world",
-  keywords: ["ceramic", "design", "home"],
+  title: " Next Ceramic",
+  description: "the best ceramic on the world",
+  keywords: ["ceramic", " design", "art", "home", "culture"],
 };
 
 export default function RootLayout({
