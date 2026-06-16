@@ -1,5 +1,9 @@
-import { Home } from "@/components/home";
+import Link from "next/link";
 
-export default function HomePage() {
-  return <Home />;
+export default function AboutPage() {
+  return (
+    <h1>
+      about page <Link href={"/"}>home</Link>
+    </h1>
+  );
 }

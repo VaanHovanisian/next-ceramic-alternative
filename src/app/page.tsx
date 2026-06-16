@@ -1,9 +1,5 @@
-import Link from "next/link";
+import { Home } from "@/components/home";
 
-export default function Home() {
-  return (
-    <h1>
-      Hello, Next.js! <Link href={"/about"}>about</Link>
-    </h1>
-  );
+export default function HomePage() {
+  return <Home />;
 }
