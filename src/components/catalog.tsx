@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from "react";
 import { cn } from "@/lib/utils";
 =======
@@ -11,6 +12,10 @@ import { SkeletonCard } from "./skeleton-card";
 import { Card } from "./card";
 import { PRODUCTS } from "@/constants/products";
 >>>>>>> Tagavor
+=======
+import React from "react";
+import { cn } from "@/lib/utils";
+>>>>>>> Tagavor
 
 interface Props {
   className?: string;
@@ -18,6 +23,7 @@ interface Props {
 
 export const Catalog: React.FC<Props> = (props) => {
   const { className } = props;
+<<<<<<< HEAD
 <<<<<<< HEAD
   return <div className={cn("", className)}></div>;
 =======
@@ -61,5 +67,8 @@ export const Catalog: React.FC<Props> = (props) => {
       </Container>
     </div>
   );
+>>>>>>> Tagavor
+=======
+  return <div className={cn("", className)}></div>;
 >>>>>>> Tagavor
 };
