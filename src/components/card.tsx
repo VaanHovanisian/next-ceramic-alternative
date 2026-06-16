@@ -1,28 +1,15 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import React from "react";
-import { cn } from "@/lib/utils";
-
-interface Props {
-  className?: string;
-}
-
-export const Card: React.FC<Props> = (props) => {
-  const { className } = props;
-  return <div className={cn("", className)}></div>;
-=======
 /* eslint-disable @typescript-eslint/no-explicit-any */
-=======
->>>>>>> Tagavor
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import Image from "next/image";
 
 interface Props {
   className?: string;
+  product: any;
 }
 
 export const Card: React.FC<Props> = (props) => {
-<<<<<<< HEAD
   const { className, product } = props;
 
   return (
@@ -49,9 +36,4 @@ export const Card: React.FC<Props> = (props) => {
       <Button className="w-full mt-5">Add to cart</Button>
     </div>
   );
->>>>>>> Tagavor
-=======
-  const { className } = props;
-  return <div className={cn("", className)}></div>;
->>>>>>> Tagavor
 };
