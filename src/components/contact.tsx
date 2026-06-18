@@ -5,7 +5,7 @@ interface Props {
   className?: string;
 }
 
-export const PlateServises: React.FC<Props> = (props) => {
+export const Contact: React.FC<Props> = (props) => {
   const { className } = props;
   return <div className={cn("", className)}></div>;
 };
