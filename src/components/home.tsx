@@ -3,14 +3,13 @@ import { Catalog } from "./catalog";
 import { cn } from "@/lib/utils";
 import { Hero } from "./hero";
 import { PlateServices } from "./plate-services";
-import { servicesHome } from "@/constants/services";
 import { Post } from "./post";
+import { servicesHome } from "@/constants/services";
 import { PRODUCTS } from "@/constants/products";
 import { Title } from "./title";
 
 interface Props {
   className?: string;
-  children: React.ReactNode;
 }
 
 export const Home: React.FC<Props> = (props) => {
@@ -19,12 +18,12 @@ export const Home: React.FC<Props> = (props) => {
     <div className={cn("", className)}>
       <Hero
         color="#826f66"
-        desctopImgUrl="/hero.jpg"
-        mobileImgUrl="/hero-mobile.jpg"
+        desctopImgUrl="/hero/1.jpg"
+        mobileImgUrl="/hero/1-mobile.jpg"
       >
         <p>Handcrafted in Viet Nam since 1650</p>
       </Hero>
-      <PlateServices items={[servicesHome]} />
+      <PlateServices items={servicesHome} />
       <Post
         imgUrl="/post/1.jpg"
         title="Up to 40% off our Christmas collection"
@@ -42,19 +41,19 @@ export const Home: React.FC<Props> = (props) => {
       <Post
         dir="right"
         imgUrl="/post/3.jpg"
-        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
+        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit"
         title="Our History"
         linkText="Lear more"
         imgClassName="object-top"
       />
       <Catalog items={PRODUCTS.slice(0, 4)} />
-      <Title className="text-center" size={"l"}>
+      <Title className="text-center mb-12" size="l">
         OUR BLOG
       </Title>
       <Post
         imgUrl="/post/4.jpg"
-        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
-        title="Made in viet Nam since 1450"
+        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit"
+        title="The secrets to a kitchen room"
         linkText="Lear more"
         imgClassName="object-top"
       />

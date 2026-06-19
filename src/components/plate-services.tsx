@@ -2,8 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
-import Image from "next/image";
 import { Title } from "./title";
+import Image from "next/image";
 
 interface Props {
   className?: string;
@@ -20,7 +20,7 @@ export const PlateServices: React.FC<Props> = (props) => {
           {title}
         </Title>
       )}
-      <ul className="flex items-center gap-5 md:gap-7.5 overflow-auto scrollbar-none">
+      <ul className="flex items-center gap-5 md:gap-7.5 overflow-auto [scrollbar-width:none]">
         {items.map((el) => (
           <li className="w-63.75 shrink-0 text-center" key={el.id}>
             <Image

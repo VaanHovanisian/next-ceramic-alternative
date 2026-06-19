@@ -16,22 +16,23 @@ export const Hero: React.FC<Props> = (props) => {
   return (
     <section
       className={cn(
-        "flex flex-col md:flex-row relative md:min-h-screen",
+        "flex relative flex-col md:flex-row md:min-h-screen",
         className,
       )}
     >
       <picture>
         <source media="(min-width: 768px)" srcSet={desctopImgUrl} />
         <img
-          className="md:absolute inset-0 w-full h-full -z-1 object-cover"
+          className="md:absolute inset-0 object-cover w-full h-full -z-1"
           src={mobileImgUrl}
           alt=""
         />
       </picture>
+
       <Container className="md:min-h-screen w-full flex">
         <div
           style={{ backgroundColor: color }}
-          className="min-h-full flex w-full md:w-fit flex-col items-center justify-center text-center text-white px-8"
+          className="flex flex-col min-h-full w-full md:w-fit items-center justify-center text-center text-white px-8"
         >
           <svg
             width="86"
@@ -84,7 +85,6 @@ export const Hero: React.FC<Props> = (props) => {
           </svg>
 
           {children}
-
           <Button className="bg-white px-8 py-3 text-black cursor-pointer hover:bg-[#A67C52] hover:text-white transition-colors duration-300">
             SHOP NOW
           </Button>
