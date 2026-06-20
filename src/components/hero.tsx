@@ -6,14 +6,14 @@ import { Container } from "./container";
 
 interface Props {
   className?: string;
-  desktopSrc?: string;
-  mobileSrc?: string;
+  desctopImgUrl?: string;
+  mobileImgUrl?: string;
   children?: React.ReactNode;
   color?: string;
 }
 
 export const Hero: React.FC<Props> = (props) => {
-  const { className, desktopSrc, mobileSrc, children, color } = props;
+  const { className, desctopImgUrl, mobileImgUrl, children, color } = props;
   return (
     <section
       className={cn(
@@ -22,10 +22,10 @@ export const Hero: React.FC<Props> = (props) => {
       )}
     >
       <picture>
-        <source media="(min-width: 768px )" srcSet={desktopSrc} />
+        <source media="(min-width: 768px)" srcSet={desctopImgUrl} />
         <img
           className="md:absolute inset-0 object-cover w-full h-full -z-1"
-          src={mobileSrc}
+          src={mobileImgUrl}
           alt=""
         />
       </picture>
@@ -33,7 +33,7 @@ export const Hero: React.FC<Props> = (props) => {
       <Container className="md:min-h-screen w-full flex">
         <div
           style={{ backgroundColor: color }}
-          className=" flex min-h-full w-full md:w-fit flex-col  items-center justify-center text-center text-white px-8"
+          className="bg-[#8B7A74] flex flex-col min-h-full w-full md:w-fit items-center justify-center text-center text-white px-8"
         >
           <svg
             width="86"

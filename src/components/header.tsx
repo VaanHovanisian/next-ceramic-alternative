@@ -1,3 +1,4 @@
+"use client";
 import { Search, Globe, ShoppingCart } from "lucide-react";
 
 export const Header = () => {
@@ -7,7 +8,6 @@ export const Header = () => {
         <div className="text-3xl font-bold">
           MOON<span className="text-black">.</span>
         </div>
-
         <nav className="flex items-center gap-12">
           <ul className="flex gap-12 text-sm">
             <li>
@@ -25,7 +25,7 @@ export const Header = () => {
           </ul>
         </nav>
         <div className="flex items-center gap-5 cursor-pointer">
-          <Search size={18} />
+          <Search onClick={() => {}} size={18} />
           <Globe size={18} />
           <ShoppingCart size={18} />
         </div>

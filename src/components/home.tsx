@@ -18,8 +18,8 @@ export const Home: React.FC<Props> = (props) => {
     <div className={cn("", className)}>
       <Hero
         color="#826f66"
-        desktopSrc="/hero/1.jpg"
-        mobileSrc="/hero/1-mobile.jpg"
+        desctopImgUrl="/hero/1.jpg"
+        mobileImgUrl="/hero/1-mobile.jpg"
       >
         <p>Handcrafted in Viet Nam since 1650</p>
       </Hero>
@@ -41,7 +41,7 @@ export const Home: React.FC<Props> = (props) => {
       <Post
         dir="right"
         imgUrl="/post/3.jpg"
-        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit "
+        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
         title="Our History"
         linkText="Lear more"
         imgClassName="object-top"
@@ -51,9 +51,10 @@ export const Home: React.FC<Props> = (props) => {
         OUR BLOG
       </Title>
       <Post
+        dir="right"
         imgUrl="/post/4.jpg"
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
-        title="THE SECRETS TO A KITCHEN ROOM"
+        title="Our HistoryThe secrets to a kitchen room"
         linkText="Lear more"
         imgClassName="object-top"
       />
