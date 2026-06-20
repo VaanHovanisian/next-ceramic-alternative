@@ -18,22 +18,22 @@ export const servicesHome = [
 ].map((el, i) => ({ ...el, id: i + 1 }));
 export const servicesTeam = [
   {
-    imgUrl: "/services/5.jpg",
+    imgUrl: "/team/5.jpg",
     name: "Bernie PATTERSON",
     text: "CEO & Founder",
   },
   {
-    imgUrl: "/services/6.jpg",
+    imgUrl: "/team/6.jpg",
     name: "Ophelia Vase",
     text: "Creative Director",
   },
   {
-    imgUrl: "/services/7.jpg",
+    imgUrl: "/team/7.jpg",
     name: "CorbiN HOSSAIN",
     text: "Artist",
   },
   {
-    imgUrl: "/services/8.jpg",
+    imgUrl: "/team/8.jpg",
     name: "Seren Bowl",
     text: "Marketing",
   },
