@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { SkeletonCard } from "./skeleton-card";
 import { Card } from "./card";
-import { PRODUCTS } from "@/constants/products";
 
 interface Props {
   className?: string;
