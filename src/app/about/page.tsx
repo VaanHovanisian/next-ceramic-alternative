@@ -1,9 +1,5 @@
-import Link from "next/link";
+import { About } from "@/components/aboute";
 
 export default function AboutPage() {
-  return (
-    <h1>
-      about page <Link href={"/"}>home</Link>
-    </h1>
-  );
+  return <About />;
 }

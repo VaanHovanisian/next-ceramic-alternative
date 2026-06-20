@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -5,14 +6,14 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { SkeletonCard } from "./skeleton-card";
 import { Card } from "./card";
-import { PRODUCTS } from "@/constants/products";
 
 interface Props {
   className?: string;
+  items: any[];
 }
 
 export const Catalog: React.FC<Props> = (props) => {
-  const { className } = props;
+  const { className, items } = props;
 
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +42,7 @@ export const Catalog: React.FC<Props> = (props) => {
           )}
 
           {!loading &&
-            PRODUCTS.map((product) => (
+            items.map((product) => (
               <li
                 key={product.id}
                 className="w-full max-w-70 min-h-120 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4 flex flex-col justify-between"
