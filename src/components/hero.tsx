@@ -1,13 +1,14 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import Image from "next/image";
 import { Container } from "./container";
 
 interface Props {
   className?: string;
   desctopImgUrl?: string;
   mobileImgUrl?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   color?: string;
 }
 
@@ -32,7 +33,7 @@ export const Hero: React.FC<Props> = (props) => {
       <Container className="md:min-h-screen w-full flex">
         <div
           style={{ backgroundColor: color }}
-          className="flex flex-col min-h-full w-full md:w-fit items-center justify-center text-center text-white px-8"
+          className="bg-[#8B7A74] flex flex-col min-h-full w-full md:w-fit items-center justify-center text-center text-white px-8"
         >
           <svg
             width="86"
