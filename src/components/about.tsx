@@ -1,23 +1,14 @@
 import React from "react";
-<<<<<<< HEAD
-import { cn } from "@/lib/utils";
-=======
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Title } from "./title";
 import { PlateServices } from "./plate-services";
 import { servicesTeam } from "@/constants/services";
->>>>>>> Tagavor
 
 interface Props {
   className?: string;
 }
 
-<<<<<<< HEAD
-export const About: React.FC<Props> = (props) => {
-  const { className } = props;
-  return <div className={cn("", className)}></div>;
-=======
 export const About: React.FC<Props> = ({ className }) => {
   return (
     <>
@@ -117,5 +108,4 @@ export const About: React.FC<Props> = ({ className }) => {
       </div>
     </>
   );
->>>>>>> Tagavor
 };

@@ -15,10 +15,6 @@ export const Title: React.FC<Props> = (props) => {
     m: "h2",
     s: "h3",
   };
-<<<<<<< HEAD
-
-=======
->>>>>>> Tagavor
   const setStyle = {
     l: "text-[36px] leading-[111%] font-bold font-garamond tracking-[0.04em] uppercase",
     m: "text-[28px] leading-[114%] font-bold font-garamond tracking-[0.04em] uppercase",
