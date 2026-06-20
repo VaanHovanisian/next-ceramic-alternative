@@ -41,7 +41,11 @@ export const Home: React.FC<Props> = (props) => {
       <Post
         dir="right"
         imgUrl="/post/3.jpg"
+<<<<<<< HEAD
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit"
+=======
+        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
+>>>>>>> Tagavor
         title="Our History"
         linkText="Lear more"
         imgClassName="object-top"
@@ -51,9 +55,16 @@ export const Home: React.FC<Props> = (props) => {
         OUR BLOG
       </Title>
       <Post
+<<<<<<< HEAD
         imgUrl="/post/4.jpg"
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit"
         title="The secrets to a kitchen room"
+=======
+        dir="right"
+        imgUrl="/post/4.jpg"
+        text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
+        title="Our HistoryThe secrets to a kitchen room"
+>>>>>>> Tagavor
         linkText="Lear more"
         imgClassName="object-top"
       />

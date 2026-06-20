@@ -8,7 +8,6 @@ export const Header = () => {
         <div className="text-3xl font-bold">
           MOON<span className="text-black">.</span>
         </div>
-
         <nav className="flex items-center gap-12">
           <ul className="flex gap-12 text-sm">
             <li>
