@@ -27,7 +27,7 @@ export const Header = () => {
         <div className="flex items-center gap-5 cursor-pointer">
           <Search onClick={() => {}} size={18} />
           <Globe size={18} />
-          <ShoppingCart onClick={() => {}} size={18} />
+          <ShoppingCart size={18} />
         </div>
       </div>
     </header>
