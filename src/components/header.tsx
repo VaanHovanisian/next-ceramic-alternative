@@ -1,5 +1,6 @@
 "use client";
 import { Search, Globe, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -20,7 +21,7 @@ export const Header = () => {
               <a href="/about">About</a>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <Link href="/Contact">Contact</Link>
             </li>
           </ul>
         </nav>

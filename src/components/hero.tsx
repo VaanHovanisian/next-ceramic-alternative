@@ -1,7 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import Image from "next/image";
 import { Container } from "./container";
 
 interface Props {
