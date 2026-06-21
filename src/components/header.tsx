@@ -28,7 +28,9 @@ export const Header = () => {
         <div className="flex items-center gap-5 cursor-pointer">
           <Search onClick={() => {}} size={18} />
           <Globe size={18} />
-          <ShoppingCart size={18} />
+          <Link href="/basket" className="hover:opacity-70 transition-opacity">
+            <ShoppingCart size={18} />
+          </Link>
         </div>
       </div>
     </header>
