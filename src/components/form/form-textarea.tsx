@@ -1,9 +1,11 @@
+"use client";
+
 import React, { TextareaHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { useFormContext } from "react-hook-form";
 import { Textarea } from "../ui/textarea";
+
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
   label?: string;
@@ -16,7 +18,9 @@ export const FormTextarea: React.FC<Props> = (props) => {
     register,
     formState: { errors },
   } = useFormContext();
+
   const isError = errors[name]?.message;
+
   return (
     <Label className={cn("", className)}>
       {label && (
@@ -24,7 +28,7 @@ export const FormTextarea: React.FC<Props> = (props) => {
           {label}
         </span>
       )}
-      <Textarea {...register(name)} {...inputProps} />
+      <Textarea {...register(name)} name={name} {...inputProps} />
       {isError && <span className="text-red-500">{isError as string}</span>}
     </Label>
   );

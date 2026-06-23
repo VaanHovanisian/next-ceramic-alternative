@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
       <Hero
         className="text-[#c69b7b]"
         color="#3a3845"
-        desctopImgUrl={"/hero/2.jpg"}
+        desctopImgUrl="/hero/2.jpg"
         mobileImgUrl="/hero/2-mobile.jpg"
       >
         <div className="max-w-70 mx-auto text-center text-[#fffdfb]">
