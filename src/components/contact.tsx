@@ -1,7 +1,6 @@
 import React from "react";
 import { Hero } from "./hero";
 import { Title } from "./title";
-
 import { Container } from "./container";
 import { ContactInfo } from "./contact-info";
 import { FormContact } from "./form/form-contact";
@@ -47,7 +46,7 @@ export const Contact: React.FC = () => {
             Follow us on social media
           </p>
           <ul className="flex items-center justify-center gap-4">
-            {/* { [] .map((el, i) => (
+            {/* {[].map((el, i) => (
               <li key={i}>
                 <a
                   className="flex items-center justify-center text-white bg-[#c69b7b] w-6 h-6"
