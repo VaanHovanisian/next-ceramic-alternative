@@ -1,5 +1,6 @@
 "use client";
 import { Search, Globe, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 export const Header = () => {
   return (
@@ -11,16 +12,16 @@ export const Header = () => {
         <nav className="flex items-center gap-12">
           <ul className="flex gap-12 text-sm">
             <li>
-              <a href="/home">Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a href="/shop">Shop</a>
+              <Link href="/shop">Shop</Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <Link href="/contact">Contact</Link>
             </li>
           </ul>
         </nav>
