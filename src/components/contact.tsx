@@ -1,7 +1,7 @@
 import React from "react";
-import { Container } from "./container";
 import { Hero } from "./hero";
 import { Title } from "./title";
+import { Container } from "./container";
 import { ContactInfo } from "./contact-info";
 import { FormContact } from "./form/form-contact";
 
@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
       <Hero
         className="text-[#c69b7b]"
         color="#3a3845"
-        desctopImgUrl={"/hero/2.jpg"}
+        desctopImgUrl="/hero/2.jpg"
         mobileImgUrl="/hero/2-mobile.jpg"
       >
         <div className="max-w-70 mx-auto text-center text-[#fffdfb]">
@@ -50,10 +50,10 @@ export const Contact: React.FC = () => {
               <li key={i}>
                 <a
                   className="flex items-center justify-center text-white bg-[#c69b7b] w-6 h-6"
-                  href={el.href}
+                  href={el?.href}
                   target="_blank"
                 >
-                  {el.icon}
+                  {el?.icon}
                 </a>
               </li>
             ))} */}

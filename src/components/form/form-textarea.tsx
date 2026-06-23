@@ -17,7 +17,9 @@ export const FormTextarea: React.FC<Props> = (props) => {
     register,
     formState: { errors },
   } = useFormContext();
+
   const isError = errors[name]?.message;
+
   return (
     <Label className={cn("", className)}>
       {label && (
@@ -25,7 +27,7 @@ export const FormTextarea: React.FC<Props> = (props) => {
           {label}
         </span>
       )}
-      <Textarea {...register(name)} {...inputProps} />
+      <Textarea {...register(name)} name={name} {...inputProps} />
       {isError && <span className="text-red-500">{isError as string}</span>}
     </Label>
   );

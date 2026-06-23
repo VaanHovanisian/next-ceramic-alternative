@@ -11,7 +11,9 @@ interface Props {
 
 export const FormContact: React.FC<Props> = (props) => {
   const { className } = props;
+
   const form = useForm();
+
   return (
     <FormProvider {...form}>
       <form className={cn("", className)}>
