@@ -21,7 +21,7 @@ export const FormInput: React.FC<Props> = (props) => {
   const isError = errors[name]?.message;
 
   return (
-    <Label className={cn("", className)}>
+    <Label className={cn("grid w-full gap-3", className)}>
       {label && (
         <span className="font-semibold text-[14px] leading-[143%] text-primary">
           {label}
