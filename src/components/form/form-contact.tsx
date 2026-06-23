@@ -4,6 +4,11 @@ import { cn } from "@/lib/utils";
 import { FormInput } from "./form-input";
 import { FormTextarea } from "./form-textarea";
 import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactFormSchema,
+  contactFormSchemaType,
+} from "@/constants/form-schema/contact.schema";
 
 interface Props {
   className?: string;
@@ -12,7 +17,26 @@ interface Props {
 export const FormContact: React.FC<Props> = (props) => {
   const { className } = props;
 
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: contactFormSchemaType) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      form.reset();
+    }
+  };
 
   return (
     <FormProvider {...form}>
