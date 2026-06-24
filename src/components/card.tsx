@@ -16,7 +16,10 @@ export const Card: React.FC<Props> = (props) => {
   return (
     <div className={cn("", className)}>
       <div>
-        <Link href={"/product" + product.id} className="w-full h-64 overflow-hidden rounded-xl">
+        <Link
+          href={"/product/" + product.id}
+          className="w-full h-64 overflow-hidden rounded-xl"
+        >
           <Image
             src={product.img}
             alt={product.title}
@@ -24,7 +27,7 @@ export const Card: React.FC<Props> = (props) => {
             width={255}
             height={325}
           />
-        </link>
+        </Link>
         <h3 className="mt-4 flex flex-col gap-1 text-center text-base font-medium text-[#3a3845]">
           {product.title}
           <span className="text-lg font-semibold mt-1">{product.price}</span>

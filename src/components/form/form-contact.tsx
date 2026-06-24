@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   contactFormSchema,
-  contactFormSchemaType,
+  ContactFormSchemaType,
 } from "@/constants/form-schema/contact.schema";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
@@ -22,15 +22,15 @@ export const FormContact: React.FC<Props> = (props) => {
   const form = useForm({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: " ",
-      email: " ",
-      phone: " ",
-      company: " ",
-      message: " ",
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      message: "",
     },
   });
 
-  const onSubmit = async (data: contactFormSchemaType) => {
+  const onSubmit = async (data: ContactFormSchemaType) => {
     try {
       console.log(data);
       toast.success("Success send");

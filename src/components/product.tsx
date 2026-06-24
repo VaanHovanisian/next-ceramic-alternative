@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -7,6 +8,6 @@ interface Props {
 }
 
 export const Product: React.FC<Props> = (props) => {
-  const { className } = props;
+  const { className, product } = props;
   return <div className={cn("", className)}>{product.title}</div>;
 };

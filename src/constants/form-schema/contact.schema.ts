@@ -7,4 +7,5 @@ export const contactFormSchema = z.object({
   company: z.string().optional(),
   message: z.string(),
 });
-export type contactFormSchemaType = z.infer<typeof contactFormSchema>;
+
+export type ContactFormSchemaType = z.infer<typeof contactFormSchema>;
