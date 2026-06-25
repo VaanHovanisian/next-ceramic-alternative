@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useFormContext } from "react-hook-form";
-
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
@@ -21,7 +20,11 @@ export const FormInput: React.FC<Props> = (props) => {
   const isError = errors[name]?.message;
 
   return (
+<<<<<<< HEAD
     <Label className={cn("grid w-full gap-3", className)}>
+=======
+    <Label className={cn("grid gap-3 w-full", className)}>
+>>>>>>> Tagavor
       {label && (
         <span className="font-semibold text-[14px] leading-[143%] text-primary">
           {label}
