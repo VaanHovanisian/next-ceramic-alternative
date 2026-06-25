@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { cn } from "@/lib/utils";
-
-interface Props {
-  className?: string;
-  product: any;
-=======
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -19,14 +10,10 @@ interface Props {
     price: number;
     img: string;
   };
->>>>>>> Tagavor
 }
 
 export const Product: React.FC<Props> = (props) => {
   const { className, product } = props;
-<<<<<<< HEAD
-  return <div className={cn("", className)}>{product.title}</div>;
-=======
 
   return (
     <div
@@ -55,5 +42,4 @@ export const Product: React.FC<Props> = (props) => {
       </>
     </div>
   );
->>>>>>> Tagavor
 };
