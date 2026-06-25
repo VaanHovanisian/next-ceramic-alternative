@@ -55,7 +55,7 @@ export const FormCheckout: React.FC<Props> = (props) => {
         </div>
         <FormInput label="Street address *" name="addres" type="text" />
         <FormInput label="Order notes" name="message" type="text" />
-        <Button>Send Message</Button>
+        <Button disabled={form.formState.isSubmitting}>Send Message</Button>
       </form>
     </FormProvider>
   );

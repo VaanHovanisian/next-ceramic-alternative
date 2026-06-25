@@ -11,7 +11,7 @@ export const BasketTotal: React.FC<Props> = (props) => {
   const { className, totalAmount } = props;
   return (
     <div className={cn("", className)}>
-      <div className="w-full lg:w-1/4 bg-[#fcfcfc] border border-gray-100 p-6 rounded-sm shadow-sm self-end lg:self-start">
+      <div className="w-full bg-[#fcfcfc] border border-gray-100 p-6 rounded-sm shadow-sm self-end lg:self-start">
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
           <span className="text-sm font-medium uppercase tracking-wider text-gray-500">
             Cart totals

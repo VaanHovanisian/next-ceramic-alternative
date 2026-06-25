@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 import { BasketCard } from "./basket-card";
 import { BasketCartItems } from "@/constants/basket";
+import { BasketTotal } from "./basket-total";
 
 interface Props {
   className?: string;
@@ -28,8 +29,8 @@ export const Basket: React.FC<Props> = (props) => {
       {BasketCartItems.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
-          <div className="w-full lg:w-3/4 overflow-x-auto">
+        <div className="flex flex-col gap-8 items-end">
+          <div className="w-full overflow-x-auto">
             <table className="w-full border-collapse text-left min-w-150">
               <thead>
                 <tr className="bg-[#1a1a1a] text-white text-xs tracking-wider uppercase">
@@ -61,6 +62,7 @@ export const Basket: React.FC<Props> = (props) => {
               </tbody>
             </table>
           </div>
+          <BasketTotal totalAmount={1000} />
         </div>
       )}
     </div>
