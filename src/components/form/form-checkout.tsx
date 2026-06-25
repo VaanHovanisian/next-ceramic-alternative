@@ -41,7 +41,10 @@ export const FormCheckout: React.FC<Props> = (props) => {
 
   return (
     <FormProvider {...form}>
-      <form className={cn("", className)}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("", className)}
+      >
         <div className="flex items-start gap-5">
           <FormInput label="First Name *" name="firstName" type="text" />
           <FormInput label="Last Name *" name="lastName" type="text" />
