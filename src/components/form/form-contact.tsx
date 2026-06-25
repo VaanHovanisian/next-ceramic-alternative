@@ -29,7 +29,6 @@ export const FormContact: React.FC<Props> = (props) => {
       message: "",
     },
   });
-
   const onSubmit = async (data: ContactFormSchemaType) => {
     try {
       console.log(data);
@@ -41,7 +40,6 @@ export const FormContact: React.FC<Props> = (props) => {
       form.reset();
     }
   };
-
   return (
     <FormProvider {...form}>
       <form
