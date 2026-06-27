@@ -10,7 +10,6 @@ import { Title } from "./title";
 
 interface Props {
   className?: string;
-  children: React.ReactNode;
 }
 
 export const Home: React.FC<Props> = (props) => {
