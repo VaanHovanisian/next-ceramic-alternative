@@ -7,12 +7,9 @@ import { Post } from "./post";
 import { servicesHome } from "@/constants/services";
 import { PRODUCTS } from "@/constants/products";
 import { Title } from "./title";
-
 interface Props {
   className?: string;
-  children: React.ReactNode;
 }
-
 export const Home: React.FC<Props> = (props) => {
   const { className } = props;
   return (
