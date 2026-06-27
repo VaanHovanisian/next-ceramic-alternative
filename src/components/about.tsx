@@ -66,7 +66,6 @@ export const About: React.FC<Props> = ({ className }) => {
           </div>
         </div>
 
-        {/* How We Work */}
         <div className="grid md:grid-cols-2 gap-12 items-center py-24">
           <div className="relative h-125">
             <Image src="/post/8.jpg" alt="" fill className="object-cover" />

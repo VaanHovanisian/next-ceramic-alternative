@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useFormContext } from "react-hook-form";
-
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   label?: string;
