@@ -10,10 +10,11 @@ import { Card } from "./card";
 interface Props {
   className?: string;
   items: any[];
+  title?: string;
 }
 
 export const Catalog: React.FC<Props> = (props) => {
-  const { className, items } = props;
+  const { className, items, title } = props;
 
   const [loading, setLoading] = useState(true);
 
@@ -28,9 +29,11 @@ export const Catalog: React.FC<Props> = (props) => {
   return (
     <div className={cn("py-10", className)}>
       <Container>
-        <h2 className="text-center text-2xl md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">
-          Best sellers
-        </h2>
+        {title && (
+          <h2 className="text-center text-2xl md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">
+            {title}
+          </h2>
+        )}
 
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
           {loading && (
