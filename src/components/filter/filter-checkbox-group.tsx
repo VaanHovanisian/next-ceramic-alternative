@@ -1,6 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "../title";
 import { FilterCheckbox } from "./filter-checkbox";
@@ -10,33 +9,30 @@ interface Props {
   title: string;
   items: any[];
   isColor?: boolean;
+  checked: Set<string>;
+  setChecked: (id: string) => void;
 }
 
-export const FilterCheckboxGroup: React.FC<Props> = ({
-  className,
-  title,
-  items,
-  isColor,
-}) => {
-  const [checkedItems, setCheckedItems] = useState<number[]>([]);
-
-  const toggleChecked = (id: number) => {
-    setCheckedItems((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    );
-  };
+export const FilterCheckboxGroup: React.FC<Props> = (props) => {
+  const { className, title, items, isColor, checked, setChecked } = props;
 
   return (
     <div className={cn("", className)}>
-      <Title size="s">{title}</Title>
-
-      <ul>
-        {items.map((el) => (
-          <li key={el.id}>
+      <Title className="mb-5.5" size="s">
+        {title}
+      </Title>
+      <ul
+        className={cn("grid gap-4", {
+          "flex items-center": isColor,
+        })}
+      >
+        {items.map((el, i) => (
+          <li key={i}>
             <FilterCheckbox
-              checked={checkedItems.includes(el.id)}
+              isColor={isColor}
+              checked={checked.has(el.id.toString())}
               label={el.name}
-              setChecked={() => toggleChecked(el.id)}
+              setChecked={() => setChecked(el.id.toString())}
             />
           </li>
         ))}

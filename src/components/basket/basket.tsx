@@ -2,8 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
-import { BasketCard } from "./basket-cart";
-import { BasketCartItems } from "@/constants/bsaket";
+import { BasketCard } from "./basket-card";
+import { BasketCartItems } from "@/constants/basket";
 import { BasketTotal } from "./basket-total";
 
 interface Props {
@@ -12,13 +12,9 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
+
   return (
-    <div
-      className={cn(
-        "max-w-6xl mx-auto px-4 py-8 bg-white text-[#3a3845]",
-        className,
-      )}
-    >
+    <div className={cn("", className)}>
       <div className="text-sm text-gray-400 mb-2">
         Home / <span className="text-gray-600">Shopping Cart</span>
       </div>
@@ -29,7 +25,7 @@ export const Basket: React.FC<Props> = (props) => {
       {BasketCartItems.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
-        <div className="flex flex-col gap-8 items-end">
+        <div className="flex flex-col  gap-8 items-end">
           <div className="w-full overflow-x-auto">
             <table className="w-full border-collapse text-left min-w-150">
               <thead>

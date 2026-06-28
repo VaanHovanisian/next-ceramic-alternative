@@ -1,8 +1,9 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Filter } from "../filter/filter";
+import { Filter } from "../filter";
 import { Catalog } from "../catalog";
 import { PRODUCTS } from "@/constants/products";
+import { Container } from "../container";
 
 interface Props {
   className?: string;
@@ -11,9 +12,9 @@ interface Props {
 export const Shop: React.FC<Props> = (props) => {
   const { className } = props;
   return (
-    <div className={cn("", className)}>
+    <Container className={cn("flex", className)}>
       <Filter />
       <Catalog className="grow" items={PRODUCTS} />
-    </div>
+    </Container>
   );
 };
