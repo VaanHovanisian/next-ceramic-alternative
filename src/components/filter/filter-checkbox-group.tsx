@@ -15,15 +15,15 @@ interface Props {
 
 export const FilterCheckboxGroup: React.FC<Props> = (props) => {
   const { className, title, items, isColor, checked, setChecked } = props;
+
   return (
     <div className={cn("", className)}>
       <Title className="mb-5.5" size="s">
         {title}
       </Title>
-
       <ul
         className={cn("grid gap-4", {
-          "flex gap-2 items-center": isColor,
+          "flex items-center": isColor,
         })}
       >
         {items.map((el, i) => (

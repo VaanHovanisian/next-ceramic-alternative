@@ -3,8 +3,9 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "../title";
 import { FilterCheckboxGroup } from "./filter-checkbox-group";
-import { filter } from "@/constants/filter";
-import { useSet } from "react-use";
+import { useFilter } from "@/hooks/filter/use-filter";
+import { filter as filterArr } from "@/constants/filter";
+import { useFilterQuery } from "@/hooks/filter/use-filter-query";
 
 interface Props {
   className?: string;
@@ -13,25 +14,24 @@ interface Props {
 export const Filter: React.FC<Props> = (props) => {
   const { className } = props;
 
-  const [category, { toggle: categoryToggle }] = useSet<string>(new Set([]));
-  const [price, { toggle: priceToggle }] = useSet<string>(new Set([]));
-  const [color, { toggle: colorToggle }] = useSet<string>(new Set([]));
+  const filter = useFilter();
+  useFilterQuery(filter);
 
   return (
     <div className={cn("grid gap-7.5 min-w-60 self-start", className)}>
-      <Title size="s">Showing 120 items</Title>
+      <Title size="s">Showing 120 items </Title>
       <hr />
       <FilterCheckboxGroup
-        checked={category}
-        setChecked={categoryToggle}
-        items={filter.category}
+        checked={filter.category}
+        setChecked={filter.categoryToggle}
+        items={filterArr.category}
         title="Category"
       />
       <hr />
       <FilterCheckboxGroup
-        checked={price}
-        setChecked={priceToggle}
-        items={filter.price.map((el) => ({
+        checked={filter.price}
+        setChecked={filter.priceToggle}
+        items={filterArr.price.map((el) => ({
           name: el.to ? `$${el.from} - $${el.to}` : `$${el.from}`,
           id: el.id,
         }))}
@@ -39,12 +39,13 @@ export const Filter: React.FC<Props> = (props) => {
       />
       <hr />
       <FilterCheckboxGroup
-        checked={color}
-        setChecked={colorToggle}
-        items={filter.color}
-        title="Color"
+        checked={filter.color}
+        setChecked={filter.colorToggle}
         isColor
+        items={filterArr.color}
+        title="Color"
       />
+      <hr />
     </div>
   );
 };

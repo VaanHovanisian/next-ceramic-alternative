@@ -1,5 +1,4 @@
 import z from "zod";
-import { formCheckoutSchema } from "./checkout.schema";
 
 export const contactFormSchema = z.object({
   name: z.string().min(2, "minimum 2 symbol"),
@@ -8,7 +7,5 @@ export const contactFormSchema = z.object({
   company: z.string().optional(),
   message: z.string(),
 });
-
-export type formCheckoutSchemaType = z.infer<typeof formCheckoutSchema>;
 
 export type ContactFormSchemaType = z.infer<typeof contactFormSchema>;

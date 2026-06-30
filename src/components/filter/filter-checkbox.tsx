@@ -14,7 +14,12 @@ interface Props {
 export const FilterCheckbox: React.FC<Props> = (props) => {
   const { className, label, checked, setChecked, isColor } = props;
   return (
-    <Label className={cn("flex cursor-pointer items-center gap-3", className)}>
+    <Label
+      className={cn(
+        "flex cursor-pointer relative items-center gap-3",
+        className,
+      )}
+    >
       <Checkbox
         className={cn("cursor-pointer", {
           "absolute inset-0 w-full h-full opacity-0": isColor,

@@ -5,8 +5,10 @@ import { FormInput } from "./form-input";
 import { Button } from "../ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formCheckoutSchema } from "@/constants/form-schema/checkout.schema";
-import { formCheckoutSchemaType } from "@/constants/form-schema/contact.schema";
+import {
+  formCheckoutSchema,
+  FormCheckoutSchemaType,
+} from "@/constants/form-schema/checkout.schema";
 import { toast } from "sonner";
 
 interface Props {
@@ -27,12 +29,12 @@ export const FormCheckout: React.FC<Props> = (props) => {
     },
   });
 
-  const onSubmit = async (data: formCheckoutSchemaType) => {
+  const onSubmit = async (data: FormCheckoutSchemaType) => {
     try {
       console.log(data);
-      toast.success("succes order");
-    } catch {
-      console.error();
+      toast.success("success order");
+    } catch (error) {
+      console.error(error);
       toast.error("failed order");
     } finally {
       form.reset();
@@ -53,8 +55,10 @@ export const FormCheckout: React.FC<Props> = (props) => {
           <FormInput label="Email *" name="email" type="email" />
           <FormInput label="Phone" name="phone" type="tel" />
         </div>
-        <FormInput label="Street address *" name="addres" type="text" />
+
+        <FormInput label="Street address *" name="address" type="text" />
         <FormInput label="Order notes" name="message" type="text" />
+
         <Button disabled={form.formState.isSubmitting}>Send Message</Button>
       </form>
     </FormProvider>

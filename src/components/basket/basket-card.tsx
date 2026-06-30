@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
+import { Minus, Plus, X } from "lucide-react";
 
 interface Props {
   className?: string;

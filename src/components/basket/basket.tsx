@@ -12,6 +12,7 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
+
   return (
     <div
       className={cn(
