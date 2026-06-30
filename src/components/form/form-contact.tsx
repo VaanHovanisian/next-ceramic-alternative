@@ -18,6 +18,7 @@ interface Props {
 
 export const FormContact: React.FC<Props> = (props) => {
   const { className } = props;
+
   const form = useForm({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -29,60 +30,29 @@ export const FormContact: React.FC<Props> = (props) => {
     },
   });
 
-<<<<<<< HEAD
-  const onSumbit = async (data: ContactFormSchemaType) => {
-    try {
-      console.log(data);
-      toast.success("Form submitted successfully");
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to submit form");
-=======
-  const form = useForm({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      message: "",
-    },
-  });
   const onSubmit = async (data: ContactFormSchemaType) => {
     try {
       console.log(data);
       toast.success("Success send");
     } catch (error) {
       console.log(error);
-      toast.error("Failed send");
->>>>>>> Inga
+      toast.error("failed send");
     } finally {
       form.reset();
     }
   };
-<<<<<<< HEAD
 
   return (
     <FormProvider {...form}>
       <form
-        onSubmit={form.handleSubmit(onSumbit)}
-=======
-  return (
-    <FormProvider {...form}>
-      <form
         onSubmit={form.handleSubmit(onSubmit)}
->>>>>>> Inga
-        className={cn("grid gap-5 max-w-205 mx-auto mb-10", className)}
+        className={cn("grid max-w-205 mx-auto gap-5 mb-10", className)}
       >
-        <div className="flex items-start gap-5">
+        <div className="flex gap-5 items-start">
           <FormInput label="Name" name="name" type="text" />
           <FormInput label="Email" name="email" type="email" />
         </div>
-<<<<<<< HEAD
         <div className="flex gap-5 items-start">
-=======
-        <div className="flex items-start gap-5">
->>>>>>> Inga
           <FormInput label="Phone" name="phone" type="tel" />
           <FormInput label="Company" name="company" type="text" />
         </div>
