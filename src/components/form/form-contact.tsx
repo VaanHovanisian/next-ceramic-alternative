@@ -40,6 +40,7 @@ export const FormContact: React.FC<Props> = (props) => {
       form.reset();
     }
   };
+
   return (
     <FormProvider {...form}>
       <form
