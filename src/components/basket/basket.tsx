@@ -14,16 +14,12 @@ export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
 
   return (
-<<<<<<< HEAD
     <div
       className={cn(
         "max-w-6xl mx-auto px-4 py-8 bg-white text-[#3a3845]",
         className,
       )}
     >
-=======
-    <div className={cn("", className)}>
->>>>>>> f33930fca7f59739fc28d47c43b7ab089b007a3a
       <div className="text-sm text-gray-400 mb-2">
         Home / <span className="text-gray-600">Shopping Cart</span>
       </div>
@@ -67,13 +63,7 @@ export const Basket: React.FC<Props> = (props) => {
               </tbody>
             </table>
           </div>
-<<<<<<< HEAD
           <BasketTotal totalAmount={1000} />
-=======
-          <BasketTotal
-            totalAmount={1000}
-          />
->>>>>>> f33930fca7f59739fc28d47c43b7ab089b007a3a
         </div>
       )}
     </div>
