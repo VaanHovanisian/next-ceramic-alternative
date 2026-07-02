@@ -7,11 +7,17 @@ export const useFilterQuery = (data: Filter) => {
   const router = useRouter();
 
   React.useEffect(() => {
-    const query = qs.stringify({
-      category: Array.from(data.category),
-      price: Array.from(data.price),
-      color: Array.from(data.color),
-    });
+    const query = qs.stringify(
+      {
+        category: Array.from(data.category),
+        price: Array.from(data.price),
+        color: Array.from(data.color),
+      },
+      {
+        arrayFormat: "comma",
+        encode: false,
+      },
+    );
 
     router.push(`?${query}`);
   }, [data.category, data.color, data.price]);

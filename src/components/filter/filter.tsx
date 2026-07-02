@@ -3,8 +3,8 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "../title";
 import { FilterCheckboxGroup } from "./filter-checkbox-group";
-import { filter as filterArr } from "@/constants/filter";
 import { useFilter } from "@/hooks/filter/use-filter";
+import { filter as filterArr } from "@/constants/filter";
 import { useFilterQuery } from "@/hooks/filter/use-filter-query";
 
 interface Props {
