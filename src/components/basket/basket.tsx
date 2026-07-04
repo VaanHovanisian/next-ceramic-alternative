@@ -5,6 +5,16 @@ import { Trash2 } from "lucide-react";
 import { BasketCard } from "./basket-card";
 import { BasketCartItems } from "@/constants/basket";
 import { BasketTotal } from "./basket-total";
+<<<<<<< HEAD
+=======
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+} from "../ui/breadcrumb";
+>>>>>>> Tagavor
 
 interface Props {
   className?: string;
@@ -20,9 +30,23 @@ export const Basket: React.FC<Props> = (props) => {
         className,
       )}
     >
+<<<<<<< HEAD
       <div className="text-sm text-gray-400 mb-2">
         Home / <span className="text-gray-600">Shopping Cart</span>
       </div>
+=======
+      <Breadcrumb className="pt-5 pb-12.5">
+        <BreadcrumbList className="flex">
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          /
+          <BreadcrumbItem>
+            <BreadcrumbPage>Shopping Cart</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+>>>>>>> Tagavor
       <h1 className="text-2xl font-medium mb-6">
         Cart ({BasketCartItems.length} item)
       </h1>
