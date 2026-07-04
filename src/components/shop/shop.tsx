@@ -11,6 +11,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 
 interface Props {
@@ -32,7 +33,7 @@ export const Shop: React.FC<Props> = (props) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex gap-7.5 w-full">
+      <div className="flex">
         <Filter />
         <div>
           <ShopSort className="ml-auto w-fit" />

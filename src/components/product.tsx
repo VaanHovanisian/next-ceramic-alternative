@@ -2,6 +2,13 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { ColorPicker } from "./product/color-picker";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+} from "./ui/breadcrumb";
 
 interface Props {
   className?: string;
@@ -19,6 +26,21 @@ export const Product: React.FC<Props> = (props) => {
     <div
       className={cn("border p-4 rounded-lg flex flex-col gap-4 ", className)}
     >
+      <Breadcrumb className="pt-5 pb-12.5">
+        <BreadcrumbList className="flex">
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          /
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+          </BreadcrumbItem>
+          /
+          <BreadcrumbItem>
+            <BreadcrumbPage>{product.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="relative w-133.75 h-146.25">
         <Image
           src={product.img}
