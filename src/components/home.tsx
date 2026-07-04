@@ -5,7 +5,7 @@ import { Hero } from "./hero";
 import { PlateServices } from "./plate-services";
 import { Post } from "./post";
 import { servicesHome } from "@/constants/services";
-import { PRODUCTS } from "@/constants/products";
+import { productIdes } from "@/constants/products";
 import { Title } from "./title";
 interface Props {
   className?: string;
@@ -28,7 +28,7 @@ export const Home: React.FC<Props> = (props) => {
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
         linkText="Shop now"
       />
-      <Catalog items={PRODUCTS} />
+      <Catalog items={productIdes} />
       <Post
         imgUrl="/post/2.jpg"
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
@@ -44,7 +44,7 @@ export const Home: React.FC<Props> = (props) => {
         linkText="Lear more"
         imgClassName="object-top"
       />
-      <Catalog items={PRODUCTS.slice(0, 4)} />
+      <Catalog items={productIdes.slice(0, 4)} />
       <Title className="text-center mb-12" size="l">
         OUR BLOG
       </Title>

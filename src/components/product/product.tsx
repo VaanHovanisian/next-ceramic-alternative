@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { ColorPicker } from "./product/color-picker";
+import { ColorPicker } from "./color-picker";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -9,14 +9,20 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "./ui/breadcrumb";
+} from "../ui/breadcrumb";
+import { ProductImage } from "./product-image";
+import { Container } from "../container";
+import { ProductContent } from "./product-content";
 
 interface Props {
   className?: string;
   product: {
-    title: string;
+    id: number;
+    name: string;
     price: number;
-    img: string;
+    imgUrl: string;
+    images: string[];
+    color: Array<{ name: string; id: number }>;
   };
 }
 
@@ -24,7 +30,7 @@ export const Product: React.FC<Props> = (props) => {
   const { className, product } = props;
 
   return (
-    <div
+    <Container
       className={cn("border p-4 rounded-lg flex flex-col gap-4 ", className)}
     >
       <Breadcrumb className="pt-5 pb-12.5">
@@ -39,31 +45,24 @@ export const Product: React.FC<Props> = (props) => {
           /
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{product.title}</BreadcrumbPage>
+            <BreadcrumbPage>{product.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="relative w-133.75 h-146.25">
-        <Image
-          src={product.img}
-          alt="{product.title}"
-          fill
-          className="object-cover rounded-md"
-          sizes="300px"
+      <div className="flex items-start gap-15 ">
+        <ProductImage
+          className="basis-1/2"
+          imgUrl={product.imgUrl}
+          alt={product.name}
+          images={product.images}
+        />
+        <ProductContent
+          className="basis-1/2"
+          name={product.name}
+          price={product.price}
+          color={product.color}
         />
       </div>
-
-      <>
-        <h2 className="text-xl font-semibold">{product.title}</h2>
-
-        <p className="text-lg font-medium">{product.price}</p>
-
-        <ColorPicker />
-
-        <button className="bg-black text-white py-2 rounded-md hover:opacity-90">
-          Add To Cart
-        </button>
-      </>
-    </div>
+    </Container>
   );
 };
