@@ -3,8 +3,13 @@
 import { useState } from "react";
 
 const colors = ["#FFFFFF", "#B86A32", "#111827", "#FBCFE8", "#78716C"];
+interface Props {
+  className?: string;
+  color: Array<{ name: string; id: number }>;
+}
 
-export const ColorPicker = () => {
+export const ColorPicker: React.FC<Props> = (props) => {
+  const { className, color };
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   return (

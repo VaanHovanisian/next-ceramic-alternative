@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Filter } from "../filter";
 import { Catalog } from "../catalog";
-import { PRODUCTS } from "@/constants/products";
+import { productIdes } from "@/constants/products";
 import { Container } from "../container";
 import { ShopSort } from "./shop-sort";
 import {
@@ -36,7 +36,7 @@ export const Shop: React.FC<Props> = (props) => {
         <Filter />
         <div>
           <ShopSort className="ml-auto w-fit" />
-          <Catalog className="grow pt-0" items={PRODUCTS} />
+          <Catalog className="grow pt-0" items={productIdes} />
         </div>
       </div>
     </Container>
