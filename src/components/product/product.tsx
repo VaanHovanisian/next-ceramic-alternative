@@ -1,18 +1,16 @@
-"use client";
-
 import React from "react";
 import { cn } from "@/lib/utils";
-
-import { ColorPicker } from "./color-picker";
 import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbSeparator,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
 import { ProductImage } from "./product-image";
 import { Container } from "../container";
+import { ProductContent } from "./product-content";
 
 interface Props {
   className?: string;
@@ -22,7 +20,7 @@ interface Props {
     price: number;
     imgUrl: string;
     images: string[];
-    color: Array<{ name: string }>;
+    color: Array<{ name: string; id: number }>;
   };
 }
 
@@ -30,7 +28,7 @@ export const Product: React.FC<Props> = (props) => {
   const { className, product } = props;
 
   return (
-    <div
+    <Container
       className={cn("border p-4 rounded-lg flex flex-col gap-4 ", className)}
     >
       <Breadcrumb className="pt-5 pb-12.5">
@@ -40,21 +38,29 @@ export const Product: React.FC<Props> = (props) => {
           </BreadcrumbItem>
           /
           <BreadcrumbItem>
-            <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+            <BreadcrumbLink href="/">Shop</BreadcrumbLink>
           </BreadcrumbItem>
           /
+          <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage>{product.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Container className="flex items-start ">
+      <div className="flex items-start gap-15 ">
         <ProductImage
-          alt="{product.name} imgUrl={product.imgUrl} images={product.images}"
-          imgUrl={""}
-          images={[]}
+          className="basis-1/2"
+          imgUrl={product.imgUrl}
+          alt={product.name}
+          images={product.images}
         />
-      </Container>
-    </div>
+        <ProductContent
+          className="basis-1/2"
+          name={product.name}
+          price={product.price}
+          color={product.color}
+        />
+      </div>
+    </Container>
   );
 };
