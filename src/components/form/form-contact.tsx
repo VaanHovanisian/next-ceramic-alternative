@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   contactFormSchema,
-  contactFormSchemaType,
+  ContactFormSchemaType,
 } from "@/constants/form-schema/contact.schema";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
@@ -30,7 +30,7 @@ export const FormContact: React.FC<Props> = (props) => {
     },
   });
 
-  const onSubmit = async (data: contactFormSchemaType) => {
+  const onSubmit = async (data: ContactFormSchemaType) => {
     try {
       console.log(data);
       toast.success("Success send");
@@ -48,11 +48,11 @@ export const FormContact: React.FC<Props> = (props) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("grid max-w-205 mx-auto gap-5 mb-10", className)}
       >
-        <div className="flex gap-5 items-start">
+        <div className="flex  sm:flex-row flex-col gap-5 items-start">
           <FormInput label="Name" name="name" type="text" />
           <FormInput label="Email" name="email" type="email" />
         </div>
-        <div className="flex gap-5 items-start">
+        <div className="flex sm:flex-row flex-col gap-5 items-start">
           <FormInput label="Phone" name="phone" type="tel" />
           <FormInput label="Company" name="company" type="text" />
         </div>
