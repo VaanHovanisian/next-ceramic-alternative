@@ -27,10 +27,10 @@ export const Catalog: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className={cn("py-10", className)}>
+    <div className={cn("py-10 text-center", className)}>
       <Container>
         {title && (
-          <h2 className="text-center text-2xl md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">
+          <h2 className="text-2xl font-garamond md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">
             {title}
           </h2>
         )}
@@ -48,7 +48,7 @@ export const Catalog: React.FC<Props> = (props) => {
             items.map((product) => (
               <li
                 key={product.id}
-                className="w-full max-w-70 min-h-120 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4 flex flex-col justify-between"
+                className="w-full text-center max-w-70 min-h-120 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4 flex flex-col justify-between"
               >
                 <Card product={product} />
               </li>

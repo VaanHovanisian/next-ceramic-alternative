@@ -8,7 +8,7 @@ export const Header = () => {
     <header className="h-20 z-100 sticky top-0 border-b bg-white">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
         <Logo />
-        <nav className="flex items-center gap-12">
+        <nav className="hidden md:flex items-center gap-12">
           <ul className="flex gap-12 text-sm">
             <li>
               <Link href="/">Home</Link>
