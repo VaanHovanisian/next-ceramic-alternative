@@ -13,9 +13,12 @@ import {
 interface Props {
   className?: string;
   product: {
-    title: string;
+    name: string;
     price: number;
-    img: string;
+    id: number;
+    imgUrl: string;
+    images: string[];
+    color: Array<{ name: string }>;
   };
 }
 
@@ -37,13 +40,13 @@ export const Product: React.FC<Props> = (props) => {
           </BreadcrumbItem>
           /
           <BreadcrumbItem>
-            <BreadcrumbPage>{product.title}</BreadcrumbPage>
+            <BreadcrumbPage>{product.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
       <div className="relative w-133.75 h-146.25">
         <Image
-          src={product.img}
+          src={product.imgUrl}
           alt="{product.title}"
           fill
           className="object-cover rounded-md"
@@ -52,7 +55,7 @@ export const Product: React.FC<Props> = (props) => {
       </div>
 
       <>
-        <h2 className="text-xl font-semibold">{product.title}</h2>
+        <h2 className="text-xl font-semibold">{product.name}</h2>
 
         <p className="text-lg font-medium">{product.price}</p>
 
