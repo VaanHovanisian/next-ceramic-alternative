@@ -10,6 +10,9 @@ import {
   FormCheckoutSchemaType,
 } from "@/constants/form-schema/checkout.schema";
 import { toast } from "sonner";
+import { FormTextarea } from "./form-textarea";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 interface Props {
   className?: string;
@@ -39,26 +42,31 @@ export const FormCheckout: React.FC<Props> = (props) => {
       form.reset();
     }
   };
-
   return (
-    <FormProvider {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("", className)}
+    <div className={cn("")}>
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className={cn("mb-10", className)}
+        >
+          <div className="flex items-start gap-5">
+            <FormInput label="First Name *" name="firstName" type="text" />
+            <FormInput label="Last Name *" name="lastName" type="text" />
+          </div>
+          <div className="flex items-start gap-5">
+            <FormInput label="Email *" name="email" type="email" />
+            <FormInput label="Phone" name="phone" type="tel" />
+          </div>
+          <FormInput label="Street address *" name="address" type="text" />
+          <FormTextarea label="Order notes" name="message" />
+        </form>
+      </FormProvider>
+      <Link
+        href={"/basket"}
+        className="flex items-center gap-2 uppercase font-semibold text-[12px] leading-[150%] text-primaty tracking-[0.08em]"
       >
-        <div className="flex items-start gap-5">
-          <FormInput label="First Name *" name="firstName" type="text" />
-          <FormInput label="Last Name *" name="lastName" type="text" />
-        </div>
-        <div className="flex items-start gap-5">
-          <FormInput label="Email *" name="email" type="email" />
-          <FormInput label="Phone" name="phone" type="tel" />
-        </div>
-        <FormInput label="Street address *" name="address" type="text" />
-        <FormInput label="Order notes" name="message" type="text" />
-
-        <Button disabled={form.formState.isSubmitting}>Send Message</Button>
-      </form>
-    </FormProvider>
+        <ChevronLeft size={20} /> Return to Cart
+      </Link>
+    </div>
   );
 };
