@@ -20,5 +20,5 @@ export const useFilterQuery = (data: Filter) => {
     );
 
     router.push(`?${query}`);
-  }, [data.category, data.color, data.price]);
+  }, [data.category, data.color, data.price, router]);
 };
