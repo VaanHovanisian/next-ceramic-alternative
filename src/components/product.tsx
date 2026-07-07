@@ -50,7 +50,6 @@ export const Product: React.FC<Props> = (props) => {
           sizes="300px"
         />
       </div>
-
       <>
         <h2 className="text-xl font-semibold">{product.title}</h2>
 
