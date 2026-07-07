@@ -48,11 +48,11 @@ export const FormContact: React.FC<Props> = (props) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("grid max-w-205 mx-auto gap-5 mb-10", className)}
       >
-        <div className="flex gap-5 items-start">
+        <div className="flex sm:flex-row flex-col gap-5 items-start">
           <FormInput label="Name" name="name" type="text" />
           <FormInput label="Email" name="email" type="email" />
         </div>
-        <div className="flex gap-5 items-start">
+        <div className="flex sm:flex-row flex-col gap-5 items-start">
           <FormInput label="Phone" name="phone" type="tel" />
           <FormInput label="Company" name="company" type="text" />
         </div>

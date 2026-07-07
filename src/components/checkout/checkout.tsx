@@ -9,6 +9,7 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
+import { Container } from "../container";
 
 interface Props {
   className?: string;
@@ -17,7 +18,7 @@ interface Props {
 export const Checkout: React.FC<Props> = (props) => {
   const { className } = props;
   return (
-    <div className={cn("", className)}>
+    <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">
         <BreadcrumbList className="flex">
           <BreadcrumbItem>
@@ -35,6 +36,6 @@ export const Checkout: React.FC<Props> = (props) => {
       </Breadcrumb>
       <FormCheckout />
       <CheckoutTotal />
-    </div>
+    </Container>
   );
 };
