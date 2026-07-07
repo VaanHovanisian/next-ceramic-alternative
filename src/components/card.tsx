@@ -33,7 +33,7 @@ export const Card: React.FC<Props> = (props) => {
           <span className="text-lg font-semibold mt-1">{product.price}</span>
         </h3>
         <p className="mt-2 text-sm text-gray-500 text-center line-clamp-3">
-          Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.
+          {product.text}
         </p>
       </div>
 

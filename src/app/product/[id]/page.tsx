@@ -1,4 +1,4 @@
-import { Product } from "@/components/product";
+import { Product } from "@/components/product/product";
 import { productIdes } from "@/constants/products";
 
 interface ParamsProps {
