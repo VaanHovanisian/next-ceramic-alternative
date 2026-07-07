@@ -15,7 +15,10 @@ export const Filter: React.FC<Props> = (props) => {
   const { className } = props;
 
   const filter = useFilter();
+<<<<<<< HEAD
 
+=======
+>>>>>>> Tagavor
   useFilterQuery(filter);
 
   return (

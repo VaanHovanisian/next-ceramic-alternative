@@ -7,9 +7,9 @@ import { BasketCartItems } from "@/constants/basket";
 import { BasketTotal } from "./basket-total";
 import {
   Breadcrumb,
+  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbList,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
 
@@ -21,7 +21,12 @@ export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
 
   return (
-    <div className={cn("", className)}>
+    <div
+      className={cn(
+        "max-w-6xl mx-auto px-4 py-8 bg-white text-[#3a3845]",
+        className,
+      )}
+    >
       <Breadcrumb className="pt-5 pb-12.5">
         <BreadcrumbList className="flex">
           <BreadcrumbItem>
@@ -29,7 +34,7 @@ export const Basket: React.FC<Props> = (props) => {
           </BreadcrumbItem>
           /
           <BreadcrumbItem>
-            <BreadcrumbPage>Shoping Cart</BreadcrumbPage>
+            <BreadcrumbPage>Shopping Cart</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -40,7 +45,7 @@ export const Basket: React.FC<Props> = (props) => {
       {BasketCartItems.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
-        <div className="flex flex-col  gap-8 items-end">
+        <div className="flex flex-col gap-8 items-end">
           <div className="w-full overflow-x-auto">
             <table className="w-full border-collapse text-left min-w-150">
               <thead>

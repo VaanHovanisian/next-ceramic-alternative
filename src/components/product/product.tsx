@@ -5,7 +5,6 @@ import {
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
 import { ProductImage } from "./product-image";
@@ -32,7 +31,7 @@ export const Product: React.FC<Props> = (props) => {
   return (
     <>
       <Container
-        className={cn("border p-4 rounded-lg flex flex-col gap-4 ", className)}
+        className={cn("p-4 rounded-lg flex flex-col gap-4 ", className)}
       >
         <Breadcrumb className="pt-5 pb-12.5">
           <BreadcrumbList className="flex">
@@ -41,10 +40,9 @@ export const Product: React.FC<Props> = (props) => {
             </BreadcrumbItem>
             /
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Shop</BreadcrumbLink>
+              <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
             </BreadcrumbItem>
             /
-            <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbPage>{product.name}</BreadcrumbPage>
             </BreadcrumbItem>
@@ -53,22 +51,22 @@ export const Product: React.FC<Props> = (props) => {
         <div className="flex md:items-start items-center gap-15 flex-col md:flex-row">
           <ProductImage
             className="basis-1/2"
-            imgUrl={product.imgUrl}
             alt={product.name}
+            imgUrl={product.imgUrl}
             images={product.images}
           />
           <ProductContent
             className="basis-1/2"
+            color={product.color}
             name={product.name}
             price={product.price}
-            color={product.color}
           />
         </div>
       </Container>
       <Catalog
         className="text-start"
         items={productIdes.slice(0, 4)}
-        title="Similar items"
+        title="Similar Items"
       />
     </>
   );

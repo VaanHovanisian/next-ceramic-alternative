@@ -265,4 +265,8 @@ export const products = [
   },
 ];
 
-export const productIdes = products.map((el, i) => ({ ...el, id: i + 1 }));
+export const productIdes = products.map((el, i) => ({
+  ...el,
+  color: el.color.map((c, i) => ({ ...c, id: i + 1 })),
+  id: i + 1,
+}));

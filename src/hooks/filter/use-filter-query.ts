@@ -18,6 +18,7 @@ export const useFilterQuery = (data: Filter) => {
         encode: false,
       },
     );
+
     router.push(`?${query}`);
-  }, [data.category, data.color, data.price, router]);
+  }, [data.category, data.color, data.price]);
 };

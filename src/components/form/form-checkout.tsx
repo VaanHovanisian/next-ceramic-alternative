@@ -5,7 +5,7 @@ import { FormInput } from "./form-input";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  formCheackoutSchema,
+  formCheckoutSchema,
   FormCheckoutSchemaType,
 } from "@/constants/form-schema/checkout.schema";
 import { toast } from "sonner";
@@ -20,9 +20,9 @@ interface Props {
 export const FormCheckout: React.FC<Props> = (props) => {
   const { className } = props;
   const form = useForm({
-    resolver: zodResolver(formCheackoutSchema),
+    resolver: zodResolver(formCheckoutSchema),
     defaultValues: {
-      firstname: "",
+      firstName: "",
       lastName: "",
       email: "",
       phone: "",
@@ -30,7 +30,8 @@ export const FormCheckout: React.FC<Props> = (props) => {
       message: "",
     },
   });
-  const onSubmit = (data: FormCheckoutSchemaType) => {
+
+  const onSubmit = async (data: FormCheckoutSchemaType) => {
     try {
       console.log(data);
       toast.success("success order");
@@ -43,12 +44,9 @@ export const FormCheckout: React.FC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <div className={cn("", className)}>
       <FormProvider {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className={cn("", className)}
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className={cn("mb-10")}>
           <div className="flex items-start gap-5">
             <FormInput label="First Name *" name="firstName" type="text" />
             <FormInput label="Last Name *" name="lastName" type="text" />
@@ -63,9 +61,9 @@ export const FormCheckout: React.FC<Props> = (props) => {
       </FormProvider>
       <Link
         href={"/basket"}
-        className="flex items-center gap-2 font-semibold text=[12px] leading-[150%] tracking-[0.08em] text-primary uppercase"
+        className="flex items-center gap-2 font-semibold text-[12px] leading-[150%] tracking-[0.08em] text-primary uppercase"
       >
-        <ChevronLeft size={20} /> Return to cart
+        <ChevronLeft size={20} /> return to cart
       </Link>
     </div>
   );

@@ -27,7 +27,7 @@ export const Catalog: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <div className={cn("text-center py-10", className)}>
+    <div className={cn("py-10 text-center", className)}>
       <Container>
         {title && (
           <h2 className="text-2xl font-garamond md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">

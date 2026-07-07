@@ -23,7 +23,7 @@ export const ProductContent: React.FC<Props> = (props) => {
       </span>
       <ColorPicker className="mb-12" color={color} />
       <div className="flex gap-2.5">
-        <div className="flex gap-10 items-center border border-primary  p-5 text-primary">
+        <div className="flex gap-10 items-center border border-primary p-5 text-primary">
           <button className="cursor-pointer">
             <Minus />
           </button>
