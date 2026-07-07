@@ -1,28 +1,45 @@
 "use client";
+import { cn } from "@/lib/utils";
+import React, { useState } from "react";
+import { GetColorName } from "hex-color-to-color-name";
 
-import { useState } from "react";
+interface Props {
+  className?: string;
+  color: Array<{ name: string; id: number }>;
+}
 
-const colors = ["#FFFFFF", "#B86A32", "#111827", "#FBCFE8", "#78716C"];
-
-export const ColorPicker = () => {
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+export const ColorPicker: React.FC<Props> = (props) => {
+  const { className, color } = props;
+  const [selectedColor, setSelectedColor] = useState(color[0].name);
 
   return (
-    <div className="flex gap-3">
-      {colors.map((color) => (
-        <button
-          key={color}
-          onClick={() => setSelectedColor(color)}
-          style={{ backgroundColor: color }}
-          className={`
-            w-9 h-9
-            border border-gray-400
-            transition-all duration-200
-            hover:scale-110
-            ${selectedColor === color ? "ring-2 ring-black ring-offset-2" : ""}
-          `}
-        />
-      ))}
+    <div className={cn("", className)}>
+      <h3 className="font-semibold text-base leading-[138%] mb-4">
+        Color:{" "}
+        <span
+          className="text-shadow-[1px_1px_2px_black]"
+          style={{ color: selectedColor }}
+        >
+          {GetColorName(selectedColor)}
+        </span>
+      </h3>
+      <ul className={cn("flex gap-3")}>
+        {color.map((c) => (
+          <li key={c.id}>
+            <button
+              onClick={() => setSelectedColor(c.name)}
+              style={{ backgroundColor: c.name }}
+              className={`
+                w-9 h-9
+                border border-gray-400
+                transition-all duration-200
+                hover:scale-110
+                ${selectedColor === c.name ? "ring-2 ring-black ring-offset-2" : ""}
+              `}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
