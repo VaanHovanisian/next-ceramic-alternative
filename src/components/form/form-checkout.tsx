@@ -11,7 +11,7 @@ import {
 import { toast } from "sonner";
 import { FormTextarea } from "./form-textarea";
 import Link from "next/link";
-import { ChevronLeft, ChevronsLeft } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronsLeft } from "lucide-react";
 
 interface Props {
   className?: string;
@@ -44,7 +44,7 @@ export const FormCheckout: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className={cn("mb-10", className)}>
+    <div className={cn("", className)}>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className={cn("mb-10")}>
           <div className="flex items-start gap-5">
@@ -62,10 +62,9 @@ export const FormCheckout: React.FC<Props> = (props) => {
       </FormProvider>
       <Link
         href={"/basket"}
-        className=" flex items-center gap-2 font-semibold text-[12px] leading-[143%] tracking-[0.08em] text-primary hover:underline"
+        className="flex items-center gap-2 font-semibold text-[12px] leading-[150%] tracking-[0.08em] text-primary uppercase"
       >
-        <ChevronLeft size={20} />
-        Return to Cart
+        <ChevronLeft size={20} /> return to cart
       </Link>
     </div>
   );

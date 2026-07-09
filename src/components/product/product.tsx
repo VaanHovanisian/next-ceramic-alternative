@@ -10,8 +10,8 @@ import {
 import { ProductImage } from "./product-image";
 import { Container } from "../container";
 import { ProductContent } from "./product-content";
-import { productIdes } from "@/constants/products";
 import { Catalog } from "../catalog";
+import { productIdes } from "@/constants/products";
 
 interface Props {
   className?: string;
