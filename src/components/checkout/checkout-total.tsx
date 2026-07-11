@@ -27,40 +27,43 @@ const orderProducts = [
 export const CheckoutTotal: React.FC<Props> = (props) => {
   const { className } = props;
   return (
-    <div className={cn("", className)}>
-      <table>
-        <thead>
+    <div className={cn("max-w-104 w-full ", className)}>
+      <table className="mb-10">
+        <thead className="border-b ">
+          <tr className="font-semibold text-[20px] leading-[140%] text-primary">
+            <th className="text-start">Product</th>
+            <th className="text-end">Subtotal</th>
+          </tr>
           <tr>
-            <th>Product</th>
-            <th>Subtotal</th>
+            <td className=""></td>
           </tr>
         </thead>
         <tbody>
           {orderProducts.map((el) => (
-            <tr key={el.id}>
+            <tr className="text-[14px] leading-[157%] text-primary" key={el.id}>
               <td>{el.name}</td>
-              <td>{el.price}</td>
+              <td className="text-end pb-5">{el.price}</td>
             </tr>
           ))}
-          <tr>
+          <tr className="text-[14px] font-semibold leading-[157%] text-primary">
             <td>Subtotal</td>
-            <td>$475.00</td>
+            <td className="text-end pb-5">$475.00</td>
           </tr>
-          <tr>
+          <tr className="text-[14px] font-semibold leading-[157%] text-primary">
             <td>Shipping</td>
-            <td>$15.00</td>
+            <td className="text-end pb-10">$15.00</td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
+        <tfoot className="border-t">
+          <tr className="font-semibold text-[20px] leading-[140%] text-primary">
             <td>Total</td>
-            <td>$490.00</td>
+            <td className="text-end">$490.00</td>
           </tr>
         </tfoot>
       </table>
-      <div className="bg-primary text-white">
-        <h3>Payment</h3>
-        <div className="flex gap-2">
+      <div className="grid bg-primary p-7.5 gap-5 text-white">
+        <h3 className="font-semibold text-[20px] leading-[140%]">Payment</h3>
+        <div className="flex justify-center py-5 border-b border-white gap-2">
           <svg
             width="38"
             height="24"
