@@ -51,6 +51,7 @@ export const ShopSort: React.FC<Props> = (props) => {
   return (
     <div ref={ref} className={cn("relative", className)}>
       <button
+        type="button"
         className="flex gap-5 items-center"
         onClick={() => setOpen(!open)}
       >
@@ -66,7 +67,10 @@ export const ShopSort: React.FC<Props> = (props) => {
       >
         {sort.map((el, i) => (
           <li key={i}>
-            <button className="cursor-pointer w-full hover:bg-accent text-start">
+            <button
+              type="button"
+              className="cursor-pointer w-full hover:bg-accent text-start"
+            >
               {el.name}
             </button>
           </li>
