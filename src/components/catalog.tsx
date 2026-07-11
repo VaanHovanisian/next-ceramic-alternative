@@ -30,7 +30,7 @@ export const Catalog: React.FC<Props> = (props) => {
     <div className={cn("py-10 text-center", className)}>
       <Container>
         {title && (
-          <h2 className="text-2xl font-garamond md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-semibold mb-8 md:my-10">
+          <h2 className="text-2xl md:text-[30px] leading-[120%] uppercase text-[#3a3845] font-garamond font-semibold mb-8 md:my-10">
             {title}
           </h2>
         )}

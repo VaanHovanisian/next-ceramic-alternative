@@ -7,7 +7,6 @@ interface ParamsProps {
 export default async function ProductPage({ params }: ParamsProps) {
   const id = Number((await params).id);
   const product = productIdes.find((el) => el.id === id);
-
   if (!product) {
     return null;
   }
