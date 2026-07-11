@@ -2,6 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
+import { useClickAway } from "react-use";
+import { useFilterSortQuery } from "@/hooks/filter/use-filter-sort-query";
 
 interface Props {
   className?: string;
@@ -32,21 +34,14 @@ const sort = [
 
 export const ShopSort: React.FC<Props> = (props) => {
   const { className } = props;
+  const {handleSelect} useFilterSortQuery(sort)
   const [open, setOpen] = React.useState(false);
 
   const ref = React.useRef(null);
 
-  React.useEffect(() => {
-    const handleClick = () => {
-      if (ref.current) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [open]);
+  useClickAway(ref, () => {
+    setOpen(false);
+  });
 
   return (
     <div ref={ref} className={cn("relative", className)}>
@@ -59,7 +54,7 @@ export const ShopSort: React.FC<Props> = (props) => {
       </button>
       <ul
         className={cn(
-          "absolute top-full w-full p-2 rounded-[4px] bg-white z-50 scale-y-0 origin-top transition-[scale] duration-500",
+          "absolute top-full w-full p-2 rounded-lg bg-white z-50 scale-y-0 origin-top transition-[scale] duration-500",
           {
             "scale-y-100": open,
           },
@@ -68,6 +63,10 @@ export const ShopSort: React.FC<Props> = (props) => {
         {sort.map((el, i) => (
           <li key={i}>
             <button
+              onClick={() => {
+                handleSelect(el)
+                setOpen(false);
+              }}
               type="button"
               className="cursor-pointer w-full hover:bg-accent text-start"
             >

@@ -14,30 +14,24 @@ export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
 
   return (
-    <div className={cn("", className)}>
-      <div>
-        <Link
-          href={"/product/" + product.id}
-          className="w-full h-64 overflow-hidden rounded-xl"
-        >
-          <Image
-            src={product.imgUrl}
-            alt={product.name}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            width={255}
-            height={325}
-          />
-        </Link>
-        <h3 className="mt-4 flex flex-col gap-1 text-center text-base font-medium text-[#3a3845]">
-          {product.name}
-          <span className="text-lg font-semibold mt-1">{product.price}</span>
-        </h3>
-        <p className="mt-2 text-sm text-gray-500 text-center line-clamp-3">
-          {product.text}
-        </p>
-      </div>
-
-      <Button className="w-full mt-5">Add to cart</Button>
+    <div className={cn("flex-col flex h-full text-left", className)}>
+      <Link href={"/product/" + product.id} className="w-full overflow-hidden">
+        <Image
+          src={product.imgUrl}
+          alt={product.name}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          width={255}
+          height={325}
+        />
+      </Link>
+      <h3 className="mt-4 flex flex-col gap-1 text-base font-medium text-[#3a3845]">
+        {product.name}
+        <span className="text-lg font-semibold mt-1">{product.price}</span>
+      </h3>
+      <p className="mt-2 text-sm text-gray-500 line-clamp-3 mb-3">
+        {product.text}
+      </p>
+      <Button className="w-full mt-auto">Add to cart</Button>
     </div>
   );
 };

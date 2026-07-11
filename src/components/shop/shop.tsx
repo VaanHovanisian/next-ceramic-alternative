@@ -12,6 +12,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
+import { Sidebar } from "lucide-react";
+import { ShopFilterSidebar } from "./shop-filter-sidebar";
 
 interface Props {
   className?: string;
@@ -33,9 +35,17 @@ export const Shop: React.FC<Props> = (props) => {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex">
-        <Filter />
-        <div>
-          <ShopSort className="ml-auto w-fit" />
+        <Filter className="hidden md:block" />
+        <div className="w-full">
+          <div className="flex justify-between items-center">
+            <ShopSort className="ml-auto w-fit" />
+          </div>
+          <div>
+            <ShopFilterSidebar>
+              <Sidebar />
+            </ShopFilterSidebar>
+            <ShopSort className="" />
+          </div>
           <Catalog className="grow pt-0" items={productIdes} />
         </div>
       </div>
