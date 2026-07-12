@@ -19,6 +19,6 @@ export const useFilterQuery = (data: Filter) => {
       },
     );
 
-    router.push(`?${query}`);
+    router.push(`?${query}`, { scroll: false });
   }, [data.category, data.color, data.price, router]);
 };

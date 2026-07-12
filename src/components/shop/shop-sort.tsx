@@ -66,7 +66,12 @@ export const ShopSort: React.FC<Props> = (props) => {
       >
         {sort.map((el, i) => (
           <li key={i}>
-            <button className="cursor-pointer w-full hover:bg-accent text-start">
+            <button
+              onClick={() => {
+                setOpen(false);
+              }}
+              className="cursor-pointer w-full hover:bg-accent text-start"
+            >
               {el.name}
             </button>
           </li>
