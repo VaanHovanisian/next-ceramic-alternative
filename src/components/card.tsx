@@ -14,8 +14,8 @@ export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
 
   return (
-    <div className={cn("flex flex-col text-left gap-1 h-full", className)}>
-      <Link href={"/product/" + product.id} className="w-full overflow-hidden ">
+    <div className={cn("flex flex-col gap-1 h-full text-left", className)}>
+      <Link href={"/product/" + product.id} className="w-full overflow-hidden">
         <Image
           src={product.imgUrl}
           alt={product.name}
@@ -28,8 +28,9 @@ export const Card: React.FC<Props> = (props) => {
         {product.name}
         <span className="text-lg font-semibold mt-1">{product.price}</span>
       </h3>
-      <p className="mt-2 text-sm text-gray-500 line-clamp-3">{product.text}</p>
-
+      <p className="mt-2 text-sm text-gray-500 line-clamp-3 mb-3">
+        {product.text}
+      </p>
       <Button className="w-full mt-auto">Add to cart</Button>
     </div>
   );

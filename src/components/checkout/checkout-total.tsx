@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 interface Props {
   className?: string;
 }
-
 const orderProducts = [
   {
     id: 1,
@@ -23,47 +22,46 @@ const orderProducts = [
     price: 49,
   },
 ];
-
 export const CheckoutTotal: React.FC<Props> = (props) => {
   const { className } = props;
   return (
-    <div className={cn("max-w-104 w-full ", className)}>
-      <table className="mb-10">
-        <thead className="border-b ">
+    <div className={cn("max-w-104 w-full", className)}>
+      <table className="w-full mb-12">
+        <thead>
           <tr className="font-semibold text-[20px] leading-[140%] text-primary">
-            <th className="text-start">Product</th>
-            <th className="text-end">Subtotal</th>
+            <th className="text-start pb-5">Product</th>
+            <th className="text-end pb-5">Subtotal</th>
           </tr>
-          <tr>
-            <td className=""></td>
+          <tr className="border-t">
+            <td className="pb-10" colSpan={2}></td>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="">
           {orderProducts.map((el) => (
-            <tr className="text-[14px] leading-[157%] text-primary" key={el.id}>
+            <tr key={el.id} className="text-[14px] leading-[157%] text-primary">
               <td>{el.name}</td>
-              <td className="text-end pb-5">{el.price}</td>
+              <td className="text-end">{el.price}</td>
             </tr>
           ))}
           <tr className="text-[14px] font-semibold leading-[157%] text-primary">
-            <td>Subtotal</td>
-            <td className="text-end pb-5">$475.00</td>
+            <td className="pt-10">Subtotal</td>
+            <td className="text-end pt-10">$475.00</td>
           </tr>
           <tr className="text-[14px] font-semibold leading-[157%] text-primary">
-            <td>Shipping</td>
+            <td className="pb-10">Shipping</td>
             <td className="text-end pb-10">$15.00</td>
           </tr>
         </tbody>
-        <tfoot className="border-t">
+        <tfoot className=" border-t">
           <tr className="font-semibold text-[20px] leading-[140%] text-primary">
-            <td>Total</td>
-            <td className="text-end">$490.00</td>
+            <td className="pt-5">Total</td>
+            <td className="text-end pt-5">$490.00</td>
           </tr>
         </tfoot>
       </table>
-      <div className="grid bg-primary p-7.5 gap-5 text-white">
-        <h3 className="font-semibold text-[20px] leading-[140%]">Payment</h3>
-        <div className="flex justify-center py-5 border-b border-white gap-2">
+      <div className="grid p-7.5 gap-5 text-white bg-primary">
+        <h3 className="ont-semibold text-[20px] leading-[140%]">Payment</h3>
+        <div className="flex gap-2 justify-center py-5 border-b border-white">
           <svg
             width="38"
             height="24"
@@ -71,7 +69,7 @@ export const CheckoutTotal: React.FC<Props> = (props) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_52_2831)">
+            <g clipPath="url(#clip0_52_2831)">
               <path
                 opacity="0.07"
                 d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z"
@@ -99,7 +97,7 @@ export const CheckoutTotal: React.FC<Props> = (props) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_52_2835)">
+            <g clipPath="url(#clip0_52_2835)">
               <path
                 opacity="0.07"
                 d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z"

@@ -31,46 +31,40 @@ export const BasketCard: React.FC<Props> = (props) => {
       </td>
 
       <td className="p-4">
-        <div className="w-16 h-20 rounded overflow-hidden flex items-center justify-center">
-          <Image
-            src={item.img}
-            alt={item.title}
-            width={120}
-            height={141}
-            className="object-cover w-full h-full"
-          />
+        <div className="rounded overflow-hidden flex items-center justify-center">
+          <Image src={item.img} alt={item.title} width={120} height={141} />
         </div>
       </td>
 
-      <td className="p-4 font-semibold text-[14px] tracking-wide max-w-50">
+      <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
         {item.title}
       </td>
 
-      <td className="p-4 font-semibold text-[14px] tracking-wide max-w-50">
+      <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
         ${item.price}
       </td>
 
       <td className="p-4">
-        <div className="flex items-center justify-center border border-gray-300 rounded w-24 mx-auto h-8 bg-white">
+        <div className="flex items-center justify-center border border-primary mx-auto h-12 bg-white">
           <button
             onClick={() => updateQuantity(item.id, -1)}
-            className="px-2 text-gray-500 hover:text-black"
+            className="px-2 text-primary hover:text-black"
           >
             <Minus className="w-3 h-3" />
           </button>
-          <span className="p-4 font-semibold text-[14px] tracking-wide max-w-50">
+          <span className="flex-1 text-center font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
             {item.quantity}
           </span>
           <button
             onClick={() => updateQuantity(item.id, 1)}
-            className="px-2 text-gray-500 hover:text-black"
+            className="px-2 text-primary hover:text-black"
           >
             <Plus className="w-3 h-3" />
           </button>
         </div>
       </td>
 
-      <td className="p-4 text-sm font-semibold #c69b7b">
+      <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase text-[#c69b7b]">
         ${item.price * item.quantity}
       </td>
     </tr>
