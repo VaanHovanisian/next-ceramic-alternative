@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   authLoginSchema,
-  authLoginSchemaType,
+  AuthLoginSchemaType,
 } from "@/constants/form-schema/auth.schema";
 
 interface Props {
@@ -17,14 +17,14 @@ interface Props {
 export const FormLogin: React.FC<Props> = (props) => {
   const { className } = props;
 
-  const form = useForm<authLoginSchemaType>({
+  const form = useForm<AuthLoginSchemaType>({
     resolver: zodResolver(authLoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const onSubmit = (data: authLoginSchemaType) => {
+  const onSubmit = (data: AuthLoginSchemaType) => {
     console.log(data);
   };
 
