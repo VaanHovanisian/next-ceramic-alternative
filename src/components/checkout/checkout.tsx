@@ -70,7 +70,7 @@ export const Checkout: React.FC<Props> = (props) => {
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={cn("grid justify-items-center md:flex gap-14")}
+          className={cn("grid md:flex justify-items-center gap-14")}
         >
           <FormCheckout />
           <CheckoutTotal />

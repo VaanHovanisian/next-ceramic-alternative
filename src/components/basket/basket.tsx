@@ -49,7 +49,7 @@ export const Basket: React.FC<Props> = (props) => {
           <div className="w-full overflow-x-auto">
             <table className="w-full border-collapse text-left min-w-150">
               <thead>
-                <tr className="bg-[#1a1a1a] text-white text-xs tracking-wider uppercase">
+                <tr className="bg-primary text-white text-xs tracking-wider uppercase">
                   <th className="p-3 text-center w-12">
                     <Trash2 className="w-4 h-4 mx-auto cursor-pointer" />
                   </th>
