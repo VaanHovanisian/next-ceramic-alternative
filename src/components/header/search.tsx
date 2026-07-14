@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { SearchIcon } from "lucide-react";
-import { Input } from "../ui";
-import { useClickAway, useDebounce } from "react-use";
-import { searchProduct } from "@/services/search";
-import { Product } from "@prisma/client";
+import { Input } from "../ui/input";
+import { useClickAway } from "react-use";
+// import { searchProduct } from "@/services/search";
+// import { Product } from "@prisma/client";
 import { SearchContent } from "./search-content";
 
 interface Props {
@@ -17,14 +18,14 @@ export const Search: React.FC<Props> = (props) => {
   const { className, btnClassName, isOverlay = true } = props;
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  const [data, setData] = React.useState<Product[]>([]);
+  const [data] = React.useState<any[]>([]);
 
   const ref = React.useRef(null);
   useClickAway(ref, () => {
     setOpen(false);
   });
 
-  useDebounce(async () => setData(await searchProduct(value)), 300, [value]);
+  // useDebounce(async () => setData(await searchProduct(value)), 300, [value]);
 
   return (
     <>
@@ -34,7 +35,7 @@ export const Search: React.FC<Props> = (props) => {
       <div ref={ref} className={cn("relative z-151", className)}>
         <button
           aria-label="open search input"
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen(true)}
           className={cn("hidden md:block cursor-pointer", btnClassName)}
         >
           <SearchIcon size={20} />

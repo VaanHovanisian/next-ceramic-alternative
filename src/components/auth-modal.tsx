@@ -16,19 +16,20 @@ export const AuthModal: React.FC<Props> = (props) => {
   return (
     <Dialog>
       <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent className={cn("z-in-105", className)}>
-        {toggle ? <FormRegister /> : <FormLogin />}
+      <DialogContent className={cn("z-105", className)}>
+        {!toggle ? <FormRegister /> : <FormLogin />}
+        <div className="flex">
+          <Button className="grow">Google</Button>
+          <Button className="grow">Github</Button>
+        </div>
         <Button
+          variant={"outline"}
           onClick={() => {
             setToggle(!toggle);
           }}
         >
           {toggle ? "signup" : "signin"}
         </Button>
-        <div className="flex">
-          <Button></Button>
-          <Button></Button>
-        </div>
       </DialogContent>
     </Dialog>
   );

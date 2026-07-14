@@ -11,21 +11,19 @@ const passwordSchema = z
 
 export const authRegisterSchema = z
   .object({
-    name: z.string().min(2, "minimum 2 symbol"),
+    name: z.string().min(2, { message: "minimum 2 symbol" }),
     email: emailFormShema,
     password: passwordSchema,
     confirmPassword: passwordSchema,
   })
-  .refine((data) => (data.password = data.confirmPassword), {
+  .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
     message: "not correct",
   });
-
 export const authLoginSchema = z.object({
-  name: z.string().min(2, "minimum 2 symbol"),
   email: emailFormShema,
   password: passwordSchema,
-  confirmPassword: passwordSchema,
 });
-export type authRegisterSchemaType = z.infer<typeof authRegisterSchema>;
-export type authLoginSchemaType = z.infer<typeof authLoginSchema>;
+
+export type AuthRegisterSchemaType = z.infer<typeof authRegisterSchema>;
+export type AuthLoginSchemaType = z.infer<typeof authLoginSchema>;
