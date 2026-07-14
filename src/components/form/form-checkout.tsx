@@ -15,28 +15,27 @@ export const FormCheckout: React.FC<Props> = (props) => {
 
   return (
     <div className={cn("max-w-160 w-full", className)}>
-      <h2 className="font-semibold text-[20px] leading-[140%] text-primary mb-7.5 mb-10">
+      <h2 className="text-[20px] font-semibold leading-[140%] text-primary mb-10">
         Billing Details
       </h2>
-      <div className={cn(" grid gap-7.5 mb-10 ")}>
+      <div className="mb-10 grid gap-7.5">
         <div className="flex items-start gap-5">
           <FormInput label="First Name *" name="firstName" type="text" />
           <FormInput label="Last Name *" name="lastName" type="text" />
         </div>
         <div className="flex items-start gap-5">
           <FormInput label="Email *" name="email" type="email" />
-          <FormInput className="h-13" label="Phone" name="phone" type="tel" />
+          <FormInput label="Phone" name="phone" type="tel" />
         </div>
 
         <FormInput label="Street address *" name="address" type="text" />
         <FormTextarea label="Order notes" name="message" />
       </div>
-
       <Link
         href={"/basket"}
-        className="flex items-center gap-2 font-semibold text-[12px] leading-[150%] tracking-[0.08em] text-primary uppercase"
+        className="uppercase flex items-center gap-2 font-semibold text-[12px] leading-[150%] tracking-[0.08em] text-primary"
       >
-        <ChevronLeft size={20} /> return to cart
+        <ChevronLeft size={20} /> Return To Cart
       </Link>
     </div>
   );

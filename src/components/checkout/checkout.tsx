@@ -12,11 +12,11 @@ import {
 } from "../ui/breadcrumb";
 import { Container } from "../container";
 import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   formCheckoutSchema,
   FormCheckoutSchemaType,
 } from "@/constants/form-schema/checkout.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 interface Props {
@@ -69,7 +69,7 @@ export const Checkout: React.FC<Props> = (props) => {
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={cn("grid justify-items-center md:flex gap-14 ")}
+          className={cn("grid md:flex justify-items-center gap-14")}
         >
           <FormCheckout />
           <CheckoutTotal />
