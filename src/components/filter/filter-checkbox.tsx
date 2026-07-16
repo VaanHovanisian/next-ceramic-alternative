@@ -6,8 +6,8 @@ import { Checkbox } from "../ui/checkbox";
 interface Props {
   className?: string;
   label: string;
-  checked?: boolean;
-  setChecked?: () => void;
+  checked: boolean;
+  setChecked: () => void;
   isColor?: boolean;
 }
 
@@ -21,7 +21,7 @@ export const FilterCheckbox: React.FC<Props> = (props) => {
       )}
     >
       <Checkbox
-        className={cn("", {
+        className={cn("cursor-pointer", {
           "absolute inset-0 w-full h-full opacity-0": isColor,
         })}
         checked={checked}
@@ -30,7 +30,7 @@ export const FilterCheckbox: React.FC<Props> = (props) => {
       {isColor && (
         <span
           style={{ backgroundColor: label }}
-          className={cn("w-4.5 h-4.5 border ", {
+          className={cn("w-4.5 h-4.5 border", {
             "border-2 border-black": checked,
           })}
         ></span>

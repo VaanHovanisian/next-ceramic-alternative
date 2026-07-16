@@ -1,0 +1,36 @@
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Button } from "./ui/button";
+import { FormRegister } from "./form/form-register";
+import { FormLogin } from "./form/form-login";
+
+interface Props {
+  className?: string;
+  children: React.ReactNode;
+}
+
+export const AuthModal: React.FC<Props> = (props) => {
+  const { className, children } = props;
+  const [toggle, setToggle] = React.useState(false);
+  return (
+    <Dialog>
+      <DialogTrigger>{children}</DialogTrigger>
+      <DialogContent className={cn("z-105", className)}>
+        {!toggle ? <FormRegister /> : <FormLogin />}
+        <div className="flex">
+          <Button className="grow">Google</Button>
+          <Button className="grow">Github</Button>
+        </div>
+        <Button
+          variant={"outline"}
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+        >
+          {toggle ? "signup" : "signin"}
+        </Button>
+      </DialogContent>
+    </Dialog>
+  );
+};

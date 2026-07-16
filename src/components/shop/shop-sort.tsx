@@ -2,6 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
+import { useClickAway } from "react-use";
+import { useFilterSortQuery } from "@/hooks/filter/use-filter-sort-query";
 
 interface Props {
   className?: string;
@@ -28,36 +30,28 @@ const sort = [
     value: "newest",
   },
 ];
+
 export const ShopSort: React.FC<Props> = (props) => {
   const { className } = props;
+  const { handleSelect, sortBy } = useFilterSortQuery(sort);
   const [open, setOpen] = React.useState(false);
-
   const ref = React.useRef(null);
-  React.useEffect(() => {
-    const handleClick = (event: Event) => {
-      if (ref.current) {
-        event.stopPropagation();
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [open]);
+  useClickAway(ref, () => {
+    setOpen(false);
+  });
 
   return (
-    <div ref={ref} className={cn("relative ", className)}>
+    <div ref={ref} className={cn("relative", className)}>
       <button
-        className="flex items-center gap-5"
+        type="button"
+        className="flex gap-5 items-center"
         onClick={() => setOpen(!open)}
       >
-        Sort by: <span>Name</span> <ChevronDown />
+        Sort by: <span>{sortBy}</span> <ChevronDown />
       </button>
       <ul
         className={cn(
-          "absolute top-full w-full p-2 rounded-[4px] z-50 bg-white scale-y-0 origin-top transition-`[scale-duration-500]",
+          "absolute top-full w-full p-2 rounded-[4px] bg-white z-50 scale-y-0 origin-top transition-[scale] duration-500",
           {
             "scale-y-100": open,
           },
@@ -65,7 +59,14 @@ export const ShopSort: React.FC<Props> = (props) => {
       >
         {sort.map((el, i) => (
           <li key={i}>
-            <button className="cursor-pointer w-full text-start hover:bg-accent">
+            <button
+              onClick={() => {
+                handleSelect(el);
+                setOpen(false);
+              }}
+              type="button"
+              className="cursor-pointer w-full hover:bg-accent text-start"
+            >
               {el.name}
             </button>
           </li>

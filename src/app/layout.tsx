@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header";
+import { Header } from "@/components/header/header";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
 

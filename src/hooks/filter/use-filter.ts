@@ -11,9 +11,11 @@ export interface Filter {
 
 export const useFilter = () => {
   const searchParams = useSearchParams();
+
   const getParams = (name: string) => {
     return searchParams.get(name)?.split(",") || [];
   };
+
   const [category, { toggle: categoryToggle }] = useSet<string>(
     new Set(getParams("category")),
   );

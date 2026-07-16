@@ -1,7 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GetColorName } from "hex-color-to-color-name";
+
 interface Props {
   className?: string;
   color: Array<{ name: string; id: number }>;
@@ -12,7 +13,7 @@ export const ColorPicker: React.FC<Props> = (props) => {
 
   return (
     <div className={cn("", className)}>
-      <h3 className=" text-base font-semibold leading-[138%] mb-4">
+      <h3 className="font-semibold text-base leading-[138%] mb-4">
         Color:{" "}
         <span
           className="text-shadow-[1px_1px_2px_black]"

@@ -1,5 +1,5 @@
 import { Basket } from "@/components/basket/basket";
 
-export default function BasketCartPage() {
+export default function BasketPage() {
   return <Basket />;
 }

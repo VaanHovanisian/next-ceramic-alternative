@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Filter } from "../filter/";
+import { Filter } from "../filter";
 import { Catalog } from "../catalog";
 import { productIdes } from "@/constants/products";
 import { Container } from "../container";
@@ -11,8 +11,9 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "../ui/breadcrumb";
+import { Sidebar } from "lucide-react";
+import { ShopFilterSidebar } from "./shop-filter-sidebar";
 
 interface Props {
   className?: string;
@@ -25,19 +26,23 @@ export const Shop: React.FC<Props> = (props) => {
       <Breadcrumb className="pt-5 pb-12.5">
         <BreadcrumbList className="flex">
           <BreadcrumbItem>
-            <BreadcrumbLink>Home</BreadcrumbLink>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
           </BreadcrumbItem>
           /
-          <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage>Shop</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex ">
-        <Filter />
-        <div>
-          <ShopSort className="ml-auto w-fit" />
+      <div className="flex">
+        <Filter className="hidden md:grid" />
+        <div className="w-full">
+          <div className="flex justify-between items-center mb-7">
+            <ShopFilterSidebar>
+              <Sidebar />
+            </ShopFilterSidebar>
+            <ShopSort className="ml-auto w-fit" />
+          </div>
           <Catalog className="grow pt-0" items={productIdes} />
         </div>
       </div>
