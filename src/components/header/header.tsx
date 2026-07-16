@@ -1,8 +1,9 @@
 "use client";
-import { Search, Globe, ShoppingCart, UserIcon } from "lucide-react";
+import { ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
-import { Logo } from "./logo";
-import { AuthModal } from "./auth-modal";
+import { Logo } from "../logo";
+import { AuthModal } from "../auth-modal";
+import { Search } from "./search";
 
 export const Header = () => {
   return (
@@ -26,7 +27,7 @@ export const Header = () => {
           </ul>
         </nav>
         <div className="flex items-center gap-5 cursor-pointer">
-          <Search onClick={() => {}} size={18} />
+          <Search />
           <AuthModal>
             <UserIcon size={18} />
           </AuthModal>

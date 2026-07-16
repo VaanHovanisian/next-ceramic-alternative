@@ -1,10 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { FormInput } from "./form-input";
 import { Button } from "../ui/button";
 import { FormProvider, useForm } from "react-hook-form";
+import {
+  authRegisterSchema,
+  AuthRegisterSchemaType,
+} from "@/constants/form-schema/auth.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Props {
   className?: string;
@@ -13,8 +17,20 @@ interface Props {
 export const FormRegister: React.FC<Props> = (props) => {
   const { className } = props;
 
-  const onSubmit = async (data: any) => {};
-  const form = useForm();
+  const form = useForm<AuthRegisterSchemaType>({
+    resolver: zodResolver(authRegisterSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: AuthRegisterSchemaType) => {
+    console.log(data);
+  };
+
   return (
     <FormProvider {...form}>
       <form

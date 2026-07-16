@@ -1,4 +1,4 @@
-import z, { email } from "zod";
+import z from "zod";
 import { emailFormShema } from "./allowed-domains";
 
 const passwordSchema = z
@@ -17,5 +17,13 @@ export const authRegisterSchema = z
     confirmPassword: passwordSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirm"],
+    path: ["confirmPassword"],
+    message: "not correct",
   });
+export const authLoginSchema = z.object({
+  email: emailFormShema,
+  password: passwordSchema,
+});
+
+export type AuthRegisterSchemaType = z.infer<typeof authRegisterSchema>;
+export type AuthLoginSchemaType = z.infer<typeof authLoginSchema>;
