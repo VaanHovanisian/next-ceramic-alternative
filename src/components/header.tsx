@@ -1,7 +1,8 @@
 "use client";
-import { Search, Globe, ShoppingCart } from "lucide-react";
+import { Search, Globe, ShoppingCart, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "./logo";
+import { AuthModal } from "./auth-modal";
 
 export const Header = () => {
   return (
@@ -26,7 +27,9 @@ export const Header = () => {
         </nav>
         <div className="flex items-center gap-5 cursor-pointer">
           <Search onClick={() => {}} size={18} />
-          <Globe size={18} />
+          <AuthModal>
+            <UserIcon size={18} />
+          </AuthModal>
           <Link href="/basket" className="hover:opacity-70 transition-opacity">
             <ShoppingCart size={18} />
           </Link>
