@@ -14,11 +14,7 @@ export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
 
   return (
-<<<<<<< HEAD
-    <div className={cn("flex-col flex h-full text-left", className)}>
-=======
     <div className={cn("flex flex-col gap-1 h-full text-left", className)}>
->>>>>>> Tagavor
       <Link href={"/product/" + product.id} className="w-full overflow-hidden">
         <Image
           src={product.imgUrl}
