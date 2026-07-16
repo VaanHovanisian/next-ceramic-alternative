@@ -35,7 +35,11 @@ export const Catalog: React.FC<Props> = (props) => {
           </h2>
         )}
 
+<<<<<<< HEAD
         <ul className="grid grid-cols-[repeat(auto-fill,minMax(200,1fr))] lg:grid-cols-[repeat(auto-fill,minMax(250,1fr))] gap-2 md:gap-6 justify-items-center">
+=======
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2 lg:gap-6 justify-items-center">
+>>>>>>> Tagavor
           {loading && (
             <>
               {[...Array(8)].map((_, index) => (
@@ -48,7 +52,11 @@ export const Catalog: React.FC<Props> = (props) => {
             items.map((product) => (
               <li
                 key={product.id}
+<<<<<<< HEAD
                 className="w-full max-w-70 min-h-120 overflow-hidden transition-shadow flex flex-col justify-between"
+=======
+                className="w-full max-w-70 min-h-120 overflow-hidden flex flex-col justify-between"
+>>>>>>> Tagavor
               >
                 <Card product={product} />
               </li>

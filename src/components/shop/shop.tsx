@@ -35,6 +35,7 @@ export const Shop: React.FC<Props> = (props) => {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex">
+<<<<<<< HEAD
         <Filter className="hidden md:block" />
         <div className="w-full">
           <div className="flex justify-between items-center">
@@ -45,6 +46,15 @@ export const Shop: React.FC<Props> = (props) => {
               <Sidebar />
             </ShopFilterSidebar>
             <ShopSort className="" />
+=======
+        <Filter className="hidden md:grid" />
+        <div className="w-full">
+          <div className="flex justify-between items-center mb-7">
+            <ShopFilterSidebar>
+              <Sidebar />
+            </ShopFilterSidebar>
+            <ShopSort className="ml-auto w-fit" />
+>>>>>>> Tagavor
           </div>
           <Catalog className="grow pt-0" items={productIdes} />
         </div>

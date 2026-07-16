@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
+=======
+import { useRouter, useSearchParams } from "next/navigation";
+>>>>>>> Tagavor
 import React from "react";
 import qs from "qs";
 
@@ -25,11 +29,19 @@ export const useFilterSortQuery = (sort: SortProps[]) => {
         sort: el.value,
       },
       {
+<<<<<<< HEAD
         arrayFormat: "comme",
+=======
+        arrayFormat: "comma",
+>>>>>>> Tagavor
         encode: false,
       },
     );
     router.push(`?${newParams}`, { scroll: false });
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> Tagavor
   return { handleSelect, sortBy };
 };

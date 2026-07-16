@@ -14,7 +14,7 @@ export const FormCheckout: React.FC<Props> = (props) => {
   const { className } = props;
 
   return (
-    <div className={cn("max-w-160 w-f", className)}>
+    <div className={cn("max-w-160 w-full", className)}>
       <h2 className="text-[20px] font-semibold leading-[140%] text-primary mb-10">
         Billing Details
       </h2>
