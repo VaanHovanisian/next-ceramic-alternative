@@ -1,5 +1,14 @@
 model Basket {
 	id Int @id @default(autoincrement())
+
+    
+    totalAmount Int @default(0)
+
+    user User? @relation(fields: [userID], references: [id])
+    userID String? @unique
+
+    basketCatd BascketCard[]
+
     
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

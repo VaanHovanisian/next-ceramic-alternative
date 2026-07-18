@@ -6,7 +6,10 @@ model User {
 	image String?
     session  Session[]
     account Account[]
+	basket Basket?
+	orders Order[]
 	createdAt DateTime @db.Timestamptz(3)
 	updatedAt DateTime @db.Timestamptz(3)
+	
 	
 }
