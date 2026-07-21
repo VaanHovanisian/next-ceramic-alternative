@@ -2,6 +2,17 @@ model Product {
     // id String @id @default(cuid())
     id Int @id @default(autoincrement())
 
+    name   String
+    price  Int
+    text   String
+    imgUrl String
+    images String[]
+    category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  color      Color[]
+  basketCard BasketCard[]
+
     createAt DateTime @default(now())
     update   DateTime @updatedAt
 }
