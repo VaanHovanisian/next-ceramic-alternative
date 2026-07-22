@@ -1,19 +1,13 @@
 model User {
     id            String    @id @default(cuid())
     name          String
-    role UserRole @default(USER)
     email         String    @unique
     emailVerified Boolean
     image         String?
     session       Session[]
-    accounts      Account[]
+    account       Account[]
     basket        Basket?
     order         Order[]
     createdAt     DateTime  @db.Timestamptz(3)
     updatedAt     DateTime  @db.Timestamptz(3)
 }
-
-enum UserRole {
-    ADMIN
-    USER
-    }

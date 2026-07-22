@@ -1,12 +1,11 @@
 model Basket {
-    id          Int @id @default(autoincrement())
-    totalAmount Int @default(0)
+  id          Int     @id @default(autoincrement())
+  totalAmount Int     @default(0)
+  user        User?   @relation(fields: [userId], references: [id])
+  userId      String? @unique
 
-    user   User?   @relation(fields: [userId], references: [id])
-    userId String? @unique
+  basketCard BasketCard[]
 
-    basketCard BasketCard[]
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

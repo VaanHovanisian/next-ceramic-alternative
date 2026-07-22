@@ -1,18 +1,18 @@
 model Product {
-    id Int @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-    name   String
-    price  Int
-    text   String
-    imgUrl String
-    images String[]
+  name   String
+  price  Int
+  text   String
+  imgUrl String
+  images String[]
 
-    category   Category @relation(fields: [categoryId], references: [id])
-    categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
 
-    color      Color[]
-    basketCard BasketCard[]
+  color      Color[]
+  basketCard BasketCard[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
