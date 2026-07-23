@@ -7,6 +7,7 @@ import { useClickAway, useDebounce } from "react-use";
 // import { searchProduct } from "@/services/search";
 // import { Product } from "@prisma/client";
 import { SearchContent } from "./search-content";
+import { getSearch } from "@/lib/search";
 
 interface Props {
   className?: string;
@@ -25,7 +26,14 @@ export const Search: React.FC<Props> = (props) => {
     setOpen(false);
   });
 
-  // useDebounce(async () => setData(await searchProduct(value)), 300, [value]);
+  // React.useEffect(() => {
+  //   (async () =>
+  //     setData(
+  //       await (await fetch(`/api/products?limit=5&search=${value}`)).json(),
+  //     ))();
+  // }, [value]);
+
+  useDebounce(async () => setData(await getSearch(value)), 500, [value]);
 
   return (
     <>

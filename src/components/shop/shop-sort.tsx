@@ -34,17 +34,9 @@ const sort = [
 
 export const ShopSort: React.FC<Props> = (props) => {
   const { className } = props;
-<<<<<<< HEAD
-  const {handleSelect} useFilterSortQuery(sort)
-=======
   const { handleSelect, sortBy } = useFilterSortQuery(sort);
->>>>>>> Tagavor
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef(null);
-<<<<<<< HEAD
-
-=======
->>>>>>> Tagavor
   useClickAway(ref, () => {
     setOpen(false);
   });
@@ -70,11 +62,7 @@ export const ShopSort: React.FC<Props> = (props) => {
           <li key={i}>
             <button
               onClick={() => {
-<<<<<<< HEAD
-                handleSelect(el)
-=======
                 handleSelect(el);
->>>>>>> Tagavor
                 setOpen(false);
               }}
               type="button"

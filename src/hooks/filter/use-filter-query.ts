@@ -6,12 +6,7 @@ import { Filter } from "./use-filter";
 export const useFilterQuery = (data: Filter) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-<<<<<<< HEAD
-  const currentParams = qs.parse(searchParams?.toString());
-
-=======
   const currentParams = qs.parse(searchParams.toString());
->>>>>>> Tagavor
   React.useEffect(() => {
     const query = qs.stringify(
       {
