@@ -5,15 +5,16 @@ import { Hero } from "./hero";
 import { PlateServices } from "./plate-services";
 import { Post } from "./post";
 import { servicesHome } from "@/constants/services";
-import { productIdes } from "@/constants/products";
 import { Title } from "./title";
+import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
+  products: Product[];
 }
 
 export const Home: React.FC<Props> = (props) => {
-  const { className } = props;
+  const { className, products } = props;
   return (
     <div className={cn("", className)}>
       <Hero
@@ -30,7 +31,7 @@ export const Home: React.FC<Props> = (props) => {
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
         linkText="Shop now"
       />
-      <Catalog items={productIdes} />
+      <Catalog items={products} />
       <Post
         imgUrl="/post/2.jpg"
         text="Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices."
@@ -46,7 +47,7 @@ export const Home: React.FC<Props> = (props) => {
         linkText="Lear more"
         imgClassName="object-top"
       />
-      <Catalog items={productIdes.slice(0, 4)} />
+      <Catalog items={products.slice(0, 4)} />
       <Title className="text-center mb-12" size="l">
         OUR BLOG
       </Title>
