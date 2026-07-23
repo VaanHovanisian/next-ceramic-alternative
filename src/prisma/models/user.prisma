@@ -1,6 +1,7 @@
 model User {
   id            String    @id @default(cuid())
   name          String
+  role          UserRole  @default(USER)
   email         String    @unique
   emailVerified Boolean
   image         String?
@@ -8,6 +9,11 @@ model User {
   account       Account[]
   basket        Basket?
   order         Order[]
-  createdAt     DateTime  @db.Timestamptz(3)
-  updatedAt     DateTime  @db.Timestamptz(3)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }
