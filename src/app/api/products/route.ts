@@ -5,11 +5,11 @@ export async function GET(req: NextRequest) {
   try {
     const limit = req.nextUrl.searchParams.get("limit");
     const search = req.nextUrl.searchParams.get("search") || "";
-
     const products = await prisma.product.findMany({
       where: {
         name: {
-          contains: search,
+          // contains: search,
+          startsWith: search,
           mode: "insensitive",
         },
       },
@@ -17,9 +17,9 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
-    console.log("Internal Server Error" + error);
+    console.log("Internal Server Error " + error);
     return NextResponse.json(
-      { message: "Internal server Error" },
+      { message: "Internal Serever Error" },
       { status: 500 },
     );
   }
