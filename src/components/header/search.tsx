@@ -3,10 +3,11 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { SearchIcon } from "lucide-react";
 import { Input } from "../ui/input";
-import { useClickAway } from "react-use";
+import { useClickAway, useDebounce } from "react-use";
 // import { searchProduct } from "@/services/search";
 // import { Product } from "@prisma/client";
 import { SearchContent } from "./search-content";
+import { getSearch } from "@/lib/search";
 
 interface Props {
   className?: string;
@@ -18,14 +19,27 @@ export const Search: React.FC<Props> = (props) => {
   const { className, btnClassName, isOverlay = true } = props;
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  const [data] = React.useState<any[]>([]);
+  const [data, setData] = React.useState<any[]>([]);
 
   const ref = React.useRef(null);
   useClickAway(ref, () => {
     setOpen(false);
   });
 
-  // useDebounce(async () => setData(await searchProduct(value)), 300, [value]);
+  // React.useEffect(() => {
+  //   // const fetchData = async () => {
+  //   //   const prod = await fetch("/api/products");
+  //   //   const dat = await prod.json();
+  //   //   setData(dat);
+  //   // };
+  //   // fetchData();
+  //   (async () =>
+  //     setData(
+  //       await (await fetch(`/api/products?limit=5&search=${value}`)).json(),
+  //     ))();
+  // }, [value]);
+
+  useDebounce(async () => setData(await getSearch(value)), 300, [value]);
 
   return (
     <>
