@@ -1,9 +1,10 @@
 "use client";
-import { ShoppingCart, UserIcon } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "../logo";
-import { AuthModal } from "../auth-modal";
+
 import { Search } from "./search";
+import { ProfileButton } from "./profile-button";
 
 export const Header = () => {
   return (
@@ -28,9 +29,7 @@ export const Header = () => {
         </nav>
         <div className="flex items-center gap-5 cursor-pointer">
           <Search />
-          <AuthModal>
-            <UserIcon size={18} />
-          </AuthModal>
+          <ProfileButton />
           <Link href="/basket" className="hover:opacity-70 transition-opacity">
             <ShoppingCart size={18} />
           </Link>
