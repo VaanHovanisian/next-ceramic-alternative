@@ -6,13 +6,6 @@ model Basket {
 
   basketCard BasketCard[]
 
-  totalAmount Int @default(0)
-
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String? @unique
-
-  basketCard BasketCard[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

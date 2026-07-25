@@ -25,6 +25,13 @@ export const Search: React.FC<Props> = (props) => {
     setOpen(false);
   });
 
+  React.useEffect(() => {
+    (async () =>
+      setData(
+        await (await fetch(`/api/products?limit=5&search=${value}`)).json(),
+      ))();
+  }, [value]);
+
   // useDebounce(async () => setData(await searchProduct(value)), 300, [value]);
 
   return (

@@ -13,35 +13,12 @@ model Order {
 
   paymentId String
 
-  status OrderStatus @default(PENDING)
-  user   User        @relation(fields: [userId], references: [id])
-  userId String
-
-  firstName String
-  lastName  String
-  email     String
-  phone     String
-  address   String
-  message   String?
-
-  products Json
-
-  paymentId String
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 enum OrderStatus {
   PENDING
-<<<<<<< HEAD
-  FAILED
-  SUCCESS
-  PROCESSING
-  COMPLETED
-  CANCELLED
-=======
   SUCCESS
   FAILED
->>>>>>> Tagavor
 }
