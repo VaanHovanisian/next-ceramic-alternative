@@ -1,9 +1,11 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { FormRegister } from "./form/form-register";
 import { FormLogin } from "./form/form-login";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
@@ -17,10 +19,30 @@ export const AuthModal: React.FC<Props> = (props) => {
     <Dialog>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent className={cn("z-105", className)}>
+        <DialogTitle hidden />
         {!toggle ? <FormRegister /> : <FormLogin />}
         <div className="flex">
           <Button className="grow">Google</Button>
-          <Button className="grow">Github</Button>
+          <Button
+            onClick={() =>
+              signIn.social({
+                provider: "github",
+                callbackURL: "/",
+                fetchOptions: {
+                  onSuccess() {
+                    toast.success("Successfuly signin github");
+                  },
+                  onError(error) {
+                    console.log(error);
+                    toast.error("failed signin");
+                  },
+                },
+              })
+            }
+            className="grow"
+          >
+            Github
+          </Button>
         </div>
         <Button
           variant={"outline"}
