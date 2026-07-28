@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Button } from "./ui/button";
-import { signOut } from "@/lib/auth-client";
+import { deleteUser, signOut } from "@/lib/auth-client";
 import { toast } from "sonner";
 
 interface Props {
@@ -30,6 +30,24 @@ export const Profile: React.FC<Props> = (props) => {
         }}
       >
         Logout
+      </Button>
+      <Button
+        variant={"destructive"}
+        onClick={() => {
+          deleteUser({
+            fetchOptions: {
+              onSuccess() {
+                toast.success("check delete user");
+              },
+              onError(error) {
+                console.log(error);
+                toast.error("failed deleteUser");
+              },
+            },
+          });
+        }}
+      >
+        deleteUser
       </Button>
     </Container>
   );

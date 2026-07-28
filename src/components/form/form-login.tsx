@@ -9,6 +9,8 @@ import {
   authLoginSchema,
   AuthLoginSchemaType,
 } from "@/constants/form-schema/auth.schema";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
@@ -24,8 +26,23 @@ export const FormLogin: React.FC<Props> = (props) => {
       password: "",
     },
   });
-  const onSubmit = (data: AuthLoginSchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: AuthLoginSchemaType) => {
+    await signIn.email(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess() {
+          toast.success("Success Login");
+          form.reset();
+        },
+        onError(error) {
+          console.log(error);
+          toast.error("Failed Login" + error.error.message);
+        },
+      },
+    );
   };
 
   return (

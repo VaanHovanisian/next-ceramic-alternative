@@ -9,6 +9,8 @@ import {
   AuthRegisterSchemaType,
 } from "@/constants/form-schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signUp } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
@@ -28,7 +30,24 @@ export const FormRegister: React.FC<Props> = (props) => {
   });
 
   const onSubmit = async (data: AuthRegisterSchemaType) => {
-    console.log(data);
+    await signUp.email(
+      {
+        email: data.email,
+        name: data.name,
+        password: data.password,
+        callbackURL: "/",
+      },
+      {
+        onSuccess() {
+          toast.success("Success Register");
+          form.reset();
+        },
+        onError(error) {
+          console.log(error);
+          toast.error("Failed Register" + error.error.message);
+        },
+      },
+    );
   };
 
   return (
