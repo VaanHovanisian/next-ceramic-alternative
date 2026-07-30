@@ -1,10 +1,6 @@
-import { prisma } from "@/prisma/prisma-client";
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-// If your Prisma file is located elsewhere, you can change the path
-
-export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql", // or "mysql", "postgresql", ...etc
-  }),
+import { createAuthClient } from "better-auth/react";
+export const authClient = createAuthClient({
+  /** The base URL of the server (optional if you're using the same domain) */
+  baseURL: "http://localhost:3000",
 });
+export const { signIn, signUp, useSession, signOut, deleteUser } = authClient;
