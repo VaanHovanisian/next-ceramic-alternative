@@ -1,14 +1,43 @@
 import { prisma } from "@/prisma/prisma-client";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { sendEmail } from "./send-email";
+import { VerificationTemplate } from "@/components/email-templates/verification-template";
+import { DeleteTemplate } from "@/components/email-templates/delete-template";
+import { nextCookies } from "better-auth/next-js";
 // If your Prisma file is located elsewhere, you can change the path
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql", // or "mysql", "postgresql", ...etc
   }),
+  user: {
+    deleteUser: {
+      enabled: true,
+      sendDeleteAccountVerification: async ({ user, url }) => {
+        await sendEmail({
+          to: user.email,
+          subject: "Verify Delete User",
+          react: DeleteTemplate({ name: user.name, url }),
+        });
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: true,
+    autoSignIn: false,
+  },
+  emailVerification: {
+    autoSignInAfterVerification: true,
+    sendOnSignUp: true,
+    async sendVerificationEmail({ url, user }) {
+      await sendEmail({
+        to: user.email,
+        subject: "Next Ceramiq Verification",
+        react: VerificationTemplate({ name: user.name, url }),
+      });
+    },
   },
   socialProviders: {
     github: {
@@ -20,4 +49,5 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+  plugins: [nextCookies()],
 });
