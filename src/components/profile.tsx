@@ -5,6 +5,7 @@ import { Container } from "./container";
 import { Button } from "./ui/button";
 import { deleteUser, signOut } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { FormProfile } from "./form/form-profile";
 
 interface Props {
   className?: string;
@@ -14,6 +15,7 @@ export const Profile: React.FC<Props> = (props) => {
   const { className } = props;
   return (
     <Container className={cn("", className)}>
+      <FormProfile />
       <Button
         onClick={() => {
           signOut({

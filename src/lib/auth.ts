@@ -18,7 +18,7 @@ export const auth = betterAuth({
       sendDeleteAccountVerification: async ({ user, url }) => {
         await sendEmail({
           to: user.email,
-          subject: "Verify Delete user",
+          subject: "Verify Delete User",
           react: DeleteTemplate({ name: user.name, url }),
         });
       },
