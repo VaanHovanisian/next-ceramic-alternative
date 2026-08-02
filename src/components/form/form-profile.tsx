@@ -6,12 +6,13 @@ import { Button } from "../ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import {
-  profileFormSchema,
-  profileFormSchemaType,
-} from "@/constants/profile-schema";
+
 import { FormInputImage } from "./form-input-image";
 import { User } from "better-auth";
+import {
+  profileFormSchema,
+  ProfileFormSchemaType,
+} from "@/constants/form-schema/profile.schema";
 
 interface Props {
   className?: string;
@@ -30,7 +31,7 @@ export const FormProfile: React.FC<Props> = (props) => {
     },
   });
 
-  const onSubmit = async (data: profileFormSchemaType) => {
+  const onSubmit = async (data: ProfileFormSchemaType) => {
     try {
       console.log(data);
     } catch (error) {

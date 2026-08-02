@@ -25,7 +25,6 @@ interface Props {
 
 export const Checkout: React.FC<Props> = (props) => {
   const { className } = props;
-
   const form = useForm({
     resolver: zodResolver(formCheckoutSchema),
     defaultValues: {

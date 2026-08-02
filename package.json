@@ -13,8 +13,18 @@
     "@prisma/adapter-neon": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@react-email/render": "^2.1.0",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> Tagavor
     "axios": "^1.18.1",
     "better-auth": "^1.6.25",
+=======
+    "auth": "^1.6.25",
+    "axios": "^1.18.1",
+    "better": "^0.1.0",
+    "better-auth": "^1.6.23",
+>>>>>>> Narine
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",

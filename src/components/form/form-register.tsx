@@ -9,8 +9,8 @@ import {
   AuthRegisterSchemaType,
 } from "@/constants/form-schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { signUp } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
@@ -44,7 +44,15 @@ export const FormRegister: React.FC<Props> = (props) => {
         },
         onError(error) {
           console.log(error);
+<<<<<<< HEAD
           toast.error("Failed Register " + error.error.message);
+=======
+<<<<<<< HEAD
+          toast.error("Failed Register " + error.error.message);
+=======
+          toast.error("Failed Register" + error.error.message);
+>>>>>>> Narine
+>>>>>>> Tagavor
         },
       },
     );

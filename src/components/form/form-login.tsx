@@ -9,8 +9,8 @@ import {
   authLoginSchema,
   AuthLoginSchemaType,
 } from "@/constants/form-schema/auth.schema";
-import { toast } from "sonner";
 import { signIn } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
@@ -39,7 +39,15 @@ export const FormLogin: React.FC<Props> = (props) => {
         },
         onError(error) {
           console.log(error);
+<<<<<<< HEAD
           toast.error("Failed Login " + error.error.message);
+=======
+<<<<<<< HEAD
+          toast.error("Failed Login " + error.error.message);
+=======
+          toast.error("Failed Login" + error.error.message);
+>>>>>>> Narine
+>>>>>>> Tagavor
         },
       },
     );

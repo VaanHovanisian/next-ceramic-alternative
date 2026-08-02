@@ -42,7 +42,7 @@ export const ShopSort: React.FC<Props> = (props) => {
   });
 
   return (
-    <div ref={ref} className={cn("relative", className)}>
+    <div ref={ref} className={cn("relative min-w-52.5", className)}>
       <button
         type="button"
         className="flex gap-5 items-center"

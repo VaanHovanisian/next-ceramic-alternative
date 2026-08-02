@@ -5,6 +5,81 @@ import { Container } from "./container";
 import { Button } from "./ui/button";
 import { deleteUser, signOut } from "@/lib/auth-client";
 import { toast } from "sonner";
+<<<<<<< HEAD
+import { FormProfile } from "./form/form-profile";
+import { User } from "better-auth";
+=======
+<<<<<<< HEAD
+>>>>>>> Tagavor
+
+interface Props {
+  className?: string;
+  user: User;
+}
+
+export const Profile: React.FC<Props> = (props) => {
+  const { className, user } = props;
+  return (
+    <Container className={cn("py-5", className)}>
+      <FormProfile user={user} />
+      <div className="flex justify-between">
+        <Button
+          onClick={() => {
+            signOut({
+              fetchOptions: {
+                onSuccess() {
+                  window.location.href = "/";
+                },
+                onError(error) {
+                  console.log(error);
+                  toast.error("failed logout");
+                },
+              },
+            });
+          }}
+        >
+          Logout
+        </Button>
+        <Button
+          variant={"destructive"}
+          onClick={() => {
+            deleteUser({
+              fetchOptions: {
+                onSuccess() {
+                  toast.success("go gmail to check delete user");
+                },
+                onError(error) {
+                  console.log(error);
+                  toast.error("failed logout");
+                },
+              },
+<<<<<<< HEAD
+=======
+            },
+          });
+        }}
+      >
+        Logout
+      </Button>
+      <Button
+        variant={"destructive"}
+        onClick={() => {
+          deleteUser({
+            fetchOptions: {
+              onSuccess() {
+                toast.success("go gmail to check delete user");
+              },
+              onError(error) {
+                console.log(error);
+                toast.error("failed delete user");
+              },
+            },
+          });
+        }}
+      >
+        delete account
+      </Button>
+=======
 import { FormProfile } from "./form/form-profile";
 import { User } from "better-auth";
 
@@ -49,12 +124,17 @@ export const Profile: React.FC<Props> = (props) => {
                   toast.error("failed logout");
                 },
               },
+>>>>>>> Tagavor
             });
           }}
         >
           Delete Account
         </Button>
       </div>
+<<<<<<< HEAD
+=======
+>>>>>>> Narine
+>>>>>>> Tagavor
     </Container>
   );
 };

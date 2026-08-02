@@ -5,8 +5,7 @@ import { sendEmail } from "./send-email";
 import {
   DeleteTemplate,
   VerificationTemplate,
-} from "@/components/email-template";
-import { nextCookies } from "better-auth/next-js";
+} from "@/components/email-templates";
 // If your Prisma file is located elsewhere, you can change the path
 
 export const auth = betterAuth({
@@ -19,7 +18,7 @@ export const auth = betterAuth({
       sendDeleteAccountVerification: async ({ user, url }) => {
         await sendEmail({
           to: user.email,
-          subject: "Verify Delate User",
+          subject: "Verify Delete User",
           react: DeleteTemplate({ name: user.name, url }),
         });
       },

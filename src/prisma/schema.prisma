@@ -1,7 +1,15 @@
 generator client {
   provider = "prisma-client-js"
+<<<<<<< HEAD
+=======
+  
+>>>>>>> Narine
 }
 
 datasource db {
   provider = "postgresql"
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Narine
