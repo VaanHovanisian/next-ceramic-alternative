@@ -7,7 +7,6 @@ interface Props {
   className?: string;
   color: Array<{ name: string; id: number }>;
 }
-
 export const ColorPicker: React.FC<Props> = (props) => {
   const { className, color } = props;
   const [selectedColor, setSelectedColor] = useState(color[0].name);

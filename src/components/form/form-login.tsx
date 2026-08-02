@@ -39,7 +39,11 @@ export const FormLogin: React.FC<Props> = (props) => {
         },
         onError(error) {
           console.log(error);
+<<<<<<< HEAD
           toast.error("Failed Login " + error.error.message);
+=======
+          toast.error("Failed Login" + error.error.message);
+>>>>>>> Narine
         },
       },
     );

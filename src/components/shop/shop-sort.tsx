@@ -52,7 +52,7 @@ export const ShopSort: React.FC<Props> = (props) => {
       </button>
       <ul
         className={cn(
-          "absolute top-full w-full p-2 rounded-[4px] bg-white z-50 scale-y-0 origin-top transition-[scale] duration-500",
+          "absolute top-full w-full p-2 rounded-lg bg-white z-50 scale-y-0 origin-top transition-[scale] duration-500",
           {
             "scale-y-100": open,
           },

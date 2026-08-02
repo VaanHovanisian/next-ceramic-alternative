@@ -16,7 +16,11 @@ export const ProfileButton: React.FC<Props> = (props) => {
   const { data } = useSession();
   if (data?.user.email) {
     return (
+<<<<<<< HEAD
       <Link className={cn("", className)} href={"/profile"}>
+=======
+      <Link className={cn("flex gap-2", className)} href={"/profile"}>
+>>>>>>> Narine
         {data.user.image ? (
           <img
             width={30}
@@ -28,6 +32,10 @@ export const ProfileButton: React.FC<Props> = (props) => {
         ) : (
           <UserCircle />
         )}
+<<<<<<< HEAD
+=======
+        <span>{data.user.name}</span>
+>>>>>>> Narine
       </Link>
     );
   }
