@@ -1,8 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-<<<<<<< HEAD
-=======
-
->>>>>>> Tagavor
 import { Resend } from "resend";
 
 interface Props {
@@ -23,11 +19,7 @@ export async function sendEmail({ to, subject, react }: Props) {
     });
 
     if (error) {
-<<<<<<< HEAD
-      throw Error;
-=======
       throw error;
->>>>>>> Tagavor
     }
 
     return data;

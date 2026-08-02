@@ -6,6 +6,7 @@ import {
   DeleteTemplate,
   VerificationTemplate,
 } from "@/components/email-templates";
+import { nextCookies } from "better-auth/next-js";
 // If your Prisma file is located elsewhere, you can change the path
 
 export const auth = betterAuth({
