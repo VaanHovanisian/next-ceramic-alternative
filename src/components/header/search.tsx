@@ -27,6 +27,7 @@ export const Search: React.FC<Props> = (props) => {
   });
 
   // React.useEffect(() => {
+<<<<<<< HEAD
   //   // const fetchData = async () => {
   //   //   const prod = await fetch("/api/products");
   //   //   const dat = await prod.json();
@@ -36,6 +37,11 @@ export const Search: React.FC<Props> = (props) => {
   //   (async () =>
   //     setData(
   //       await (await fetch(`/api/products?limit=5&search=${value}`)).json(),
+=======
+  //   (async () =>
+  //     setData(
+  //       await (await fetch(`/api/products?limit=3&search=${value}`)).json(),
+>>>>>>> main
   //     ))();
   // }, [value]);
 

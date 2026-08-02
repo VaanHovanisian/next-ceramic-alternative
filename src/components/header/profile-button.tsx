@@ -3,9 +3,15 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/lib/auth-client";
+<<<<<<< HEAD
 import Link from "next/link";
 import { UserCircle, UserIcon } from "lucide-react";
 import { AuthModal } from "../auth-modal";
+=======
+import { UserCircle, UserIcon } from "lucide-react";
+import { AuthModal } from "../auth-modal";
+import Link from "next/link";
+>>>>>>> main
 
 interface Props {
   className?: string;
@@ -16,18 +22,30 @@ export const ProfileButton: React.FC<Props> = (props) => {
   const { data } = useSession();
   if (data?.user.email) {
     return (
+<<<<<<< HEAD
       <Link className={cn("", className)} href={"/profile"}>
+=======
+      <Link className={cn("flex gap-2", className)} href={"/profile"}>
+>>>>>>> main
         {data.user.image ? (
           <img
             width={30}
             height={30}
+<<<<<<< HEAD
             className="rounded-full"
+=======
+            className="rounded-full "
+>>>>>>> main
             src={data.user.image}
             alt=""
           />
         ) : (
           <UserCircle />
         )}
+<<<<<<< HEAD
+=======
+        <span>{data.user.name}</span>
+>>>>>>> main
       </Link>
     );
   }

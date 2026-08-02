@@ -8,7 +8,6 @@ import { useFilterSortQuery } from "@/hooks/filter/use-filter-sort-query";
 interface Props {
   className?: string;
 }
-
 const sort = [
   {
     name: "Name asc",

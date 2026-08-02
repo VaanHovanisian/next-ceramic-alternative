@@ -9,8 +9,13 @@ import {
   AuthRegisterSchemaType,
 } from "@/constants/form-schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+<<<<<<< HEAD
 import { signUp } from "@/lib/auth-client";
 import { toast } from "sonner";
+=======
+import { toast } from "sonner";
+import { signUp } from "@/lib/auth-client";
+>>>>>>> main
 
 interface Props {
   className?: string;

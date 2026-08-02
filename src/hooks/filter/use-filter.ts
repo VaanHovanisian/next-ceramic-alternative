@@ -1,6 +1,5 @@
 import { useSearchParams } from "next/navigation";
 import { useSet } from "react-use";
-
 export interface Filter {
   category: Set<string>;
   price: Set<string>;

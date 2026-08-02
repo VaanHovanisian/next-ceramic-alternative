@@ -7,12 +7,14 @@ import { Post } from "./post";
 import { servicesHome } from "@/constants/services";
 import { Title } from "./title";
 import { Product } from "@prisma/client";
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 interface Props {
   className?: string;
   products: Product[];
 }
-
 export const Home: React.FC<Props> = (props) => {
   const { className, products } = props;
   return (

@@ -1,4 +1,8 @@
 import { prisma } from "@/prisma/prisma-client";
+<<<<<<< HEAD
+=======
+import { log } from "console";
+>>>>>>> main
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -8,8 +12,12 @@ export async function GET(req: NextRequest) {
     const products = await prisma.product.findMany({
       where: {
         name: {
+<<<<<<< HEAD
           // contains: search,
           startsWith: search,
+=======
+          contains: search,
+>>>>>>> main
           mode: "insensitive",
         },
       },
@@ -19,7 +27,11 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.log("Internal Server Error " + error);
     return NextResponse.json(
+<<<<<<< HEAD
       { message: "Internal Serever Error" },
+=======
+      { message: "Internal Server Error" },
+>>>>>>> main
       { status: 500 },
     );
   }

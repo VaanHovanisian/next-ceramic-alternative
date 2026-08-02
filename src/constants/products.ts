@@ -264,7 +264,6 @@ export const products = [
     text: "Lorem ipsum dolor sit amet conse.",
   },
 ];
-
 export const productIdes = products.map((el, i) => ({
   ...el,
   color: el.color.map((c, i) => ({ ...c, id: i + 1 })),

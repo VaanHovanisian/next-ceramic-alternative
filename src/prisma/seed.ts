@@ -6,6 +6,10 @@ import {
   filterColor,
   filterPriceRange,
 } from "@/constants/filter";
+<<<<<<< HEAD
+=======
+import { off } from "process";
+>>>>>>> main
 import { products } from "@/constants/products";
 
 async function create() {
@@ -59,7 +63,10 @@ async function main() {
     console.log(error);
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 main()
   .then(async () => {
     await prisma.$disconnect();

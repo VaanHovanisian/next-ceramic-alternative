@@ -6,6 +6,10 @@ import { FormRegister } from "./form/form-register";
 import { FormLogin } from "./form/form-login";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
+<<<<<<< HEAD
+=======
+import { log } from "console";
+>>>>>>> main
 
 interface Props {
   className?: string;
@@ -29,11 +33,19 @@ export const AuthModal: React.FC<Props> = (props) => {
                 callbackURL: "/",
                 fetchOptions: {
                   onSuccess() {
+<<<<<<< HEAD
                     toast.success("Successfuly signin google");
                   },
                   onError(error) {
                     console.log(error);
                     toast.error("failed signin");
+=======
+                    toast.success("Succesfuly signin google");
+                  },
+                  onError(error) {
+                    console.log(error);
+                    toast.error("filed signin");
+>>>>>>> main
                   },
                 },
               })
@@ -49,11 +61,19 @@ export const AuthModal: React.FC<Props> = (props) => {
                 callbackURL: "/",
                 fetchOptions: {
                   onSuccess() {
+<<<<<<< HEAD
                     toast.success("Successfuly signin github");
                   },
                   onError(error) {
                     console.log(error);
                     toast.error("failed signin");
+=======
+                    toast.success("Succesfuly signin github");
+                  },
+                  onError(error) {
+                    console.log(error);
+                    toast.error("filed signin");
+>>>>>>> main
                   },
                 },
               })
