@@ -1,8 +1,7 @@
 "use client";
-import { ShoppingCart, UserIcon } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "../logo";
-import { AuthModal } from "../auth-modal";
 import { Search } from "./search";
 import { ProfileButton } from "./profile-button";
 

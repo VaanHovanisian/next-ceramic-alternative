@@ -6,7 +6,6 @@ import { FormRegister } from "./form/form-register";
 import { FormLogin } from "./form/form-login";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { error } from "console";
 
 interface Props {
   className?: string;
@@ -23,7 +22,26 @@ export const AuthModal: React.FC<Props> = (props) => {
         <DialogTitle hidden />
         {!toggle ? <FormRegister /> : <FormLogin />}
         <div className="flex">
-          <Button className="grow">Google</Button>
+          <Button
+            onClick={() =>
+              signIn.social({
+                provider: "google",
+                callbackURL: "/",
+                fetchOptions: {
+                  onSuccess() {
+                    toast.success("Successfuly signin google");
+                  },
+                  onError(error) {
+                    console.log(error);
+                    toast.error("failed signin");
+                  },
+                },
+              })
+            }
+            className="grow"
+          >
+            Google
+          </Button>
           <Button
             onClick={() =>
               signIn.social({
@@ -31,11 +49,11 @@ export const AuthModal: React.FC<Props> = (props) => {
                 callbackURL: "/",
                 fetchOptions: {
                   onSuccess() {
-                    toast.success("Signed in successfully!");
+                    toast.success("Successfuly signin github");
                   },
                   onError(error) {
                     console.log(error);
-                    toast.error("Failed to sign in.");
+                    toast.error("failed signin");
                   },
                 },
               })

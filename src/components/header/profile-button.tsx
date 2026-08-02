@@ -18,7 +18,13 @@ export const ProfileButton: React.FC<Props> = (props) => {
     return (
       <Link className={cn("", className)} href={"/profile"}>
         {data.user.image ? (
-          <img width={50} height={50} src={data.user.image} alt="Profile" />
+          <img
+            width={30}
+            height={30}
+            className="rounded-full"
+            src={data.user.image}
+            alt=""
+          />
         ) : (
           <UserCircle />
         )}
