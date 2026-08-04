@@ -50,6 +50,7 @@ export const FormProfile: React.FC<Props> = (props) => {
       >
         <FormInputImage name="avatar" label="Avatar" />
         <FormInput name="name" label="Name" />
+
         <FormInput name="email" label="Email" />
         <Button variant={"secondary"}>Save</Button>
       </form>
