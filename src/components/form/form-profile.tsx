@@ -6,13 +6,12 @@ import { Button } from "../ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-
-import { FormInputImage } from "./form-input-image";
-import { User } from "better-auth";
 import {
   profileFormSchema,
   ProfileFormSchemaType,
 } from "@/constants/form-schema/profile.schema";
+import { FormInputImage } from "./form-input-image";
+import { User } from "better-auth";
 
 interface Props {
   className?: string;
@@ -51,6 +50,7 @@ export const FormProfile: React.FC<Props> = (props) => {
       >
         <FormInputImage name="avatar" label="Avatar" />
         <FormInput name="name" label="Name" />
+
         <FormInput name="email" label="Email" />
         <Button variant={"secondary"}>Save</Button>
       </form>
