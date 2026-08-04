@@ -14,11 +14,7 @@
     "@prisma/client": "^7.8.0",
     "@react-email/render": "^2.1.0",
     "axios": "^1.18.1",
-<<<<<<< HEAD
-    "better-auth": "^1.6.25",
-=======
     "better-auth": "^1.6.23",
->>>>>>> main
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",
