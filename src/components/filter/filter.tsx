@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "../title";
 import { FilterCheckboxGroup } from "./filter-checkbox-group";
 import { useFilter } from "@/hooks/filter/use-filter";
-import { filter as filterArr } from "@/constants/filter";
 import { useFilterQuery } from "@/hooks/filter/use-filter-query";
 
 interface Props {
   className?: string;
+  filter: any;
 }
 
 export const Filter: React.FC<Props> = (props) => {
-  const { className } = props;
+  const { className, filter: filterArr } = props;
 
   const filter = useFilter();
   useFilterQuery(filter);
@@ -31,7 +32,7 @@ export const Filter: React.FC<Props> = (props) => {
       <FilterCheckboxGroup
         checked={filter.price}
         setChecked={filter.priceToggle}
-        items={filterArr.price.map((el) => ({
+        items={filterArr.priceRange.map((el: any) => ({
           name: el.to ? `$${el.from} - $${el.to}` : `$${el.from}`,
           id: el.id,
         }))}
