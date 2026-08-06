@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { toast } from "sonner";
 import { authClient } from "./auth-client";
+import { uploadImage } from "@/actions/upload-image";
 
 type DirtyProps = Partial<
   Readonly<{
@@ -14,16 +17,17 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
   const userObj = {
     async name(data: any) {
       await authClient.updateUser({ name: data.name });
-      toast.success("Name updated successfully");
+      toast.success("success update name");
     },
-    async email(data: any) {
-      await authClient.updateUser({ email: data.email });
-      toast.success("Email updated successfully");
+    async avatar({ avatar }: { avatar: string | File }) {
+      let img = typeof avatar === "string" ? avatar : undefined;
+      if (avatar instanceof File) {
+        img = await uploadImage(avatar);
+      }
+      await authClient.updateUser({ image: img });
+      toast.success("success update avatar");
     },
-    async avatar(data: any) {
-      await authClient.updateUser({ avatar: data.avatar });
-      toast.success("Avatar updated successfully");
-    },
+    async email(value) {},
   };
-  Object.keys(dirtyField).forEach((el: string) => userObj[el](data));
+  Object.keys(dirtyField).forEach((el: any) => userObj[el](data));
 };
