@@ -11,6 +11,7 @@ import {
 } from "@/constants/form-schema/contact.schema";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import { sendMessageContactAction } from "@/actions/send-message-contact";
 
 interface Props {
   className?: string;
@@ -32,7 +33,7 @@ export const FormContact: React.FC<Props> = (props) => {
 
   const onSubmit = async (data: ContactFormSchemaType) => {
     try {
-      console.log(data);
+      await sendMessageContactAction(data);
       toast.success("Success send");
     } catch (error) {
       console.log(error);

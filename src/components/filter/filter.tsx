@@ -4,18 +4,19 @@ import { cn } from "@/lib/utils";
 import { Title } from "../title";
 import { FilterCheckboxGroup } from "./filter-checkbox-group";
 import { useFilter } from "@/hooks/filter/use-filter";
-import { filter as filterArr } from "@/constants/filter";
+
 import { useFilterQuery } from "@/hooks/filter/use-filter-query";
 
 interface Props {
   className?: string;
+  filter: any;
 }
 
 export const Filter: React.FC<Props> = (props) => {
   const { className } = props;
 
   const filter = useFilter();
-  useFilterQuery(filter);
+  useFilterQuery(filter: filterArr);
 
   return (
     <div className={cn("grid gap-7.5 min-w-60 self-start", className)}>

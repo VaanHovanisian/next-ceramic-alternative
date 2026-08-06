@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Filter } from "../filter";
 import { Catalog } from "../catalog";
-import { productIdes } from "@/constants/products";
+import { products } from "@/constants/products";
 import { Container } from "../container";
 import { ShopSort } from "./shop-sort";
 import {
@@ -14,9 +14,12 @@ import {
 } from "../ui/breadcrumb";
 import { Sidebar } from "lucide-react";
 import { ShopFilterSidebar } from "./shop-filter-sidebar";
+import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
+  products: Product[];
+  filter: any;
 }
 
 export const Shop: React.FC<Props> = (props) => {
@@ -43,7 +46,7 @@ export const Shop: React.FC<Props> = (props) => {
             </ShopFilterSidebar>
             <ShopSort className="ml-auto w-fit" />
           </div>
-          <Catalog className="grow pt-0" items={productIdes} />
+          <Catalog className="grow pt-0" items={products} />
         </div>
       </div>
     </Container>

@@ -19,10 +19,6 @@ export const FormInputImage: React.FC<Props> = (props) => {
     setValue,
     formState: { errors },
   } = useFormContext();
-<<<<<<< HEAD
-=======
-
->>>>>>> Tagavor
   const isError = errors[name]?.message;
 
   const handleImageChange = (e: any) => {

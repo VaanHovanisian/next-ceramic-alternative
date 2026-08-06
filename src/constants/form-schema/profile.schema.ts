@@ -14,8 +14,4 @@ export const profileFormSchema = z.object({
     ])
     .optional(),
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> Tagavor
 export type ProfileFormSchemaType = z.infer<typeof profileFormSchema>;
