@@ -1,6 +1,9 @@
 generator client {
   provider = "prisma-client-js"
+<<<<<<< HEAD
   
+=======
+>>>>>>> Tagavor
 }
 
 datasource db {

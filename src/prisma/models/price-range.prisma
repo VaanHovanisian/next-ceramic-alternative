@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 model PriceRange{
 	id Int @id @default(autoincrement())
 
@@ -6,4 +7,14 @@ model PriceRange{
     
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+=======
+model PriceRange {
+  id Int @id @default(autoincrement())
+
+  from Int  @default(0)
+  to   Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+>>>>>>> Tagavor
 }

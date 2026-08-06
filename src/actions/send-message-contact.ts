@@ -1,4 +1,4 @@
-"use-server";
+"use server";
 
 import {
   contactFormSchema,
@@ -12,7 +12,7 @@ export const sendMessageContactAction = async (
 ) => {
   const parsedData = contactFormSchema.safeParse(dataObj);
   if (!parsedData.success) {
-    throw new Error(parsedData.error?.message);
+    throw new Error(parsedData.error.message);
   }
   const data = parsedData.data;
   await prisma.contact.create({
