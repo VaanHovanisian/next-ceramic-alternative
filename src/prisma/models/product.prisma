@@ -11,7 +11,7 @@ model Product {
     categoryId Int
 
     color Color[]
-    bascketCards BascketCard[]
+    bascketCards BasketCard[]
 
     
     createdAt DateTime @default(now())
