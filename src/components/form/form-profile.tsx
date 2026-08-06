@@ -13,6 +13,7 @@ import {
   profileFormSchema,
   ProfileFormSchemaType,
 } from "@/constants/form-schema/profile.schema";
+import { changeUser } from "@/lib/change-user";
 
 interface Props {
   className?: string;
@@ -34,6 +35,7 @@ export const FormProfile: React.FC<Props> = (props) => {
   const onSubmit = async (data: ProfileFormSchemaType) => {
     try {
       console.log(data);
+      await changeUser(data, form.formState.dirtyFields);
     } catch (error) {
       console.log(error);
       toast.error("Failed Update " + error);
@@ -52,7 +54,9 @@ export const FormProfile: React.FC<Props> = (props) => {
         <FormInputImage name="avatar" label="Avatar" />
         <FormInput name="name" label="Name" />
         <FormInput name="email" label="Email" />
-        <Button variant={"secondary"}>Save</Button>
+        <Button disabled={!form.formState.isDirty} variant={"secondary"}>
+          Save
+        </Button>
       </form>
     </FormProvider>
   );
