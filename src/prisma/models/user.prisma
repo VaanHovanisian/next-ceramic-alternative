@@ -1,5 +1,4 @@
 model User {
-<<<<<<< HEAD
 	id String @id @default(cuid())
 	name String
 	role UserRole @default(USER)
@@ -20,23 +19,3 @@ enum UserRole {
 	ADMIN
 	USER
 }
-=======
-  id            String    @id @default(cuid())
-  name          String
-  role          UserRole  @default(USER)
-  email         String    @unique
-  emailVerified Boolean
-  image         String?
-  session       Session[]
-  account       Account[]
-  basket        Basket?
-  order         Order[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
-enum UserRole {
-  ADMIN
-  USER
-}
->>>>>>> Tagavor
