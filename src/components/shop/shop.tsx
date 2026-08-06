@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Filter } from "../filter";
@@ -18,10 +19,11 @@ import { Product } from "@prisma/client";
 interface Props {
   className?: string;
   products: Product[];
+  filter: any;
 }
 
 export const Shop: React.FC<Props> = (props) => {
-  const { className, products } = props;
+  const { className, products, filter } = props;
   return (
     <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">
@@ -36,7 +38,7 @@ export const Shop: React.FC<Props> = (props) => {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex">
-        <Filter className="hidden md:grid" />
+        <Filter filter={filter} className="hidden md:grid" />
         <div className="w-full">
           <div className="flex justify-between items-center mb-7">
             <ShopFilterSidebar>
