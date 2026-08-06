@@ -1,7 +1,22 @@
 "use server";
 
-import { ContactFormSchemaType } from "@/constants/form-schema/contact.schema";
+import {
+  contactFormSchema,
+  ContactFormSchemaType,
+} from "@/constants/form-schema/contact.schema";
+import { sendEmail } from "@/lib/send-email";
+import { prisma } from "@/prisma/prisma-client";
 
 export const sendMessageContactAction = async (
-  data: ContactFormSchemaType,
-) => {};
+  dataObj: ContactFormSchemaType,
+) => {
+  const parsedData = contactFormSchema.safeParse(dataObj);
+  if (!parsedData.success) {
+    throw new Error(parsedData.error.message);
+  }
+  const data = parsedData.data;
+  await prisma.contact.create({
+    data,
+  });
+  await sendEmail({});
+};
