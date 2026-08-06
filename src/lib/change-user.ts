@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+=======
+>>>>>>> Tagavor
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { toast } from "sonner";
@@ -29,5 +32,9 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
     },
     async email(value) {},
   };
+<<<<<<< HEAD
   Object.keys(dirtyField).forEach((el: string) => userObj[el](data));
+=======
+  Object.keys(dirtyField).forEach((el: any) => userObj[el](data));
+>>>>>>> Tagavor
 };
