@@ -1,5 +1,6 @@
 "use server";
 
+import { ContactTemplate } from "@/components/email-templates";
 import {
   contactFormSchema,
   ContactFormSchemaType,
@@ -18,5 +19,9 @@ export const sendMessageContactAction = async (
   await prisma.contact.create({
     data,
   });
-  await sendEmail({});
+  await sendEmail({
+    to: "vaa.hovanisyan@gmail.com",
+    subject: "Next Ceramic new Contact",
+    react: ContactTemplate(data),
+  });
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Filter } from "../filter";
 import { Catalog } from "../catalog";
-import { productIdes } from "@/constants/products";
 import { Container } from "../container";
 import { ShopSort } from "./shop-sort";
 import {
@@ -14,13 +13,15 @@ import {
 } from "../ui/breadcrumb";
 import { Sidebar } from "lucide-react";
 import { ShopFilterSidebar } from "./shop-filter-sidebar";
+import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
+  products: Product[];
 }
 
 export const Shop: React.FC<Props> = (props) => {
-  const { className } = props;
+  const { className, products } = props;
   return (
     <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">
@@ -43,7 +44,7 @@ export const Shop: React.FC<Props> = (props) => {
             </ShopFilterSidebar>
             <ShopSort className="ml-auto w-fit" />
           </div>
-          <Catalog className="grow pt-0" items={productIdes} />
+          <Catalog className="grow pt-0" items={products} />
         </div>
       </div>
     </Container>
