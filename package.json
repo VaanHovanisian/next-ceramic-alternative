@@ -23,6 +23,7 @@
     "better-auth": "^1.6.23",
 >>>>>>> Narine
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",
     "hex-color-to-color-name": "^2.0.1",
