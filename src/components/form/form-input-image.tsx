@@ -26,7 +26,6 @@ export const FormInputImage: React.FC<Props> = (props) => {
     if (!file) {
       return;
     }
-
     setPrevew(URL.createObjectURL(file));
     setValue(name, file, { shouldDirty: true });
   };
@@ -35,7 +34,7 @@ export const FormInputImage: React.FC<Props> = (props) => {
     <div className={cn("relative w-25", className)}>
       {label && <span>{label}</span>}
       <Image
-        className="w-full h-full"
+        className="w-full h-25 object-cover"
         src={preview}
         alt=""
         width={100}
@@ -43,9 +42,7 @@ export const FormInputImage: React.FC<Props> = (props) => {
       />
       <Input
         className="absolute opacity-0 w-full h-full inset-0 cursor-pointer"
-
         name={name}
-
         type="file"
         accept="image/*"
         onChange={handleImageChange}

@@ -19,7 +19,7 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
       await authClient.updateUser({ name: data.name });
       toast.success("success update name");
     },
-    async avatar({ avatar }) {
+    async avatar({ avatar }: { avatar: string | File }) {
       let img = typeof avatar === "string" ? avatar : undefined;
       if (avatar instanceof File) {
         img = await uploadImage(avatar);
@@ -29,5 +29,5 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
     },
     async email(value) {},
   };
-  Object.keys(dirtyField).forEach((el: string) => userObj[el](data));
+  Object.keys(dirtyField).forEach((el: any) => userObj[el](data));
 };

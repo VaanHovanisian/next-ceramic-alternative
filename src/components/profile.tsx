@@ -46,13 +46,21 @@ export const Profile: React.FC<Props> = (props) => {
                 },
                 onError(error) {
                   console.log(error);
+<<<<<<< HEAD
                   toast.error("failed logout");
+=======
+                  toast.error("failed delete user");
+>>>>>>> Tagavor
                 },
               },
             });
           }}
         >
+<<<<<<< HEAD
           Delete Account
+=======
+          delete account
+>>>>>>> Tagavor
         </Button>
       </div>
     </Container>

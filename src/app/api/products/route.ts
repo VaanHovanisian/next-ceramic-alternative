@@ -4,11 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const limit = req.nextUrl.searchParams.get("limit");
-    const search = req.nextUrl.searchParams.get("search") || " ";
+    const search = req.nextUrl.searchParams.get("search") || "";
     const products = await prisma.product.findMany({
       where: {
         name: {
-          contains: search,
+          // contains: search,
+          startsWith: search,
           mode: "insensitive",
         },
       },
