@@ -12,16 +12,37 @@ export const sendMessageContactAction = async (
   dataObj: ContactFormSchemaType,
 ) => {
   const parsedData = contactFormSchema.safeParse(dataObj);
+
   if (!parsedData.success) {
-    throw new Error(parsedData.error.message);
+    return {
+      success: false,
+      message: parsedData.error.message,
+    };
   }
-  const data = parsedData.data;
-  await prisma.contact.create({
-    data,
-  });
-  await sendEmail({
-    to: "ynarine11@gmail.com",
-    subject: "Next ceramic new Contact",
-    react: ContactTemplate(data),
-  });
+
+  try {
+    const data = parsedData.data;
+
+    await prisma.contact.create({
+      data,
+    });
+
+    await sendEmail({
+      to: "vaa.hovanisyan@gmail.com",
+      subject: "Next Ceramic new Contact",
+      react: ContactTemplate(data),
+    });
+
+    return {
+      success: true,
+      message: "Message sent successfully",
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      success: false,
+      message: "Something went wrong",
+    };
+  }
 };
