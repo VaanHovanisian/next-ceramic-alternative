@@ -28,7 +28,7 @@ const sort = [
   },
   {
     name: "Newest",
-    value: "newest",
+    value: "createdAt_desc",
   },
 ];
 
