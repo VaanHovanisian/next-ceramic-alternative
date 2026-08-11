@@ -15,15 +15,19 @@ import {
 import { Sidebar } from "lucide-react";
 import { ShopFilterSidebar } from "./shop-filter-sidebar";
 import { Product } from "@prisma/client";
+import { ShopPagination } from "./shop-pagination";
 
 interface Props {
   className?: string;
   products: Product[];
   filter: any;
+  page: number;
+  totalPages: number;
+  count: number;
 }
 
 export const Shop: React.FC<Props> = (props) => {
-  const { className, products, filter } = props;
+  const { className, products, filter, page, totalPages, count } = props;
   return (
     <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">
@@ -38,15 +42,16 @@ export const Shop: React.FC<Props> = (props) => {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex">
-        <Filter filter={filter} className="hidden md:grid" />
+        <Filter itemsCount={count} filter={filter} className="hidden md:grid" />
         <div className="w-full">
           <div className="flex justify-between items-center mb-7">
-            <ShopFilterSidebar>
+            <ShopFilterSidebar itemsCount={count} filter={filter}>
               <Sidebar />
             </ShopFilterSidebar>
             <ShopSort className="ml-auto w-fit" />
           </div>
           <Catalog className="grow pt-0" items={products} />
+          <ShopPagination currentPage={page} totalPages={totalPages} />
         </div>
       </div>
     </Container>
