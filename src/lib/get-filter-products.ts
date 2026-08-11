@@ -1,4 +1,6 @@
 import { prisma } from "@/prisma/prisma-client";
+import { PriceRange } from "@prisma/client";
+import { cacheLife, cacheTag } from "next/cache";
 
 export interface GetSearchParams {
   category: string;
@@ -9,14 +11,34 @@ export interface GetSearchParams {
   limit?: string;
 }
 
-export const getFilterProducts = async (params: GetSearchParams) => {
+export const getFilterProducts = async (
+  params: GetSearchParams,
+  priceRange: PriceRange[],
+) => {
+  "use cache";
+  cacheLife("hours");
+  cacheTag("filter-products");
   const category = params.category
     ? params.category.split(",").map(Number)
     : undefined;
   const color = params.color ? params.color.split(",").map(Number) : undefined;
+  const fromId = params.price
+    ? params.price.split(",").map(Number)[0]
+    : undefined;
+  const toId = params.price
+    ? params.price.split(",").map(Number).at(-1)
+    : undefined;
+  const from = priceRange.find((el) => el.id === fromId)?.from;
+  const to = priceRange.find((el) => el.id === toId)?.to;
 
-  const frimId = params.price;
-  const products = await prisma.products.findMany({
+  const [sortKey, sortValue] = params.sort
+    ? params.sort.split("_")
+    : ["id", "asc"];
+
+  const products = await prisma.product.findMany({
+    orderBy: {
+      [sortKey]: sortValue,
+    },
     where: {
       price: {
         gte: from,
@@ -32,4 +54,5 @@ export const getFilterProducts = async (params: GetSearchParams) => {
       },
     },
   });
+  return products;
 };

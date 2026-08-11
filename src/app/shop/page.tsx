@@ -1,14 +1,20 @@
 import { Shop } from "@/components/shop";
 import { getFilterProducts, GetSearchParams } from "@/lib/get-filter-products";
 import { getFilterShop } from "@/lib/get-filter-shop";
-import { prisma } from "@/prisma/prisma-client";
-
+import { Suspense } from "react";
 interface SearchParamsProps {
   searchParams: Promise<GetSearchParams>;
 }
 
-export default async function ShopPage() {
-  const products = await getFilterProducts(await searchParams filter.priceRange);
+export default async function ShopPage({ searchParams }: SearchParamsProps) {
   const filter = await getFilterShop();
-  return <Shop products={products} filter={filter} />;
+  const products = await getFilterProducts(
+    await searchParams,
+    filter.priceRange,
+  );
+  return (
+    <Suspense>
+      <Shop products={products} filter={filter} />
+    </Suspense>
+  );
 }

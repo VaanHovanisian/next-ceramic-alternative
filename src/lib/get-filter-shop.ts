@@ -2,7 +2,11 @@ import { prisma } from "@/prisma/prisma-client";
 import { cacheLife, cacheTag } from "next/cache";
 
 export const getFilterShop = async () => {
+<<<<<<< HEAD
   "use cashe";
+=======
+  "use cache";
+>>>>>>> Tagavor
   cacheLife("weeks");
   cacheTag("filter-shop");
   const [category, priceRange, color] = await Promise.all([
