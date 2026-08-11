@@ -11,11 +11,7 @@ import { products } from "@/constants/products";
 async function create() {
   await prisma.user.create({
     data: {
-<<<<<<< HEAD
-      email: "gvidon1234@gmail.com",
-=======
       email: "gvidon123@gmail.com",
->>>>>>> Tagavor
       emailVerified: true,
       name: "Gvidon",
       role: UserRole.ADMIN,
@@ -23,11 +19,7 @@ async function create() {
   });
   await prisma.user.create({
     data: {
-<<<<<<< HEAD
-      email: "patrisia1234@gmail.com",
-=======
       email: "Parisia123@gmail.com",
->>>>>>> Tagavor
       emailVerified: true,
       name: "Patrisia",
     },
