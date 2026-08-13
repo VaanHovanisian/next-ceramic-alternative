@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -12,10 +13,12 @@ import { Filter } from "../filter";
 interface Props {
   className?: string;
   children: React.ReactNode;
+  filter: any;
+  itemsCount: number;
 }
 
 export const ShopFilterSidebar: React.FC<Props> = (props) => {
-  const { className, children } = props;
+  const { className, children, filter, itemsCount } = props;
   return (
     <Sheet>
       <SheetTrigger className="md:hidden">{children}</SheetTrigger>
@@ -26,7 +29,7 @@ export const ShopFilterSidebar: React.FC<Props> = (props) => {
         <SheetHeader className="sr-only">
           <SheetTitle>Filter</SheetTitle>
         </SheetHeader>
-        <Filter />
+        <Filter itemsCount={itemsCount} filter={filter} />
       </SheetContent>
     </Sheet>
   );

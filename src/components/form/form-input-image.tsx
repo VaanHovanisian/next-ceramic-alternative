@@ -16,9 +16,10 @@ export const FormInputImage: React.FC<Props> = (props) => {
   const { className, name, label, imgUrl } = props;
   const [preview, setPrevew] = React.useState(imgUrl || "");
   const {
-    register,
+    setValue,
     formState: { errors },
   } = useFormContext();
+
   const isError = errors[name]?.message;
 
   const handleImageChange = (e: any) => {
@@ -27,14 +28,14 @@ export const FormInputImage: React.FC<Props> = (props) => {
       return;
     }
     setPrevew(URL.createObjectURL(file));
-    // setValue(name, file);
+    setValue(name, file, { shouldDirty: true });
   };
 
   return (
     <div className={cn("relative w-25", className)}>
       {label && <span>{label}</span>}
       <Image
-        className="w-full h-full"
+        className="w-full h-25 object-cover"
         src={preview}
         alt=""
         width={100}
@@ -42,9 +43,7 @@ export const FormInputImage: React.FC<Props> = (props) => {
       />
       <Input
         className="absolute opacity-0 w-full h-full inset-0 cursor-pointer"
-        {...register(name)}
         name={name}
-
         type="file"
         accept="image/*"
         onChange={handleImageChange}

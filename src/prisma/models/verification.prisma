@@ -1,5 +1,4 @@
 model Verification {
-<<<<<<< HEAD
   id         String   @id @default(cuid())
   identifier String
   value      String
@@ -7,13 +6,3 @@ model Verification {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
-=======
-	id String @id @default(cuid())
-	identifier String
-	value String
-	expiresAt DateTime @db.Timestamptz(3)
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
-	
-}
->>>>>>> Narine

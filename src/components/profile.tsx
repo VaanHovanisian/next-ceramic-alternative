@@ -46,13 +46,13 @@ export const Profile: React.FC<Props> = (props) => {
                 },
                 onError(error) {
                   console.log(error);
-                  toast.error("failed logout");
+                  toast.error("failed delete user");
                 },
               },
             });
           }}
         >
-          Delete Account
+          delete account
         </Button>
       </div>
     </Container>

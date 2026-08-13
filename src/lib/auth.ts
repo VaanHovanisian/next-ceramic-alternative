@@ -6,6 +6,7 @@ import {
   DeleteTemplate,
   VerificationTemplate,
 } from "@/components/email-templates";
+import { nextCookies } from "better-auth/next-js";
 // If your Prisma file is located elsewhere, you can change the path
 
 export const auth = betterAuth({
@@ -50,4 +51,5 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+  plugins: [nextCookies()],
 });

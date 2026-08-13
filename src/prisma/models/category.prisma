@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-model Category {
-  id Int @id @default(autoincrement())
-
-  name String
-
-  product Product[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-=======
 model Category{
 	id Int @id @default(autoincrement())
 
@@ -19,4 +7,3 @@ model Category{
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
->>>>>>> Narine
