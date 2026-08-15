@@ -2,8 +2,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
-import { BasketCard } from "./basket-card";
-import { BasketCartItems } from "@/constants/basket";
 import { BasketTotal } from "./basket-total";
 import {
   Breadcrumb,
@@ -12,6 +10,9 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
+import { useBasketStore } from "@/store/use-basket-store";
+import { getBasket } from "@/lib/get-basket";
+import { BasketCard } from "./basket-card";
 
 interface Props {
   className?: string;
@@ -19,6 +20,15 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
+  const [data, setData] = React.useState([]);
+  const { basket, removeItem } = useBasketStore();
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const items = await getBasket(basket.map((el) => el.id));
+      setData(items);
+    };
+    fetchData();
+  }, [basket]);
 
   return (
     <div
@@ -38,11 +48,9 @@ export const Basket: React.FC<Props> = (props) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h1 className="text-2xl font-medium mb-6">
-        Cart ({BasketCartItems.length} item)
-      </h1>
+      <h1 className="text-2xl font-medium mb-6">Cart ({data.length} item)</h1>
 
-      {BasketCartItems.length === 0 ? (
+      {data.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
         <div className="flex flex-col gap-8 items-end">
@@ -67,11 +75,13 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {BasketCartItems.map((item) => (
+                {data.map((item) => (
                   <BasketCard
                     key={item.id}
                     item={item}
-                    removeItem={() => {}}
+                    removeItem={() => {
+                      removeItem(item.id);
+                    }}
                     updateQuantity={() => {}}
                   />
                 ))}

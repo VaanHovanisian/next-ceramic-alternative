@@ -32,12 +32,12 @@ export const BasketCard: React.FC<Props> = (props) => {
 
       <td className="p-4">
         <div className="rounded overflow-hidden flex items-center justify-center">
-          <Image src={item.img} alt={item.title} width={120} height={141} />
+          <Image src={item.imgUrl} alt={item.name} width={120} height={141} />
         </div>
       </td>
 
       <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
-        {item.title}
+        {item.name}
       </td>
 
       <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
