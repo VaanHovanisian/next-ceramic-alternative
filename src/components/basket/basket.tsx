@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
@@ -20,17 +22,37 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
-  const [data, setData] = React.useState([]);
-  const { basket, removeItem } = useBasketStore();
-  console.log(basket.map((el) => el.id));
+
+  const [data, setData] = React.useState<any[]>([]);
+
+  const { basket, removeItem, updateItem, clearBasket, quantity } =
+    useBasketStore();
 
   React.useEffect(() => {
     const fetchData = async () => {
+      if (basket.length === 0) {
+        setData([]);
+        return;
+      }
+
       const items = await getBasket(basket.map((el) => el.id));
-      setData(items);
+
+      const itemsData = items.map((item: { id: number }) => {
+        const basketItem = basket.find((el) => el.id === item.id);
+
+        return {
+          ...item,
+          quantity: basketItem?.quantity ?? 0,
+        };
+      });
+
+      setData(itemsData);
     };
+
     fetchData();
   }, [basket]);
+
+  const total = data.reduce((acc, el) => acc + el.price * el.quantity, 0);
 
   return (
     <div
@@ -50,10 +72,13 @@ export const Basket: React.FC<Props> = (props) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h1 className="text-2xl font-medium mb-6">Cart ({data.length} item)</h1>
+
+      <h1 className="text-2xl font-medium mb-6">
+        Cart ({quantity} {quantity === 1 ? "item" : "items"})
+      </h1>
 
       {data.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">Basket is empty:</div>
+        <div className="text-center py-12 text-gray-500">Basket is empty</div>
       ) : (
         <div className="flex flex-col gap-8 items-end">
           <div className="w-full overflow-x-auto">
@@ -61,36 +86,45 @@ export const Basket: React.FC<Props> = (props) => {
               <thead>
                 <tr className="bg-primary text-white text-xs tracking-wider uppercase">
                   <th className="p-3 text-center w-12">
-                    <Trash2 className="w-4 h-4 mx-auto cursor-pointer" />
+                    <Trash2
+                      className="w-4 h-4 mx-auto cursor-pointer hover:opacity-70"
+                      onClick={clearBasket}
+                    />
                   </th>
+
                   <th className="p-3 uppercase text-xs font-semibold">Photo</th>
+
                   <th className="p-3 uppercase text-xs font-semibold">
                     Product
                   </th>
+
                   <th className="p-3 uppercase text-xs font-semibold">Price</th>
+
                   <th className="p-3 uppercase text-xs font-semibold text-center">
                     Quantity
                   </th>
+
                   <th className="p-3 uppercase text-xs font-semibold">
                     Subtotal
                   </th>
                 </tr>
               </thead>
+
               <tbody>
-                {data?.map((item) => (
+                {data.map((item) => (
                   <BasketCard
                     key={item.id}
                     item={item}
-                    removeItem={() => {
-                      removeItem(item.id);
-                    }}
-                    updateQuantity={() => {}}
+                    removeItem={() => removeItem(item.id)}
+                    incrementQuantity={() => updateItem(item.id, "increment")}
+                    decrementQuantity={() => updateItem(item.id, "decrement")}
                   />
                 ))}
               </tbody>
             </table>
           </div>
-          <BasketTotal totalAmount={1000} />
+
+          <BasketTotal totalAmount={total} />
         </div>
       )}
     </div>

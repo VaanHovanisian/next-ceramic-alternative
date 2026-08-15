@@ -1,9 +1,8 @@
-"use client";
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "../logo";
 import { Search } from "./search";
 import { ProfileButton } from "./profile-button";
+import { BasketLink } from "./basket-link";
 
 export const Header = () => {
   return (
@@ -29,9 +28,7 @@ export const Header = () => {
         <div className="flex items-center gap-5 cursor-pointer">
           <Search />
           <ProfileButton />
-          <Link href="/basket" className="hover:opacity-70 transition-opacity">
-            <ShoppingCart size={18} />
-          </Link>
+          <BasketLink />
         </div>
       </div>
     </header>
