@@ -8,13 +8,19 @@ interface SearchParamsProps {
 
 export default async function ShopPage({ searchParams }: SearchParamsProps) {
   const filter = await getFilterShop();
-  const products = await getFilterProducts(
+  const { products, count, page, totalPages } = await getFilterProducts(
     await searchParams,
     filter.priceRange,
   );
   return (
     <Suspense>
-      <Shop products={products} filter={filter} />
+      <Shop
+        count={count}
+        page={page}
+        totalPages={totalPages}
+        products={products}
+        filter={filter}
+      />
     </Suspense>
   );
 }

@@ -20,7 +20,7 @@ export const Filter: React.FC<Props> = (props) => {
 
   return (
     <div className={cn("grid gap-7.5 min-w-60 self-start", className)}>
-      <Title size="s">Showing 120 items </Title>
+      <Title size="s">Showing (page - 1) * LIMIT items </Title>
       <hr />
       <FilterCheckboxGroup
         checked={filter.category}
