@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/prisma-client";
 import { PriceRange } from "@prisma/client";
-import { cacheLife, cacheTag } from "next/cache";
+// import { cacheLife, cacheTag } from "next/cache";
 
 export interface GetSearchParams {
   category: string;
@@ -15,9 +15,9 @@ export const getFilterProducts = async (
   params: GetSearchParams,
   priceRange: PriceRange[],
 ) => {
-  "use cache";
-  cacheLife("hours");
-  cacheTag("filter-products");
+  // "use cache";
+  // cacheLife("hours");
+  // cacheTag("filter-products");
   const page = params.page ? Number(params.page) : 1;
   const category = params.category
     ? params.category.split(",").map(Number)

@@ -10,17 +10,18 @@ import { useFilterQuery } from "@/hooks/filter/use-filter-query";
 interface Props {
   className?: string;
   filter: any;
+  itemsCount: number;
 }
 
 export const Filter: React.FC<Props> = (props) => {
-  const { className, filter: filterArr } = props;
+  const { className, filter: filterArr, itemsCount } = props;
 
   const filter = useFilter();
   useFilterQuery(filter);
 
   return (
     <div className={cn("grid gap-7.5 min-w-60 self-start", className)}>
-      <Title size="s">Showing (page - 1) * LIMIT items </Title>
+      <Title size="s">Showing {itemsCount} items </Title>
       <hr />
       <FilterCheckboxGroup
         checked={filter.category}

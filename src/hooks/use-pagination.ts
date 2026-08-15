@@ -1,15 +1,15 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import QueryString from "qs";
-
+import qs from "qs";
 export const usePagination = (currentPage: number, totalPages: number) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const currentParams = QueryString.parse(searchParams.toString());
+  const currentParams = qs.parse(searchParams.toString());
   const goPage = (page: number) => {
-    const query = QueryString.stringify({
+    const query = qs.stringify({
       ...currentParams,
       page,
     });
+
     router.push(`?${query}`);
   };
 

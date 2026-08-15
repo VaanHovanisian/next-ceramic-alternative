@@ -44,7 +44,7 @@ export const FormRegister: React.FC<Props> = (props) => {
         },
         onError(error) {
           console.log(error);
-          toast.error("Failed Register " + error.error.message);
+          toast.error("Failed Register" + error.error.message);
         },
       },
     );

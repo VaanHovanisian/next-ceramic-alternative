@@ -4,14 +4,24 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useBasketStore } from "@/store/use-basket-store";
+import { toast } from "sonner";
+import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
-  product: any;
+  product: Product;
 }
 
 export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
+
+  const addItem = useBasketStore((state) => state.addItem);
+
+  const addToBasket = () => {
+    addItem(product.id, 1);
+    toast.success("success add to basket");
+  };
 
   return (
     <div className={cn("flex flex-col gap-1 h-full text-left", className)}>
@@ -31,7 +41,9 @@ export const Card: React.FC<Props> = (props) => {
       <p className="mt-2 text-sm text-gray-500 line-clamp-3 mb-3">
         {product.text}
       </p>
-      <Button className="w-full mt-auto">Add to cart</Button>
+      <Button onClick={addToBasket} className="w-full mt-auto">
+        Add to cart
+      </Button>
     </div>
   );
 };

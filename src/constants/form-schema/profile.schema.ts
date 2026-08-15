@@ -14,5 +14,4 @@ export const profileFormSchema = z.object({
     ])
     .optional(),
 });
-
 export type ProfileFormSchemaType = z.infer<typeof profileFormSchema>;
