@@ -11,43 +11,21 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
-import { useBasketStore } from "@/store/use-basket-store";
-import { getBasket } from "@/lib/get-basket";
+import { useBasket } from "@/hooks/use-basket";
 import { toast } from "sonner";
-import { Product } from "@prisma/client";
 
 interface Props {
   className?: string;
 }
-type BasketRow = Product & { quantity: number };
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
-  const [data, setData] = React.useState<BasketRow[]>([]);
-  const { basket, removeItem, updateItem, quantity, deleteAllItems } =
-    useBasketStore();
-  const ids = basket.map((b) => b.id).join(",");
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const items: Product[] = await getBasket(basket.map((el) => el.id));
-      const returnedIds = new Set(items.map((i) => i.id));
-      const ghosts = basket.filter((b) => !returnedIds.has(b.id));
-      ghosts.forEach((g) => removeItem(g.id));
-      const itemsData = items.map((el) => {
-        const item = basket.find((b) => b.id === el.id);
-        return { ...el, quantity: item?.quantity ?? 1 };
-      });
-      setData(itemsData);
-    };
-    fetchData();
-  }, [ids]);
+  const { items, quantity, total, removeItem, updateItem, clear } = useBasket();
 
-  const deleteAll = () => {
-    deleteAllItems();
-    toast.success("delete all");
+  const deleteAll = async () => {
+    await clear();
+    toast.success("Cart cleared");
   };
-
-  const total = data.reduce((acc, el) => acc + el.price * el.quantity, 0);
 
   return (
     <div
@@ -69,7 +47,7 @@ export const Basket: React.FC<Props> = (props) => {
       </Breadcrumb>
       <h1 className="text-2xl font-medium mb-6">Cart ({quantity} item)</h1>
 
-      {basket.length === 0 ? (
+      {items.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
         <div className="flex flex-col gap-8 items-end">
@@ -96,7 +74,7 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((item) => (
+                {items.map((item) => (
                   <BasketCard
                     key={item.id}
                     item={item}

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header/header";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
+import { BasketSyncer } from "@/components/basket-syncer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,6 +35,7 @@ export default function RootLayout({
       className={`${inter.className} ${garamond.variable} h-full antialiased`}
     >
       <body className="h-full">
+        <BasketSyncer />
         <Header />
         {children}
         <Footer />

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useBasketStore } from "@/store/use-basket-store";
+import { useBasket } from "@/hooks/use-basket";
 import { toast } from "sonner";
 import { Product } from "@prisma/client";
 
@@ -16,10 +15,10 @@ interface Props {
 export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
 
-  const addItem = useBasketStore((state) => state.addItem);
+  const { addItem } = useBasket();
 
-  const addToBasket = () => {
-    addItem(product.id, 1);
+  const addToBasket = async () => {
+    await addItem(product.id, 1);
     toast.success("success add to basket");
   };
 
