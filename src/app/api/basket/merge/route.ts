@@ -1,68 +1,32 @@
-import { prisma } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getUser } from "@/lib/get-user";
+import { updateTotalAmountBasket } from "@/lib/update-total-amount-basket";
+import { findOrCreateBasket } from "@/lib/find-or-create-basket";
+import { basketMerge } from "@/lib/basket-merge";
 
 export async function POST(req: NextRequest) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const userId = session?.user?.id;
-  if (!userId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    const userId = (await getUser())?.id;
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const localItems = (await req.json()) as { id: number; quantity: number }[];
-  if (!Array.isArray(localItems))
-    return NextResponse.json({ error: "array required" }, { status: 400 });
+    const localItems = (await req.json().catch(() => null)) as unknown;
+    if (!Array.isArray(localItems))
+      return NextResponse.json({ error: "array required" }, { status: 400 });
 
-  const basket = await prisma.basket.upsert({
-    where: { userId },
-    update: {},
-    create: { userId },
-  });
+    const basket = await findOrCreateBasket(userId);
+    await basketMerge(
+      localItems as { id: number; quantity: number }[],
+      basket.id,
+    );
+    const items = await updateTotalAmountBasket(userId);
 
-  const cleanItems = localItems.filter(
-    (i) => Number.isFinite(i.id) && i.quantity > 0,
-  );
-
-  if (cleanItems.length > 0) {
-    const productIds = cleanItems.map((i) => i.id);
-    const existingProducts = await prisma.product.findMany({
-      where: { id: { in: productIds } },
-      select: { id: true },
-    });
-    const validIds = new Set(existingProducts.map((p) => p.id));
-
-    const existingCards = await prisma.basketCard.findMany({
-      where: { basketId: basket.id, productId: { in: productIds } },
-    });
-    const byProduct = new Map(existingCards.map((c) => [c.productId, c]));
-
-    for (const item of cleanItems) {
-      if (!validIds.has(item.id)) continue;
-      const existing = byProduct.get(item.id);
-      if (existing) {
-        await prisma.basketCard.update({
-          where: { id: existing.id },
-          data: { quantity: existing.quantity + item.quantity },
-        });
-      } else {
-        await prisma.basketCard.create({
-          data: {
-            basketId: basket.id,
-            productId: item.id,
-            quantity: item.quantity,
-          },
-        });
-      }
-    }
+    return NextResponse.json(items, { status: 200 });
+  } catch (error) {
+    console.error("Server Internal Error POST /api/basket/merge", error);
+    return NextResponse.json(
+      { error: "Server Internal Error" },
+      { status: 500 },
+    );
   }
-
-  const cards = await prisma.basketCard.findMany({
-    where: { basketId: basket.id },
-    include: { product: true },
-    orderBy: { createdAt: "asc" },
-  });
-  return NextResponse.json(
-    cards.map((c) => ({ ...c.product, quantity: c.quantity })),
-    { status: 200 },
-  );
 }

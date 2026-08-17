@@ -15,7 +15,7 @@ const authedFetcher = async (): Promise<BasketItem[]> =>
   (await axiosInstance.get(ApiRoutes.BASKET)).data;
 
 const anonFetcher = async (ids: string): Promise<Product[]> =>
-  (await axiosInstance.get(ApiRoutes.BASKET, { params: { ids } })).data;
+  (await axiosInstance.get(ApiRoutes.PRODUCTS, { params: { ids } })).data;
 
 export function useBasket() {
   const { data: session, isPending: sessionLoading } = useSession();
@@ -42,7 +42,7 @@ export function useBasket() {
     [localBasket],
   );
   const { data: anonProducts, isLoading: anonLoading } = useSWR<Product[]>(
-    !isAuthed && anonIds ? [ApiRoutes.BASKET, "anon", anonIds] : null,
+    !isAuthed && anonIds ? [ApiRoutes.PRODUCTS, "anon", anonIds] : null,
     () => anonFetcher(anonIds),
   );
 

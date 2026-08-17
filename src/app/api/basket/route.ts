@@ -1,139 +1,97 @@
+import { findOrCreateBasket } from "@/lib/find-or-create-basket";
+import { getUser } from "@/lib/get-user";
+import { updateTotalAmountBasket } from "@/lib/update-total-amount-basket";
 import { prisma } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 
-async function getUserId() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  return session?.user?.id ?? null;
-}
+const MAX_QUANTITY = 999;
 
-async function getOrCreateBasket(userId: string) {
-  return prisma.basket.upsert({
-    where: { userId },
-    update: {},
-    create: { userId },
-  });
-}
-
-async function loadBasketItems(userId: string) {
-  const basket = await getOrCreateBasket(userId);
-  const cards = await prisma.basketCard.findMany({
-    where: { basketId: basket.id },
-    include: { product: true },
-    orderBy: { createdAt: "asc" },
-  });
-  return cards.map((c) => ({ ...c.product, quantity: c.quantity }));
-}
-
-export async function GET(req: NextRequest) {
-  const idsParam = req.nextUrl.searchParams.get("ids");
-
-  if (idsParam !== null) {
-    const ids = idsParam
-      .split(",")
-      .map(Number)
-      .filter((n) => Number.isFinite(n));
-    if (ids.length === 0) return NextResponse.json([], { status: 200 });
-    const products = await prisma.product.findMany({
-      where: { id: { in: ids } },
-    });
-    return NextResponse.json(products, { status: 200 });
+export async function GET() {
+  try {
+    const userId = (await getUser())?.id;
+    if (!userId) return NextResponse.json([], { status: 200 });
+    const items = await updateTotalAmountBasket(userId);
+    return NextResponse.json(items, { status: 200 });
+  } catch (error) {
+    console.error("Server Internal Error GET /api/basket", error);
+    return NextResponse.json(
+      { error: "Server Internal Error" },
+      { status: 500 },
+    );
   }
-
-  const userId = await getUserId();
-  if (!userId) return NextResponse.json([], { status: 200 });
-  const items = await loadBasketItems(userId);
-  return NextResponse.json(items, { status: 200 });
 }
 
 export async function POST(req: NextRequest) {
-  const userId = await getUserId();
-  if (!userId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  try {
+    const userId = (await getUser())?.id;
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { productId, quantity = 1 } = (await req.json()) as {
-    productId: number;
-    quantity?: number;
-  };
-  if (!productId)
+    const body = (await req.json().catch(() => null)) as {
+      productId?: unknown;
+      quantity?: unknown;
+    } | null;
+    if (!body)
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+
+    const productId = Number(body.productId);
+    const quantity = body.quantity === undefined ? 1 : Number(body.quantity);
+
+    if (!Number.isInteger(productId) || productId <= 0)
+      return NextResponse.json(
+        { error: "productId must be a positive integer" },
+        { status: 400 },
+      );
+
+    if (!Number.isInteger(quantity) || quantity <= 0 || quantity > MAX_QUANTITY)
+      return NextResponse.json(
+        { error: `quantity must be an integer between 1 and ${MAX_QUANTITY}` },
+        { status: 400 },
+      );
+
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+      select: { id: true },
+    });
+    if (!product)
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+
+    const basket = await findOrCreateBasket(userId);
+    await prisma.basketCard.upsert({
+      where: {
+        basketId_productId: { basketId: basket.id, productId },
+      },
+      create: { basketId: basket.id, productId, quantity },
+      update: { quantity: { increment: quantity } },
+    });
+
+    const items = await updateTotalAmountBasket(userId);
+    return NextResponse.json(items, { status: 200 });
+  } catch (error) {
+    console.error("Server Internal Error POST /api/basket", error);
     return NextResponse.json(
-      { error: "productId required" },
-      { status: 400 },
+      { error: "Server Internal Error" },
+      { status: 500 },
     );
-
-  const basket = await getOrCreateBasket(userId);
-  const existing = await prisma.basketCard.findFirst({
-    where: { basketId: basket.id, productId },
-  });
-  if (existing) {
-    await prisma.basketCard.update({
-      where: { id: existing.id },
-      data: { quantity: existing.quantity + quantity },
-    });
-  } else {
-    await prisma.basketCard.create({
-      data: { basketId: basket.id, productId, quantity },
-    });
   }
-
-  const items = await loadBasketItems(userId);
-  return NextResponse.json(items, { status: 200 });
 }
 
-export async function PATCH(req: NextRequest) {
-  const userId = await getUserId();
-  if (!userId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+export async function DELETE() {
+  try {
+    const userId = (await getUser())?.id;
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { productId, type } = (await req.json()) as {
-    productId: number;
-    type: "increment" | "decrement";
-  };
-  if (!productId || !type)
-    return NextResponse.json(
-      { error: "productId and type required" },
-      { status: 400 },
-    );
-
-  const basket = await getOrCreateBasket(userId);
-  const existing = await prisma.basketCard.findFirst({
-    where: { basketId: basket.id, productId },
-  });
-  if (existing) {
-    const next =
-      type === "increment"
-        ? existing.quantity + 1
-        : Math.max(1, existing.quantity - 1);
-    await prisma.basketCard.update({
-      where: { id: existing.id },
-      data: { quantity: next },
-    });
-  }
-
-  const items = await loadBasketItems(userId);
-  return NextResponse.json(items, { status: 200 });
-}
-
-export async function DELETE(req: NextRequest) {
-  const userId = await getUserId();
-  if (!userId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const productIdParam = req.nextUrl.searchParams.get("productId");
-  const basket = await getOrCreateBasket(userId);
-
-  if (productIdParam) {
-    const productId = Number(productIdParam);
-    if (Number.isFinite(productId)) {
-      await prisma.basketCard.deleteMany({
-        where: { basketId: basket.id, productId },
-      });
-    }
-  } else {
+    const basket = await findOrCreateBasket(userId);
     await prisma.basketCard.deleteMany({ where: { basketId: basket.id } });
-  }
 
-  const items = await loadBasketItems(userId);
-  return NextResponse.json(items, { status: 200 });
+    const items = await updateTotalAmountBasket(userId);
+    return NextResponse.json(items, { status: 200 });
+  } catch (error) {
+    console.error("Server Internal Error DELETE /api/basket", error);
+    return NextResponse.json(
+      { error: "Server Internal Error" },
+      { status: 500 },
+    );
+  }
 }
