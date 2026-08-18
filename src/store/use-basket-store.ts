@@ -58,13 +58,14 @@ export const useBasketStore = create<BAsketStateStore>()(
         });
       },
       removeItem: (id) => {
-        set((state) => ({
-          basket: state.basket.filter((el) => el.id !== id),
-          quantity: state.quantity - 1,
-        }));
+        set((state) => {
+          const basket = state.basket.filter((el) => el.id !== id);
+          const quantity = basket.reduce((acc, el) => acc + el.quantity, 0);
+          return { basket, quantity };
+        });
       },
       deleteAllItems: () => {
-        set(() => ({ basket: [], quantity: 0, totalAmount: 0 }));
+        set(() => ({ basket: [], quantity: 0 }));
       },
     }),
     {
