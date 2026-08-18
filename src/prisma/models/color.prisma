@@ -1,10 +1,10 @@
-model Color{
-	id Int @id @default(autoincrement())
-    
-    name String
+model Color {
+  id Int @id @default(autoincrement())
 
-    product Product[]
-    
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  name String
+
+  product    Product[]
+  basketCard BasketCard[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 }
