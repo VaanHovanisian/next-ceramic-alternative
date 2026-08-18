@@ -6,16 +6,8 @@ import { useSession } from "@/lib/auth-client";
 import { useBasketStore } from "@/store/use-basket-store";
 import { axiosInstance } from "@/lib/instance";
 import { ApiRoutes } from "@/constants/api-routes";
-
-export type BasketItem = Product & { quantity: number };
-
-const AUTHED_KEY = [ApiRoutes.BASKET, "authed"] as const;
-
-const authedFetcher = async (): Promise<BasketItem[]> =>
-  (await axiosInstance.get(ApiRoutes.BASKET)).data;
-
-const anonFetcher = async (ids: string): Promise<Product[]> =>
-  (await axiosInstance.get(ApiRoutes.PRODUCTS, { params: { ids } })).data;
+import { fetcher } from "@/lib/fetcher";
+import { BasketItem } from "@/@types/basket";
 
 export function useBasket() {
   const { data: session, isPending: sessionLoading } = useSession();
@@ -29,9 +21,9 @@ export function useBasket() {
 
   const {
     data: authedItems,
-    mutate: mutateAuthed,
+    mutate,
     isLoading: authedLoading,
-  } = useSWR<BasketItem[]>(isAuthed ? AUTHED_KEY : null, authedFetcher);
+  } = useSWR<BasketItem[]>(isAuthed ? ApiRoutes.BASKET : null, fetcher);
 
   const anonIds = useMemo(
     () =>
@@ -42,8 +34,8 @@ export function useBasket() {
     [localBasket],
   );
   const { data: anonProducts, isLoading: anonLoading } = useSWR<Product[]>(
-    !isAuthed && anonIds ? [ApiRoutes.PRODUCTS, "anon", anonIds] : null,
-    () => anonFetcher(anonIds),
+    !isAuthed && anonIds ? `${ApiRoutes.PRODUCTS}/${anonIds}` : null,
+    fetcher,
   );
 
   const anonItems = useMemo<BasketItem[]>(() => {
@@ -75,7 +67,7 @@ export function useBasket() {
           i.id === productId ? { ...i, quantity: i.quantity + qty } : i,
         )
       : cur;
-    await mutateAuthed(
+    await mutate(
       async () =>
         (
           await axiosInstance.post(ApiRoutes.BASKET, {
@@ -107,9 +99,13 @@ export function useBasket() {
           }
         : i,
     );
-    await mutateAuthed(
+    await mutate(
       async () =>
-        (await axiosInstance.patch(ApiRoutes.BASKET, { productId, type })).data,
+        (
+          await axiosInstance.patch(`${ApiRoutes.BASKET}/${productId}`, {
+            type,
+          })
+        ).data,
       { optimisticData: optimistic, rollbackOnError: true, revalidate: false },
     );
   };
@@ -120,13 +116,9 @@ export function useBasket() {
       return;
     }
     const optimistic = (authedItems ?? []).filter((i) => i.id !== productId);
-    await mutateAuthed(
+    await mutate(
       async () =>
-        (
-          await axiosInstance.delete(ApiRoutes.BASKET, {
-            params: { productId },
-          })
-        ).data,
+        (await axiosInstance.delete(`${ApiRoutes.BASKET}/${productId}`)).data,
       { optimisticData: optimistic, rollbackOnError: true, revalidate: false },
     );
   };
@@ -136,10 +128,12 @@ export function useBasket() {
       clearLocal();
       return;
     }
-    await mutateAuthed(
-      async () => (await axiosInstance.delete(ApiRoutes.BASKET)).data,
-      { optimisticData: [], rollbackOnError: true, revalidate: false },
-    );
+    await axiosInstance.delete(ApiRoutes.BASKET);
+    mutate([], {
+      optimisticData: [],
+      rollbackOnError: true,
+      revalidate: false,
+    });
   };
 
   return {

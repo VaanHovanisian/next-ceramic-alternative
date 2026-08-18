@@ -22,7 +22,7 @@ export const BasketSyncer = () => {
     synced.current = true;
 
     if (basket.length === 0) {
-      mutate([ApiRoutes.BASKET, "authed"]);
+      mutate(ApiRoutes.BASKET);
       return;
     }
 
@@ -30,7 +30,7 @@ export const BasketSyncer = () => {
       try {
         await axiosInstance.post(ApiRoutes.BASKET_MERGE, basket);
         clearLocal();
-        mutate([ApiRoutes.BASKET, "authed"]);
+        mutate(ApiRoutes.BASKET);
       } catch (e) {
         console.error("basket merge failed", e);
         synced.current = false;

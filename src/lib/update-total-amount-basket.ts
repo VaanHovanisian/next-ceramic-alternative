@@ -17,5 +17,5 @@ export const updateTotalAmountBasket = async (userId: string) => {
     });
   }
 
-  return items;
+  return { items, totalAmount };
 };

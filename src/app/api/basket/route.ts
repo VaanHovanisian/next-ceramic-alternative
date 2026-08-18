@@ -65,8 +65,8 @@ export async function POST(req: NextRequest) {
       update: { quantity: { increment: quantity } },
     });
 
-    const items = await updateTotalAmountBasket(userId);
-    return NextResponse.json(items, { status: 200 });
+    const updateBasket = await updateTotalAmountBasket(userId);
+    return NextResponse.json(updateBasket, { status: 200 });
   } catch (error) {
     console.error("Server Internal Error POST /api/basket", error);
     return NextResponse.json(
@@ -85,8 +85,8 @@ export async function DELETE() {
     const basket = await findOrCreateBasket(userId);
     await prisma.basketCard.deleteMany({ where: { basketId: basket.id } });
 
-    const items = await updateTotalAmountBasket(userId);
-    return NextResponse.json(items, { status: 200 });
+    const updateBasket = await updateTotalAmountBasket(userId);
+    return NextResponse.json(updateBasket, { status: 200 });
   } catch (error) {
     console.error("Server Internal Error DELETE /api/basket", error);
     return NextResponse.json(

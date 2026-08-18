@@ -19,9 +19,9 @@ export async function POST(req: NextRequest) {
       localItems as { id: number; quantity: number }[],
       basket.id,
     );
-    const items = await updateTotalAmountBasket(userId);
+    const updateBasket = await updateTotalAmountBasket(userId);
 
-    return NextResponse.json(items, { status: 200 });
+    return NextResponse.json(updateBasket, { status: 200 });
   } catch (error) {
     console.error("Server Internal Error POST /api/basket/merge", error);
     return NextResponse.json(
