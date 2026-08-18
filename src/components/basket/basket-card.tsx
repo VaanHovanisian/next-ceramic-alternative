@@ -8,11 +8,13 @@ interface Props {
   className?: string;
   item: any;
   removeItem: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  incrementQuantity: () => void;
+  decrementQuantity: () => void;
 }
 
 export const BasketCard: React.FC<Props> = (props) => {
-  const { className, item, removeItem, updateQuantity } = props;
+  const { className, item, removeItem, incrementQuantity, decrementQuantity } =
+    props;
   return (
     <tr
       key={item.id}
@@ -43,11 +45,10 @@ export const BasketCard: React.FC<Props> = (props) => {
       <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
         ${item.price}
       </td>
-
       <td className="p-4">
         <div className="flex items-center justify-center border border-primary mx-auto h-12 bg-white">
           <button
-            onClick={() => updateQuantity(item.id, -1)}
+            onClick={decrementQuantity}
             className="px-2 text-primary hover:text-black"
           >
             <Minus className="w-3 h-3" />
@@ -56,7 +57,7 @@ export const BasketCard: React.FC<Props> = (props) => {
             {item.quantity}
           </span>
           <button
-            onClick={() => updateQuantity(item.id, 1)}
+            onClick={incrementQuantity}
             className="px-2 text-primary hover:text-black"
           >
             <Plus className="w-3 h-3" />
