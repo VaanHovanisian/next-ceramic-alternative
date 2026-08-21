@@ -12,7 +12,6 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
-import { useBasketStore } from "@/store/use-basket-store";
 import { toast } from "sonner";
 import { useBasket } from "@/hooks/use-basket";
 
@@ -27,7 +26,7 @@ export const Basket: React.FC<Props> = (props) => {
 
   const deleteAll = async () => {
     await clearBasket();
-    toast.success("delete all");
+    toast.success("clear basket");
   };
 
   return (
@@ -81,14 +80,14 @@ export const Basket: React.FC<Props> = (props) => {
               <tbody>
                 {basket.items?.map((item: any) => (
                   <BasketCard
-                    key={item.id}
+                    key={`${item.id}-${item.colorId}`}
                     item={item}
-                    removeItem={() => removeProduct(item.id)}
+                    removeItem={() => removeProduct(item.id, item.colorId)}
                     incrementQuantity={() =>
-                      updateProduct(item.id, "increment")
+                      updateProduct(item.id, item.colorId, "increment")
                     }
                     decrementQuantity={() =>
-                      updateProduct(item.id, "decrement")
+                      updateProduct(item.id, item.colorId, "decrement")
                     }
                   />
                 ))}

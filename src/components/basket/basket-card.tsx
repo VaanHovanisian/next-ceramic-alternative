@@ -7,7 +7,7 @@ import { Minus, Plus, X } from "lucide-react";
 interface Props {
   className?: string;
   item: any;
-  removeItem: (id: number) => void;
+  removeItem: () => void;
   incrementQuantity: () => void;
   decrementQuantity: () => void;
 }
@@ -17,7 +17,6 @@ export const BasketCard: React.FC<Props> = (props) => {
     props;
   return (
     <tr
-      key={item.id}
       className={cn(
         "border-b text-primary border-gray-200 align-middle",
         className,
@@ -25,7 +24,7 @@ export const BasketCard: React.FC<Props> = (props) => {
     >
       <td className="p-4 text-center">
         <button
-          onClick={() => removeItem(item.id)}
+          onClick={removeItem}
           className="text-red-400 hover:text-red-600 transition"
         >
           <X className="w-5 h-5 mx-auto" />

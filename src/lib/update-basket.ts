@@ -7,6 +7,7 @@ export const updateBasket = async (userId: string) => {
       basketCard: {
         include: {
           product: true,
+          color: true,
         },
       },
     },

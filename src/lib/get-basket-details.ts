@@ -7,6 +7,7 @@ export const getBasketDetails = (data: BasketDTO) => {
 
   const items = data.items.map((el) => ({
     id: el.id,
+    colorId: el.color.id,
     name: el.product.name,
     price: el.product.price,
     quantity: el.quantity,

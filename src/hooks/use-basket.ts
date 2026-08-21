@@ -5,7 +5,7 @@ import { fetcher } from "@/lib/fetcher";
 import { getBasketDetails } from "@/lib/get-basket-details";
 import { axiosInstance } from "@/lib/instance";
 import { useBasketStore } from "@/store/use-basket-store";
-import { Product } from "@prisma/client";
+import { Color, Product } from "@prisma/client";
 import useSWR from "swr";
 
 export const useBasket = () => {
@@ -20,40 +20,52 @@ export const useBasket = () => {
     items: basketLocal,
   } = useBasketStore();
 
-  const anonIds = basketLocal
-    .map((b) => b.id)
+  const anonIds = Array.from(new Set(basketLocal.map((b) => b.id)))
     .sort((a, b) => a - b)
     .join(",");
 
-  const {
-    data: authBasket,
-    mutate,
-    isLoading: authdLoading,
-  } = useSWR(isAuthed ? ApiRoutes.BASKET : null, fetcher);
-  console.log(authBasket, "authBasket");
+  const { data: authBasket, mutate } = useSWR(
+    isAuthed ? ApiRoutes.BASKET : null,
+    fetcher,
+  );
 
   const dataAuthBasket = getBasketDetails(authBasket) ?? {
     totalAmount: 0,
     items: [],
   };
-  console.log(dataAuthBasket, "dataAuthBasket");
 
-  const { data: anonProducts, isLoading: anonLoading } = useSWR<Product[]>(
+  const { data: anonProducts } = useSWR<(Product & { color: Color[] })[]>(
     !isAuthed && anonIds ? `${ApiRoutes.PRODUCTS}?ids=${anonIds}` : null,
     fetcher,
   );
 
-  const dataAnonBasket = anonProducts ?? [];
+  const productsById = new Map((anonProducts ?? []).map((p) => [p.id, p]));
 
-  const anonItems = dataAnonBasket.map((p) => {
-    const local = basketLocal.find((b) => b.id === p.id);
-    return { ...p, quantity: local?.quantity ?? 1, colorId: local?.colorId };
+  const anonItems = basketLocal.flatMap((b) => {
+    const p = productsById.get(b.id);
+    if (!p) return [];
+    const color = p.color?.find((c) => c.id === b.colorId);
+    return [
+      {
+        id: b.id,
+        colorId: b.colorId,
+        quantity: b.quantity,
+        name: p.name,
+        price: p.price,
+        imgUrl: p.imgUrl,
+        subtotal: p.price * b.quantity,
+        color,
+      },
+    ];
   });
   const total = anonItems.reduce((acc, el) => acc + el.price * el.quantity, 0);
   const basket = isAuthed
     ? dataAuthBasket
     : { items: anonItems, totalAmount: total };
-  const quantityBasket = basket.items.reduce((acc, el) => acc + el.quantity, 0);
+  const quantityBasket = isAuthed
+    ? dataAuthBasket.items.reduce((acc, el) => acc + el.quantity, 0)
+    : basketLocal.reduce((acc, el) => acc + el.quantity, 0);
+
   const addProduct = async (value: PostBasketValue) => {
     if (!isAuthed) {
       addItem(value.productId, value.quantity, value.colorId);
@@ -63,18 +75,22 @@ export const useBasket = () => {
     const updateData = (await axiosInstance.post(ApiRoutes.BASKET, value)).data;
     mutate(updateData, { populateCache: false });
   };
-  const removeProduct = async (id: number) => {
+  const removeProduct = async (id: number, colorId: number) => {
     if (!isAuthed) {
-      removeItem(id);
+      removeItem(id, colorId);
       return;
     }
     const updateData = (await axiosInstance.delete(`${ApiRoutes.BASKET}/${id}`))
       .data;
     mutate(updateData, { populateCache: false });
   };
-  const updateProduct = async (id: number, type: "increment" | "decrement") => {
+  const updateProduct = async (
+    id: number,
+    colorId: number,
+    type: "increment" | "decrement",
+  ) => {
     if (!isAuthed) {
-      updateItem(id, type);
+      updateItem(id, colorId, type);
       return;
     }
 

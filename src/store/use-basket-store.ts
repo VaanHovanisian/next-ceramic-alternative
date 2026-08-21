@@ -6,8 +6,12 @@ interface BasketStateStore {
   items: BasketItemLocal[];
   quantity: number;
   addItem: (productId: number, quantity: number, colorId: number) => void;
-  removeItem: (id: number) => void;
-  updateItem: (id: number, type: "increment" | "decrement") => void;
+  removeItem: (id: number, colorId: number) => void;
+  updateItem: (
+    id: number,
+    colorId: number,
+    type: "increment" | "decrement",
+  ) => void;
   deleteAllItems: () => void;
 }
 
@@ -18,11 +22,13 @@ export const useBasketStore = create<BasketStateStore>()(
       quantity: 0,
       addItem: (id, qty, colorId) => {
         set((state) => {
-          const existing = state.items.find((el) => el.id === id);
+          const existing = state.items.find(
+            (el) => el.id === id && el.colorId === colorId,
+          );
           const items = existing
             ? state.items.map((el) =>
-                el.id === id
-                  ? { ...el, colorId, quantity: el.quantity + qty }
+                el.id === id && el.colorId === colorId
+                  ? { ...el, quantity: el.quantity + qty }
                   : el,
               )
             : [...state.items, { id, colorId, quantity: qty }];
@@ -30,31 +36,28 @@ export const useBasketStore = create<BasketStateStore>()(
           return { items, quantity };
         });
       },
-      updateItem: (id, type) => {
+      updateItem: (id, colorId, type) => {
         set((state) => {
-          const existing = state.items.find((el) => el.id === id);
-          const items = existing
-            ? state.items.map((el) =>
-                el.id === id
-                  ? {
-                      ...el,
-                      quantity:
-                        type === "increment"
-                          ? el.quantity + 1
-                          : el.quantity === 1
-                            ? 1
-                            : el.quantity - 1,
-                    }
-                  : el,
-              )
-            : [...state.items];
+          const items = state.items.map((el) =>
+            el.id === id && el.colorId === colorId
+              ? {
+                  ...el,
+                  quantity:
+                    type === "increment"
+                      ? el.quantity + 1
+                      : Math.max(1, el.quantity - 1),
+                }
+              : el,
+          );
           const quantity = items.reduce((acc, el) => acc + el.quantity, 0);
           return { items, quantity };
         });
       },
-      removeItem: (id) => {
+      removeItem: (id, colorId) => {
         set((state) => {
-          const items = state.items.filter((el) => el.id !== id);
+          const items = state.items.filter(
+            (el) => !(el.id === id && el.colorId === colorId),
+          );
           const quantity = items.reduce((acc, el) => acc + el.quantity, 0);
           return { items, quantity };
         });
