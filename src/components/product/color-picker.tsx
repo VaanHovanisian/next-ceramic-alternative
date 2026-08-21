@@ -2,13 +2,15 @@
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { GetColorName } from "hex-color-to-color-name";
+import { Color } from "@prisma/client";
 
 interface Props {
   className?: string;
-  color: Array<{ name: string; id: number }>;
+  color: Array<Color>;
+  setActiveColor: (color: number) => void;
 }
 export const ColorPicker: React.FC<Props> = (props) => {
-  const { className, color } = props;
+  const { className, color, setActiveColor } = props;
   const [selectedColor, setSelectedColor] = useState(color[0].name);
 
   return (
@@ -26,7 +28,10 @@ export const ColorPicker: React.FC<Props> = (props) => {
         {color.map((c) => (
           <li key={c.id}>
             <button
-              onClick={() => setSelectedColor(c.name)}
+              onClick={() => {
+                setSelectedColor(c.name);
+                setActiveColor(c.id);
+              }}
               style={{ backgroundColor: c.name }}
               className={`
                 w-9 h-9

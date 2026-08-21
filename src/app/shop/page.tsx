@@ -1,18 +1,19 @@
 import { Shop } from "@/components/shop";
 import { getFilterProducts, GetSearchParams } from "@/lib/get-filter-products";
 import { getFilterShop } from "@/lib/get-filter-shop";
+import { Suspense } from "react";
+
 interface SearchParamsProps {
   searchParams: Promise<GetSearchParams>;
 }
 
-export default async function ShopPage({ searchParams }: SearchParamsProps) {
+async function ShopData({ searchParams }: SearchParamsProps) {
   const filter = await getFilterShop();
   const { products, count, page, totalPages } = await getFilterProducts(
     await searchParams,
     filter.priceRange,
   );
   return (
-    // <Suspense>
     <Shop
       count={count}
       page={page}
@@ -20,6 +21,13 @@ export default async function ShopPage({ searchParams }: SearchParamsProps) {
       products={products}
       filter={filter}
     />
-    // </Suspense>
+  );
+}
+
+export default function ShopPage({ searchParams }: SearchParamsProps) {
+  return (
+    <Suspense>
+      <ShopData searchParams={searchParams} />
+    </Suspense>
   );
 }

@@ -1,25 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useBasketStore } from "@/store/use-basket-store";
 import { toast } from "sonner";
-import { Product } from "@prisma/client";
+import { Color, Product } from "@prisma/client";
+import { useBasket } from "@/hooks/use-basket";
 
 interface Props {
   className?: string;
-  product: Product;
+  product: Product & { color: Color[] };
 }
 
 export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
 
-  const addItem = useBasketStore((state) => state.addItem);
+  const { addProduct } = useBasket();
 
-  const addToBasket = () => {
-    addItem(product.id, 1);
+  const addToBasket = async () => {
+    await addProduct({
+      productId: product.id,
+      quantity: 1,
+      colorId: product.color[0].id,
+    });
     toast.success("success add to basket");
   };
 

@@ -1,15 +1,11 @@
+import { BasketItemLocal } from "@/@types/basket";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface BasketItem {
-  id: number;
-  quantity: number;
-}
-
 interface BasketStateStore {
-  basket: BasketItem[];
+  items: BasketItemLocal[];
   quantity: number;
-  addItem: (id: number, qty: number) => void;
+  addItem: (productId: number, quantity: number, colorId: number) => void;
   removeItem: (id: number) => void;
   updateItem: (id: number, type: "increment" | "decrement") => void;
   deleteAllItems: () => void;
@@ -18,25 +14,27 @@ interface BasketStateStore {
 export const useBasketStore = create<BasketStateStore>()(
   persist(
     (set) => ({
-      basket: [],
+      items: [],
       quantity: 0,
-      addItem: (id, qty = 1) => {
+      addItem: (id, qty, colorId) => {
         set((state) => {
-          const existing = state.basket.find((el) => el.id === id);
-          const basket = existing
-            ? state.basket.map((el) =>
-                el.id === id ? { ...el, quantity: el.quantity + qty } : el,
+          const existing = state.items.find((el) => el.id === id);
+          const items = existing
+            ? state.items.map((el) =>
+                el.id === id
+                  ? { ...el, colorId, quantity: el.quantity + qty }
+                  : el,
               )
-            : [...state.basket, { id, quantity: qty }];
-          const quantity = basket.reduce((acc, el) => acc + el.quantity, 0);
-          return { basket, quantity };
+            : [...state.items, { id, colorId, quantity: qty }];
+          const quantity = items.reduce((acc, el) => acc + el.quantity, 0);
+          return { items, quantity };
         });
       },
       updateItem: (id, type) => {
         set((state) => {
-          const existing = state.basket.find((el) => el.id === id);
-          const basket = existing
-            ? state.basket.map((el) =>
+          const existing = state.items.find((el) => el.id === id);
+          const items = existing
+            ? state.items.map((el) =>
                 el.id === id
                   ? {
                       ...el,
@@ -49,20 +47,20 @@ export const useBasketStore = create<BasketStateStore>()(
                     }
                   : el,
               )
-            : [...state.basket];
-          const quantity = basket.reduce((acc, el) => acc + el.quantity, 0);
-          return { basket, quantity };
+            : [...state.items];
+          const quantity = items.reduce((acc, el) => acc + el.quantity, 0);
+          return { items, quantity };
         });
       },
       removeItem: (id) => {
         set((state) => {
-          const basket = state.basket.filter((el) => el.id !== id);
-          const quantity = basket.reduce((acc, el) => acc + el.quantity, 0);
-          return { basket, quantity };
+          const items = state.items.filter((el) => el.id !== id);
+          const quantity = items.reduce((acc, el) => acc + el.quantity, 0);
+          return { items, quantity };
         });
       },
       deleteAllItems: () => {
-        set(() => ({ basket: [], quantity: 0 }));
+        set(() => ({ items: [], quantity: 0 }));
       },
     }),
     { name: "basket" },

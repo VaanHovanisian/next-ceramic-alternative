@@ -14,12 +14,12 @@ import {
 } from "../ui/breadcrumb";
 import { Sidebar } from "lucide-react";
 import { ShopFilterSidebar } from "./shop-filter-sidebar";
-import { Product } from "@prisma/client";
+import { Color, Product } from "@prisma/client";
 import { ShopPagination } from "./shop-pagination";
 
 interface Props {
   className?: string;
-  products: Product[];
+  products: (Product & { color: Color[] })[];
   filter: any;
   page: number;
   totalPages: number;
@@ -28,6 +28,7 @@ interface Props {
 
 export const Shop: React.FC<Props> = (props) => {
   const { className, products, filter, page, totalPages, count } = props;
+
   return (
     <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">

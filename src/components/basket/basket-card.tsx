@@ -48,6 +48,7 @@ export const BasketCard: React.FC<Props> = (props) => {
       <td className="p-4">
         <div className="flex items-center justify-center border border-primary mx-auto h-12 bg-white">
           <button
+            disabled={item.quantity <= 1}
             onClick={decrementQuantity}
             className="px-2 text-primary hover:text-black"
           >

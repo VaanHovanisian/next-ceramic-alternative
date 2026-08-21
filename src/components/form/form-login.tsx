@@ -11,6 +11,7 @@ import {
 } from "@/constants/form-schema/auth.schema";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
+// import { useBasket } from "@/hooks/use-basket";
 
 interface Props {
   className?: string;
@@ -18,7 +19,7 @@ interface Props {
 
 export const FormLogin: React.FC<Props> = (props) => {
   const { className } = props;
-
+  // const { basketSyncer } = useBasket();
   const form = useForm<AuthLoginSchemaType>({
     resolver: zodResolver(authLoginSchema),
     defaultValues: {
@@ -36,6 +37,7 @@ export const FormLogin: React.FC<Props> = (props) => {
         onSuccess() {
           toast.success("Success Login");
           form.reset();
+          // basketSyncer();
         },
         onError(error) {
           console.log(error);

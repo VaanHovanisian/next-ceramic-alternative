@@ -44,8 +44,9 @@ export const basketMerge = async (
           basketId: basket.id,
           productId: el.productId,
           colorId: el.colorId,
+          quantity: el.quantity,
         },
-        update: { quantity: el.quantity },
+        update: { quantity: { increment: el.quantity } },
       }),
     ),
   );

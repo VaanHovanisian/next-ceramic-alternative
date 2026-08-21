@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -11,22 +13,30 @@ import { ProductImage } from "./product-image";
 import { Container } from "../container";
 import { ProductContent } from "./product-content";
 import { Catalog } from "../catalog";
-import { productIdes } from "@/constants/products";
+import { Color, Product as ProductType } from "@prisma/client";
+import { useBasket } from "@/hooks/use-basket";
+import { toast } from "sonner";
 
 interface Props {
   className?: string;
-  product: {
-    id: number;
-    name: string;
-    price: number;
-    imgUrl: string;
-    images: string[];
-    color: Array<{ name: string; id: number }>;
-  };
+  popularItems: (ProductType & { color: Color[] })[];
+  product: ProductType & { color: Color[] };
 }
 
 export const Product: React.FC<Props> = (props) => {
-  const { className, product } = props;
+  const { className, product, popularItems } = props;
+  const { addProduct } = useBasket();
+  const [count, setCount] = React.useState(1);
+  const [colorId, setColorId] = React.useState(product.color[0].id);
+
+  const addToBasket = async () => {
+    try {
+      await addProduct({ productId: product.id, quantity: count, colorId });
+    } catch (error) {
+      console.error(error);
+      toast.error("failed to basket");
+    }
+  };
 
   return (
     <>
@@ -60,12 +70,16 @@ export const Product: React.FC<Props> = (props) => {
             color={product.color}
             name={product.name}
             price={product.price}
+            count={count}
+            setCount={setCount}
+            setActiveColor={setColorId}
+            addToBasket={addToBasket}
           />
         </div>
       </Container>
       <Catalog
         className="text-start"
-        items={productIdes.slice(0, 4)}
+        items={popularItems}
         title="Similar Items"
       />
     </>

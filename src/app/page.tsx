@@ -1,16 +1,15 @@
-"use cache";
 import { Home } from "@/components/home";
 import { prisma } from "@/prisma/prisma-client";
-import { cacheLife, cacheTag } from "next/cache";
-import { Suspense } from "react";
+import { unstable_cache } from "next/cache";
 
 export default async function HomePage() {
-  cacheLife("weeks");
-  cacheTag("home");
-  const products = await prisma.product.findMany();
-  return (
-    <Suspense>
-      <Home products={products} />
-    </Suspense>
-  );
+  const products = await unstable_cache(
+    async () =>
+      await prisma.product.findMany({
+        include: { color: true },
+      }),
+    ["home"],
+    { revalidate: 3600, tags: ["home"] },
+  )();
+  return <Home products={products} />;
 }

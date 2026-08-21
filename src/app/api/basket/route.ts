@@ -11,8 +11,10 @@ export async function GET() {
       return NextResponse.json({ totalAmount: 0, items: [] }, { status: 200 });
     }
     const userId = user.id;
-    const basket = updateBasket(userId);
-    return NextResponse.json(basket, { status: 200 });
+    const basket = await updateBasket(userId);
+    return NextResponse.json(basket ?? { totalAmount: 0, items: [] }, {
+      status: 200,
+    });
   } catch (error) {
     console.error("Internal Server Error GET BASKET " + error);
     return NextResponse.json(

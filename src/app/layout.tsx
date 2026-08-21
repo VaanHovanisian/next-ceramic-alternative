@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/header/header";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
+import { BasketSyncer } from "@/components/basket/basket-syncer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,6 +36,7 @@ export default function RootLayout({
     >
       <body className="h-full">
         <Header />
+        <BasketSyncer />
         {children}
         <Footer />
         <Toaster />

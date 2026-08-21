@@ -6,11 +6,11 @@ import { PlateServices } from "./plate-services";
 import { Post } from "./post";
 import { servicesHome } from "@/constants/services";
 import { Title } from "./title";
-import { Product } from "@prisma/client";
+import { Color, Product } from "@prisma/client";
 
 interface Props {
   className?: string;
-  products: Product[];
+  products: (Product & { color: Color[] })[];
 }
 
 export const Home: React.FC<Props> = (props) => {
