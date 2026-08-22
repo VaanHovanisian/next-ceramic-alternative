@@ -3,8 +3,8 @@ model Color {
 
   name String
 
-  product Product[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  product    Product[]
+  basketCard BasketCard[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 }

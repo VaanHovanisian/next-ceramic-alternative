@@ -9,6 +9,11 @@ model BasketCard {
   product   Product @relation(fields: [productId], references: [id])
   productId Int
 
+  color   Color @relation(fields: [colorId], references: [id])
+  colorId Int
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([basketId, productId, colorId])
 }

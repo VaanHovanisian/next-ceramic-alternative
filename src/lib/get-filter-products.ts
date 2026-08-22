@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/prisma-client";
 import { PriceRange } from "@prisma/client";
-import { cacheLife, cacheTag } from "next/cache";
+// import { cacheLife, cacheTag } from "next/cache";
 
 export interface GetSearchParams {
   category: string;
@@ -10,14 +10,15 @@ export interface GetSearchParams {
   page: string;
   limit?: string;
 }
-
+const LIMIT = 6;
 export const getFilterProducts = async (
   params: GetSearchParams,
   priceRange: PriceRange[],
 ) => {
-  "use cache";
-  cacheLife("hours");
-  cacheTag("filter-products");
+  // "use cache";
+  // cacheLife("hours");
+  // cacheTag("filter-products");
+  const page = params.page ? Number(params.page) : 1;
   const category = params.category
     ? params.category.split(",").map(Number)
     : undefined;
@@ -35,24 +36,31 @@ export const getFilterProducts = async (
     ? params.sort.split("_")
     : ["id", "asc"];
 
-  const products = await prisma.product.findMany({
-    orderBy: {
-      [sortKey]: sortValue,
-    },
-    where: {
-      price: {
-        gte: from,
-        lte: to || undefined,
+  const [products, count] = await Promise.all([
+    prisma.product.findMany({
+      orderBy: {
+        [sortKey]: sortValue,
       },
-      category: {
-        id: { in: category },
-      },
-      color: {
-        some: {
-          id: { in: color },
+      take: LIMIT,
+      skip: (page - 1) * LIMIT,
+      where: {
+        price: {
+          gte: from,
+          lte: to || undefined,
+        },
+        category: {
+          id: { in: category },
+        },
+        color: {
+          some: {
+            id: { in: color },
+          },
         },
       },
-    },
-  });
-  return products;
+    }),
+    prisma.product.count(),
+  ]);
+  const totalPages = Math.ceil(count / LIMIT);
+
+  return { products, count, totalPages, page };
 };

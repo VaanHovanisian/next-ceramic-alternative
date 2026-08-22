@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 model Category {
   id Int @id @default(autoincrement())
 
@@ -7,4 +8,14 @@ model Category {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+=======
+model Category{
+	id Int @id @default(autoincrement())
+
+    name String
+    product Product[]
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+>>>>>>> 855627fb70e37f5429500e054767eff1d2ed6bf0
 }
