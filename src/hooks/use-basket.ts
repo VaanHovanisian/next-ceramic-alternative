@@ -1,1 +1,79 @@
-export const useBasket = () => {};
+import { PostBasketValue } from "@/@types/basket";
+import { ApiRoutes } from "@/constants/api-routes";
+import { useSession } from "@/lib/auth-client";
+import { fetcher } from "@/lib/fetcher";
+import { axiosInstance } from "@/lib/instance";
+import { useBasketStore } from "@/store/use-basket-store";
+import useSWR from "swr";
+
+export const useBasket = () => {
+  const { data } = useSession();
+  const isAuthed = !!data?.session;
+  const { addItem, basket, deleteAllItems, quantity, removeItem, updateItem } =
+    useBasketStore();
+
+  const anonIds = basket.map((el) => Number(el.id)).join(",");
+
+  const { data: anonProducts, isLoading } = useSWR(
+    !isAuthed ? `${ApiRoutes.PRODUCTS}?ids=${anonIds}` : null,
+    fetcher,
+  );
+
+  const dataAnonBasket = anonProducts ?? { items: [], totalAmount: 0 };
+
+  const {
+    data: authProducts,
+    isLoading: authBasketLoading,
+    mutate,
+  } = useSWR(isAuthed ? ApiRoutes.BASKET : null, fetcher);
+
+  const dataAuthBasket = authProducts ?? { items: [], totalAmount: 0 };
+
+  const basketItems = isAuthed ? dataAuthBasket : dataAnonBasket;
+
+  const addProduct = async (value: PostBasketValue) => {
+    if (!isAuthed) {
+      addItem(value.productId, value.quantity, value.colorId);
+      return;
+    }
+    const updateData = await axiosInstance.post(ApiRoutes.BASKET, value);
+    mutate(updateData);
+  };
+
+  const removeProduct = async (id: number) => {
+    if (!isAuthed) {
+      removeItem(id);
+      return;
+    }
+    const updateData = await axiosInstance.delete(`${ApiRoutes.BASKET}/${id}`);
+    mutate(updateData);
+  };
+
+  const updateProduct = async (id: number, type: "increment" | "decrement") => {
+    if (!isAuthed) {
+      updateItem(id, type);
+      return;
+    }
+    const updateData = await axiosInstance.patch(`${ApiRoutes.BASKET}/${id}`, {
+      type,
+    });
+    mutate(updateData);
+  };
+
+  const clearBasket = async () => {
+    if (!isAuthed) {
+      deleteAllItems();
+      return;
+    }
+    const updateData = await axiosInstance.delete(ApiRoutes.BASKET);
+    mutate(updateData);
+  };
+
+  return {
+    basket: basketItems,
+    addProduct,
+    removeProduct,
+    updateProduct,
+    clearBasket,
+  };
+};
