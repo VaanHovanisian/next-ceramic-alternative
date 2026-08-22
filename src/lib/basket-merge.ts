@@ -29,6 +29,7 @@ export const basketMerge = async (
   if (items.length === 0) {
     return;
   }
+
   await prisma.$transaction(
     items.map((el) =>
       prisma.basketCard.upsert({
@@ -39,7 +40,12 @@ export const basketMerge = async (
             colorId: el.colorId,
           },
         },
-        create: {},
+        create: {
+          basketId: basket.id,
+          productId: el.productId,
+          colorId: el.colorId,
+        },
+        update: { quantity: el.quantity },
       }),
     ),
   );

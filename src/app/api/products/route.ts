@@ -17,6 +17,9 @@ export async function GET(req: NextRequest) {
         where: {
           id: { in: ids },
         },
+        include: {
+          color: true,
+        },
       });
 
       return NextResponse.json(productsItems, { status: 200 });
