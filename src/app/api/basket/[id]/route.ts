@@ -53,7 +53,7 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     if (quantityType === "increment") {
       await prisma.basketCard.update({
         where: { id },
-        data: { quantity: { increment: findBasketCard.quantity + 1 } },
+        data: { quantity: { increment:1 } },
       });
     }
     if (quantityType === "decrement" && findBasketCard.quantity > 1) {
