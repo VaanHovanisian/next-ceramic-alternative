@@ -45,7 +45,6 @@ export const BasketCard: React.FC<Props> = (props) => {
       <td className="p-4 font-semibold text-[14px] tracking-[0.06em] leading-[143%] uppercase">
         ${item.price}
       </td>
-
       <td className="p-4">
         <div className="flex items-center justify-center border border-primary mx-auto h-12 bg-white">
           <button

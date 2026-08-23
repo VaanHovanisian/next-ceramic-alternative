@@ -12,7 +12,7 @@ export const updateBasket = async (userId: string) => {
     },
   });
   if (!basket) return;
-  const totalAmount = basket.basketCard.reduceRight(
+  const totalAmount = basket.basketCard.reduce(
     (acc, el) => acc + el.product.price * el.quantity,
     0,
   );

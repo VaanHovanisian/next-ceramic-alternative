@@ -11,20 +11,22 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const userId = user.id;
-    const ParamsId = (await params).id;
-    if (!ParamsId) {
+    const paramsId = (await params).id;
+    if (!paramsId) {
       return NextResponse.json(
-        { error: "paraps id bad request" },
+        { error: "params id bad request" },
         { status: 400 },
       );
     }
-    const id = Number(ParamsId);
+    const id = Number(paramsId);
     const body = (await req.json()) as {
       quantityType: "increment" | "decrement";
     };
+
     if (!body) {
       return NextResponse.json({ error: "bad request" }, { status: 400 });
     }
+
     if (
       !("quantityType" in body) ||
       (body.quantityType !== "increment" && body.quantityType !== "decrement")
@@ -45,25 +47,26 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     if (quantityType === "increment") {
       await prisma.basketCard.update({
         where: { id },
-        data: { quantity: { increment: 1 } },
+        data: { quantity: { increment: findBasketCard.quantity + 1 } },
       });
     }
     if (quantityType === "decrement" && findBasketCard.quantity > 1) {
       await prisma.basketCard.update({
         where: { id },
-        data: { quantity: { increment: 1 } },
+        data: { quantity: { decrement: findBasketCard.quantity - 1 } },
       });
     }
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error PATCH BASKET" + error);
+    console.error("Internal Server Error PATCH BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 200 },
+      { status: 500 },
     );
   }
 }
+
 export async function DELETE(_: NextRequest, { params }: ParamsProps) {
   try {
     const user = await getUser();
@@ -71,14 +74,14 @@ export async function DELETE(_: NextRequest, { params }: ParamsProps) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const userId = user.id;
-    const ParamsId = (await params).id;
-    if (!ParamsId) {
+    const paramsId = (await params).id;
+    if (!paramsId) {
       return NextResponse.json(
-        { error: "paraps id bad request" },
+        { error: "params id bad request" },
         { status: 400 },
       );
     }
-    const id = Number(ParamsId);
+    const id = Number(paramsId);
 
     const findBasketCard = await prisma.basketCard.findUnique({
       where: { id },
@@ -97,10 +100,10 @@ export async function DELETE(_: NextRequest, { params }: ParamsProps) {
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error DELETE BASKET" + error);
+    console.error("Internal Server Error DELETE BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 200 },
+      { status: 500 },
     );
   }
 }

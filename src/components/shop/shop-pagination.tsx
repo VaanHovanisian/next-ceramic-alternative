@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePagination } from "@/hooks/use-pagination";
 
 interface Props {

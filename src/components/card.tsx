@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useBasketStore } from "@/store/use-basket-store";
 import { toast } from "sonner";
-import { success } from "zod";
 import { Product } from "@prisma/client";
 
 interface Props {
@@ -16,6 +15,13 @@ interface Props {
 
 export const Card: React.FC<Props> = (props) => {
   const { className, product } = props;
+  const addItem = useBasketStore((state) => state.addItem);
+
+  const addToBasket = () => {
+    addItem(product.id, 1);
+    toast.success("success add to basket");
+  };
+
   const addItem = useBasketStore((state) => state.addItem);
 
   const addToBasket = () => {

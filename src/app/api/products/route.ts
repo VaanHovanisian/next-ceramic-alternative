@@ -17,20 +17,34 @@ export async function GET(req: NextRequest) {
         where: {
           id: { in: ids },
         },
-        include: {
-          color: true,
-        },
       });
 
       return NextResponse.json(productsItems, { status: 200 });
     }
 
     const limit = req.nextUrl.searchParams.get("limit");
+<<<<<<< HEAD
     const search = req.nextUrl.searchParams.get("search") || " ";
     const products = await prisma.product.findMany({
       where: {
         name: {
           contains: search,
+=======
+<<<<<<< HEAD
+    const search = req.nextUrl.searchParams.get("search") || "";
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          // contains: search,
+          startsWith: search,
+=======
+    const search = req.nextUrl.searchParams.get("search") || " ";
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: search,
+>>>>>>> 855627fb70e37f5429500e054767eff1d2ed6bf0
+>>>>>>> Tagavor
           mode: "insensitive",
         },
       },
@@ -38,7 +52,11 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
+<<<<<<< HEAD
     console.error("Internal Server Error " + error);
+=======
+    console.error("Internal Server Error GET PRODUCTS" + error);
+>>>>>>> Tagavor
     return NextResponse.json(
       { message: "Internal Serever Error" },
       { status: 500 },

@@ -2,7 +2,6 @@ import { PostBasketValue } from "@/@types/basket";
 import { getUser } from "@/lib/get-user";
 import { updateBasket } from "@/lib/update-basket";
 import { prisma } from "@/prisma/prisma-client";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -15,14 +14,13 @@ export async function GET() {
     const basket = updateBasket(userId);
     return NextResponse.json(basket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error GET BASKET" + error);
+    console.error("Internal Server Error GET BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 200 },
+      { status: 500 },
     );
   }
 }
-
 export async function POST(req: NextRequest) {
   try {
     const user = await getUser();
@@ -43,7 +41,7 @@ export async function POST(req: NextRequest) {
       !Number.isFinite(quantity)
     ) {
       return NextResponse.json(
-        { error: "productId | colorId bad request" },
+        { error: "productId | colorId | quantity bad request" },
         { status: 400 },
       );
     }
@@ -52,13 +50,14 @@ export async function POST(req: NextRequest) {
       select: { id: true },
     });
     if (!product) {
-      return NextResponse.json({ error: "product not found" }, { status: 400 });
+      return NextResponse.json({ error: "product not found" }, { status: 404 });
     }
     const basket = await prisma.basket.findUnique({
       where: { userId },
     });
+
     if (!basket) {
-      return NextResponse.json({ error: "basket not found" }, { status: 400 });
+      return NextResponse.json({ error: "basket not found" }, { status: 404 });
     }
 
     await prisma.basketCard.upsert({
@@ -68,17 +67,16 @@ export async function POST(req: NextRequest) {
       update: { quantity: { increment: quantity } },
       create: { basketId: basket.id, productId, colorId, quantity },
     });
-    const upBasket = updateBasket(userId);
+    const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error GET POST BASKET" + error);
+    console.error("Internal Server Error POST BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 200 },
+      { status: 500 },
     );
   }
 }
-
 export async function DELETE() {
   try {
     const user = await getUser();
@@ -90,18 +88,18 @@ export async function DELETE() {
       where: { userId },
     });
     if (!findBasket) {
-      return NextResponse.json({ error: "basket not found" }, { status: 400 });
+      return NextResponse.json({ error: "basket not found" }, { status: 404 });
     }
     await prisma.basketCard.deleteMany({
       where: { basketId: findBasket.id },
     });
-    const upBasket = updateBasket(userId);
+    const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error CLEAR BASKET" + error);
+    console.error("Internal Server Error CLEAR BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 200 },
+      { status: 500 },
     );
   }
 }

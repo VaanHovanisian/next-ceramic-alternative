@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
+import { BasketCard } from "./basket-card";
 import { BasketTotal } from "./basket-total";
 import {
   Breadcrumb,
@@ -12,7 +13,6 @@ import {
 } from "../ui/breadcrumb";
 import { useBasketStore } from "@/store/use-basket-store";
 import { getBasket } from "@/lib/get-basket";
-import { BasketCard } from "./basket-card";
 import { toast } from "sonner";
 
 interface Props {
@@ -22,9 +22,9 @@ interface Props {
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
   const [data, setData] = React.useState([]);
-  const [totalAmount, setTotoalAmount] = React.useState(0);
   const { basket, removeItem, updateItem, quantity, deleteAllItems } =
     useBasketStore();
+
   React.useEffect(() => {
     const fetchData = async () => {
       const items = await getBasket(basket.map((el) => el.id));
@@ -44,7 +44,9 @@ export const Basket: React.FC<Props> = (props) => {
     deleteAllItems();
     toast.success("delete all");
   };
-  const total = data.reduce((acc, el) => acc + el.price + el.quantity, 0);
+
+  const total = data.reduce((acc, el) => acc + el.price * el.quantity, 0);
+
   return (
     <div
       className={cn(
@@ -92,13 +94,11 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item) => (
+                {data?.map((item) => (
                   <BasketCard
                     key={item.id}
                     item={item}
-                    removeItem={() => {
-                      removeItem(item.id);
-                    }}
+                    removeItem={() => removeItem(item.id)}
                     incrementQuantity={() => updateItem(item.id, "increment")}
                     decrementQuantity={() => updateItem(item.id, "decrement")}
                   />
