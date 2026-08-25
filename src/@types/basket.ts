@@ -3,3 +3,9 @@ export type PostBasketValue = {
   quantity: number;
   colorId: number;
 };
+
+export interface BasketItem {
+  id: number;
+  quantity: number;
+  colorId: number;
+}
