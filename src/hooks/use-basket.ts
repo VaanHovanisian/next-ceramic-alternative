@@ -19,7 +19,28 @@ export const useBasket = () => {
     fetcher,
   );
 
+  const dataAnon = anonProducts?.map((el) => {
+    const existing = basket.find((item) => item.id === el.id);
+    if (!existing) {
+      return [];
+    }
+    return {
+      id: el.id,
+      colorId: existing.colorId,
+      quantity: existing.quantity,
+      name: el.name,
+      price: el.price,
+      imgUrl: el.imgUrl,
+      subtotal: el.price * existing.quantity,
+      color: [],
+    };
+  });
+
   const dataAnonBasket = anonProducts ?? { items: [], totalAmount: 0 };
+  const totalAmountAnon = dataAnon?.reduce(
+    (acc, el) => acc + el.price * el.quantity,
+    0,
+  );
 
   const {
     data: authProducts,
@@ -29,7 +50,13 @@ export const useBasket = () => {
 
   const dataAuthBasket = authProducts ?? { items: [], totalAmount: 0 };
 
-  const basketItems = isAuthed ? dataAuthBasket : dataAnonBasket;
+  const basketItems = isAuthed
+    ? dataAuthBasket
+    : { items: dataAnon, totalAmount: totalAmountAnon };
+
+  const quantityBasket = isAuthed
+    ? dataAuthBasket.items?.reduce((acc, el) => acc + el.quantity, 0)
+    : basket?.reduce((acc, el) => acc + el.quantity, 0);
 
   const addProduct = async (value: PostBasketValue) => {
     if (!isAuthed) {
@@ -70,6 +97,7 @@ export const useBasket = () => {
   };
 
   return {
+    quantity: quantityBasket,
     basket: basketItems,
     addProduct,
     removeProduct,

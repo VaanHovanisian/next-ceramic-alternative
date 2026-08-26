@@ -13,7 +13,7 @@ export const BasketTotal: React.FC<Props> = (props) => {
     <div className={cn("bg-primary px-12.5 py-10 max-w-135 w-full", className)}>
       <div className="flex justify-between items-center mb-10 text-base font-semibold leading-[138%] text-white">
         <span className="">Cart totals</span>
-        <span className="">${totalAmount.toFixed(2)}</span>
+        <span className="">${totalAmount?.toFixed(2)}</span>
       </div>
       <Link
         href="/checkout"
