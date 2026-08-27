@@ -1,11 +1,4 @@
 import { Shop } from "@/components/shop";
-<<<<<<< HEAD
-import { prisma } from "@/prisma/prisma-client";
-
-export default async function ShopPage() {
-  const products = await prisma.product.findMany();
-  return <Shop products={products} />;
-=======
 import { getFilterProducts, GetSearchParams } from "@/lib/get-filter-products";
 import { getFilterShop } from "@/lib/get-filter-shop";
 interface SearchParamsProps {
@@ -29,5 +22,4 @@ export default async function ShopPage({ searchParams }: SearchParamsProps) {
     />
     // </Suspense>
   );
->>>>>>> Tagavor
 }

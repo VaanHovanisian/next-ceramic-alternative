@@ -20,12 +20,6 @@ import { ShopPagination } from "./shop-pagination";
 interface Props {
   className?: string;
   products: Product[];
-<<<<<<< HEAD
-}
-
-export const Shop: React.FC<Props> = (props) => {
-  const { className, products } = props;
-=======
   filter: any;
   page: number;
   totalPages: number;
@@ -34,7 +28,6 @@ export const Shop: React.FC<Props> = (props) => {
 
 export const Shop: React.FC<Props> = (props) => {
   const { className, products, filter, page, totalPages, count } = props;
->>>>>>> Tagavor
   return (
     <Container className={cn("", className)}>
       <Breadcrumb className="pt-5 pb-12.5">
@@ -58,10 +51,7 @@ export const Shop: React.FC<Props> = (props) => {
             <ShopSort className="ml-auto w-fit" />
           </div>
           <Catalog className="grow pt-0" items={products} />
-<<<<<<< HEAD
-=======
           <ShopPagination currentPage={page} totalPages={totalPages} />
->>>>>>> Tagavor
         </div>
       </div>
     </Container>
