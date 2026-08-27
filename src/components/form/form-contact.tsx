@@ -37,12 +37,7 @@ export const FormContact: React.FC<Props> = (props) => {
       toast.success("Success send");
     } catch (error) {
       console.log(error);
-      toast.error(
-        "failed send" +
-          (error instanceof Error
-            ? error.message
-            : "An unexpected error occurred"),
-      );
+      toast.error("failed send " + error);
     } finally {
       form.reset();
     }

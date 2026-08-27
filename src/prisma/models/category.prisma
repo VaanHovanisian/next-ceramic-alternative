@@ -1,10 +1,9 @@
-model Category {
-  id Int @id @default(autoincrement())
+model Category{
+	id Int @id @default(autoincrement())
 
-  name String
-
-  product Product[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    name String
+    product Product[]
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

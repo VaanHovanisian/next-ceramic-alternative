@@ -20,7 +20,7 @@ export const sendMessageContactAction = async (
     data,
   });
   await sendEmail({
-    to: "tig100tig@gmail.com",
+    to: "vaa.hovanisyan@gmail.com",
     subject: "Next Ceramic new Contact",
     react: ContactTemplate(data),
   });
