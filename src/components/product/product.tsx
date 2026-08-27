@@ -56,6 +56,7 @@ export const Product: React.FC<Props> = (props) => {
             images={product.images}
           />
           <ProductContent
+            id={product.id}
             className="basis-1/2"
             color={product.color}
             name={product.name}

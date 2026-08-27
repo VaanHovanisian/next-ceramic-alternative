@@ -1,10 +1,11 @@
-import { PostBasketValue } from "@/@types/basket";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BaasketItemsDTO, PostBasketValue } from "@/@types/basket";
 import { ApiRoutes } from "@/constants/api-routes";
 import { useSession } from "@/lib/auth-client";
 import { fetcher } from "@/lib/fetcher";
 import { axiosInstance } from "@/lib/instance";
 import { useBasketStore } from "@/store/use-basket-store";
-import { access } from "fs";
+import { Product } from "@prisma/client";
 import useSWR from "swr";
 
 export const useBasket = () => {
@@ -15,12 +16,18 @@ export const useBasket = () => {
 
   const anonIds = basket.map((el) => Number(el.id)).join(",");
 
-  const { data: anonProducts, isLoading } = useSWR(
+  const {
+    data: anonProducts,
+    isLoading: localLoading,
+    error: localError,
+  } = useSWR<Product[]>(
     !isAuthed ? `${ApiRoutes.PRODUCTS}?ids=${anonIds}` : null,
     fetcher,
   );
 
-  const dataAnon = anonProducts?.map((el) => {
+  const dataAnonProducts = anonProducts ?? [];
+
+  const dataAnon = dataAnonProducts?.map((el) => {
     const existing = basket.find((item) => item.id === el.id);
     if (!existing) {
       return [];
@@ -33,21 +40,20 @@ export const useBasket = () => {
       price: el.price,
       imgUrl: el.imgUrl,
       subtotal: el.price * existing.quantity,
-      color: [],
     };
   });
 
-  const dataAnonBasket = anonProducts ?? { items: [], totalAmount: 0 };
   const totalAmountAnon = dataAnon?.reduce(
-    (acc, el) => acc + el.price * el.quantity,
+    (acc, el: any) => acc + el.price * el.quantity,
     0,
   );
   const {
     data: authProducts,
     isLoading: authBasketLoading,
+    error: authError,
     mutate,
   } = useSWR(isAuthed ? ApiRoutes.BASKET : null, fetcher);
-
+  console.log("authProducts", authProducts);
   const dataAuthBasket = authProducts ?? { items: [], totalAmount: 0 };
 
   const basketItems = isAuthed
@@ -55,8 +61,11 @@ export const useBasket = () => {
     : { items: dataAnon, totalAmount: totalAmountAnon };
 
   const quantityBasket = isAuthed
-    ? dataAuthBasket.items?.reduce((acc, el) => acc + el.quantity, 0)
-    : basket?.reduce((acc, el) => acc + el.quantity, 0);
+    ? dataAuthBasket.items?.reduce(
+        (acc: number, el: any) => acc + el.quantity,
+        0,
+      )
+    : quantity;
 
   const addProduct = async (value: PostBasketValue) => {
     if (!isAuthed) {
@@ -73,7 +82,7 @@ export const useBasket = () => {
       return;
     }
     const updateData = await axiosInstance.delete(`${ApiRoutes.BASKET}/${id}`);
-    mutate(updateData);
+    mutate(updateData, { populateCache: false });
   };
 
   const updateProduct = async (id: number, type: "increment" | "decrement") => {
@@ -82,9 +91,9 @@ export const useBasket = () => {
       return;
     }
     const updateData = await axiosInstance.patch(`${ApiRoutes.BASKET}/${id}`, {
-      type,
+      quantityType: type,
     });
-    mutate(updateData);
+    mutate(updateData, { populateCache: false });
   };
 
   const clearBasket = async () => {
@@ -93,7 +102,7 @@ export const useBasket = () => {
       return;
     }
     const updateData = await axiosInstance.delete(ApiRoutes.BASKET);
-    mutate(updateData);
+    mutate(updateData, { populateCache: false });
   };
 
   return {
@@ -103,5 +112,7 @@ export const useBasket = () => {
     removeProduct,
     updateProduct,
     clearBasket,
+    isLoading: isAuthed ? authBasketLoading : localLoading,
+    error: isAuthed ? authError : localError,
   };
 };

@@ -15,6 +15,7 @@ import { useBasketStore } from "@/store/use-basket-store";
 import { getBasket } from "@/lib/get-basket";
 import { toast } from "sonner";
 import { useBasket } from "@/hooks/use-basket";
+import { BaasketItemsDTO } from "@/@types/basket";
 
 interface Props {
   className?: string;
@@ -23,12 +24,19 @@ interface Props {
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
 
-  const { basket, removeProduct, updateProduct, quantity, clearBasket } =
-    useBasket();
+  const {
+    basket,
+    removeProduct,
+    updateProduct,
+    quantity,
+    clearBasket,
+    isLoading,
+    error,
+  } = useBasket();
 
   const deleteAll = () => {
     clearBasket();
-    toast.success("delete all");
+    toast.success("clear basket");
   };
 
   return (
@@ -78,7 +86,7 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {basket.items?.map((item) => (
+                {basket.items?.map((item: BaasketItemsDTO) => (
                   <BasketCard
                     key={item.id}
                     item={item}
