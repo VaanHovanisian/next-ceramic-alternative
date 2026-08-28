@@ -1,18 +1,25 @@
 "use client";
-
+import React from "react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { ShoppingBasket } from "lucide-react";
-import { useBasketStore } from "@/store/use-basket-store";
+import { ShoppingCart } from "lucide-react";
+import { useBasket } from "@/hooks/use-basket";
 
-export const BasketLink = () => {
-  const quantity = useBasketStore((state) => state.quantity);
+interface Props {
+  className?: string;
+}
 
+export const BasketLink: React.FC<Props> = (props) => {
+  const { className } = props;
+  const { quantity } = useBasket();
   return (
-    <Link href="/basket" className="relative">
-      <ShoppingBasket className="w-5 h-5" />
-
+    <Link
+      href="/basket"
+      className={cn("relative hover:opacity-70 transition-opacity", className)}
+    >
+      <ShoppingCart size={18} />
       {quantity > 0 && (
-        <span className="absolute -top-2 -right-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs text-white">
+        <span className="absolute top-3 left-2 flex items-center justify-center bg-black text-white leading-[130%] rounded-full text-[12px] w-4 h-4">
           {quantity}
         </span>
       )}

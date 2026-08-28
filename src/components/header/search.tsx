@@ -5,8 +5,6 @@ import { cn } from "@/lib/utils";
 import { SearchIcon } from "lucide-react";
 import { Input } from "../ui/input";
 import { useClickAway, useDebounce } from "react-use";
-// import { searchProduct } from "@/services/search";
-// import { Product } from "@prisma/client";
 import { SearchContent } from "./search-content";
 import { getSearch } from "@/lib/search";
 

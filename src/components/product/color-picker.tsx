@@ -6,9 +6,10 @@ import { GetColorName } from "hex-color-to-color-name";
 interface Props {
   className?: string;
   color: Array<{ name: string; id: number }>;
+  setColorId: (id: number) => void;
 }
 export const ColorPicker: React.FC<Props> = (props) => {
-  const { className, color } = props;
+  const { className, color, setColorId } = props;
   const [selectedColor, setSelectedColor] = useState(color[0].name);
 
   return (
@@ -26,7 +27,10 @@ export const ColorPicker: React.FC<Props> = (props) => {
         {color.map((c) => (
           <li key={c.id}>
             <button
-              onClick={() => setSelectedColor(c.name)}
+              onClick={() => {
+                setSelectedColor(c.name);
+                setColorId(c.id);
+              }}
               style={{ backgroundColor: c.name }}
               className={`
                 w-9 h-9
