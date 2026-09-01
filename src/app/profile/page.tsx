@@ -1,7 +1,6 @@
-
+import { Profile } from "@/components/profile";
 import { getUser } from "@/lib/get-user";
 import { redirect } from "next/navigation";
-
 
 export default async function ProfilePage() {
   const user = await getUser();
@@ -10,7 +9,10 @@ export default async function ProfilePage() {
   }
   return <Profile user={user} />;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Narine
 =======
 
+=======
+>>>>>>> Tagavor
 }

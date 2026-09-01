@@ -12,6 +12,8 @@ export async function GET() {
     }
     const userId = user.id;
     const basket = await updateBasket(userId);
+    console.log(basket);
+
     return NextResponse.json(basket, { status: 200 });
   } catch (error) {
     console.error("Internal Server Error GET BASKET " + error);
