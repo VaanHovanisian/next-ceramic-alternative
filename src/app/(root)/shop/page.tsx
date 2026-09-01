@@ -12,7 +12,6 @@ export default async function ShopPage({ searchParams }: SearchParamsProps) {
     filter.priceRange,
   );
   return (
-    // <Suspense>
     <Shop
       count={count}
       page={page}
@@ -20,6 +19,5 @@ export default async function ShopPage({ searchParams }: SearchParamsProps) {
       products={products}
       filter={filter}
     />
-    // </Suspense>
   );
 }
