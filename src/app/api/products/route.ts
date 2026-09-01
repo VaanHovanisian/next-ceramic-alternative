@@ -31,25 +31,13 @@ export async function GET(req: NextRequest) {
       where: {
         name: {
           contains: search,
-    const search = req.nextUrl.searchParams.get("search") || "";
-    const products = await prisma.product.findMany({
-      where: {}
-        name: {}
-          startsWith: search,
-    const search = req.nextUrl.searchParams.get("search") || " ";
-    const products = await prisma.product.findMany({
-      where: {
-        name: {
-          contains: search,
           mode: "insensitive",
         },
       },
       take: Number(limit),
     });
     return NextResponse.json(products, { status: 200 });
-    )}
   } catch (error) {
-    console.error("Internal Server Error " + error);
     console.error("Internal Server Error GET PRODUCTS" + error);
     return NextResponse.json(
       { message: "Internal Serever Error" },

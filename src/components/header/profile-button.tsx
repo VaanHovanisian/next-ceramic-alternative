@@ -29,7 +29,6 @@ export const ProfileButton: React.FC<Props> = (props) => {
           <UserCircle />
         )}
         <span>{data.user.name}</span>
-        <span>{data.user.name}</span>
       </Link>
     );
   }

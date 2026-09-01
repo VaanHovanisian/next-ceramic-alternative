@@ -11,9 +11,8 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
-import { useBasketStore } from "@/store/use-basket-store";
-import { getBasket } from "@/lib/get-basket";
 import { toast } from "sonner";
+import { useBasket } from "@/hooks/use-basket";
 
 interface Props {
   className?: string;
@@ -21,31 +20,20 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
-  const [data, setData] = React.useState([]);
-  const { basket, removeItem, updateItem, quantity, deleteAllItems } =
-    useBasketStore();
+  const {
+    basket,
+    removeProduct,
+    updateProduct,
+    quantity,
+    clearBasket,
+    authLoading,
+    localLoading,
+  } = useBasket();
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const items = await getBasket(basket.map((el) => el.id));
-      const itemsData = items.map((el, i) => {
-        const item = basket[i];
-        if (el.id === item.id) {
-          return { ...el, quantity: item.quantity };
-        } else {
-          return { ...el };
-        }
-      });
-      setData(itemsData);
-    };
-    fetchData();
-  }, [basket]);
   const deleteAll = () => {
-    deleteAllItems();
+    clearBasket();
     toast.success("delete all");
   };
-
-  const total = data.reduce((acc, el) => acc + el.price * el.quantity, 0);
 
   return (
     <div
@@ -67,7 +55,7 @@ export const Basket: React.FC<Props> = (props) => {
       </Breadcrumb>
       <h1 className="text-2xl font-medium mb-6">Cart ({quantity} item)</h1>
 
-      {data.length === 0 ? (
+      {basket.items?.length === 0 ? (
         <div className="text-center py-12 text-gray-500">Basket is empty:</div>
       ) : (
         <div className="flex flex-col gap-8 items-end">
@@ -94,19 +82,23 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((item) => (
+                {basket.items?.map((item) => (
                   <BasketCard
                     key={item.id}
                     item={item}
-                    removeItem={() => removeItem(item.id)}
-                    incrementQuantity={() => updateItem(item.id, "increment")}
-                    decrementQuantity={() => updateItem(item.id, "decrement")}
+                    removeItem={() => removeProduct(item.id)}
+                    incrementQuantity={() =>
+                      updateProduct(item.id, "increment")
+                    }
+                    decrementQuantity={() =>
+                      updateProduct(item.id, "decrement")
+                    }
                   />
                 ))}
               </tbody>
             </table>
           </div>
-          <BasketTotal totalAmount={total} />
+          <BasketTotal totalAmount={basket.totalAmount} />
         </div>
       )}
     </div>
