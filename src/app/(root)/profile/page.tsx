@@ -8,11 +8,4 @@ export default async function ProfilePage() {
     return redirect("/");
   }
   return <Profile user={user} />;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Narine
-=======
-
-=======
->>>>>>> Tagavor
 }
