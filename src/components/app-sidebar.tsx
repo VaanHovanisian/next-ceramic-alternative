@@ -14,12 +14,56 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { CommandIcon } from "lucide-react";
+import {
+  ChartBarIcon,
+  FolderIcon,
+  LayoutDashboardIcon,
+  ListIcon,
+  UsersIcon,
+} from "lucide-react";
 
-interface Props extends React.ComponentProps<typeof Sidebar> {
-  data: any;
-}
-
-export const AppSidebar = ({ data, ...props }: Props) => {
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  navMain: [
+    {
+      title: "Home",
+      url: "/dashboard/home",
+      icon: <LayoutDashboardIcon />,
+    },
+    {
+      title: "Contact",
+      url: "#",
+      icon: <ListIcon />,
+    },
+    {
+      title: "Category",
+      url: "#",
+      icon: <ChartBarIcon />,
+    },
+    {
+      title: "Color",
+      url: "#",
+      icon: <FolderIcon />,
+    },
+    {
+      title: "Price",
+      url: "#",
+      icon: <UsersIcon />,
+    },
+    {
+      title: "Product",
+      url: "#",
+      icon: <UsersIcon />,
+    },
+  ],
+};
+export const AppSidebar = ({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) => {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
