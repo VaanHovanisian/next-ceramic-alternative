@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header/header";
 import { Toaster } from "sonner";
-import { Footer } from "@/components/footer";
-import { BasketSyncer } from "@/components/basket/basket-syncer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,7 +21,7 @@ export const metadata: Metadata = {
   keywords: ["ceramic", "design", "home"],
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -35,10 +32,7 @@ export default function RootLayout({
       className={`${inter.className} ${garamond.variable} h-full antialiased`}
     >
       <body className="h-full">
-        <Header />
         {children}
-        <Footer />
-        <BasketSyncer />
         <Toaster />
       </body>
     </html>
