@@ -1,5 +1,4 @@
 import { Profile } from "@/components/profile";
-
 import { getUser } from "@/lib/get-user";
 import { redirect } from "next/navigation";
 

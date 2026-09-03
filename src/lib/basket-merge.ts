@@ -10,7 +10,6 @@ export const basketMerge = async (
     update: {},
     create: { userId },
   });
-
   const filterItems = localItems.filter(
     (el) =>
       Number.isFinite(el.productId) &&
@@ -25,7 +24,6 @@ export const basketMerge = async (
     where: { id: { in: productIds } },
     select: { id: true },
   });
-
   const validIds = new Set(existingProducts.map((el) => el.id));
   const items = filterItems.filter((el) => validIds.has(el.productId));
   if (items.length === 0) {

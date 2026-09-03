@@ -11,11 +11,9 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
-import { useBasketStore } from "@/store/use-basket-store";
-import { getBasket } from "@/lib/get-basket";
 import { toast } from "sonner";
 import { useBasket } from "@/hooks/use-basket";
-import { BaasketItemsDTO } from "@/@types/basket";
+import { BasketItemDTO } from "@/@types/basket";
 
 interface Props {
   className?: string;
@@ -23,7 +21,6 @@ interface Props {
 
 export const Basket: React.FC<Props> = (props) => {
   const { className } = props;
-
   const {
     basket,
     removeProduct,
@@ -86,7 +83,7 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {basket.items?.map((item: BaasketItemsDTO) => (
+                {basket.items?.map((item: BasketItemDTO) => (
                   <BasketCard
                     key={item.id}
                     item={item}

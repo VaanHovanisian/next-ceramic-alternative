@@ -27,7 +27,7 @@ export const useBasketStore = create<BasketStateStore>()(
                   ? { ...el, quantity: el.quantity + qty }
                   : el,
               )
-            : [...state.basket, { id, quantity: qty }];
+            : [...state.basket, { id, quantity: qty, colorId }];
           const quantity = basket.reduce((acc, el) => acc + el.quantity, 0);
           return { basket, quantity };
         });

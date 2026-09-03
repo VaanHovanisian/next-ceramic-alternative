@@ -12,16 +12,17 @@ export async function GET() {
     }
     const userId = user.id;
     const basket = await updateBasket(userId);
+    console.log(basket);
+
     return NextResponse.json(basket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error Get BSKET" + error);
+    console.error("Internal Server Error GET BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },
     );
   }
 }
-
 export async function POST(req: NextRequest) {
   try {
     const user = await getUser();
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest) {
     if (
       !Number.isFinite(productId) ||
       !Number.isFinite(colorId) ||
-      !Number(body.quantity)
+      !Number.isFinite(quantity)
     ) {
       return NextResponse.json(
         { error: "productId | colorId | quantity bad request" },
@@ -70,14 +71,13 @@ export async function POST(req: NextRequest) {
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error POST BASKET" + error);
+    console.error("Internal Server Error POST BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },
     );
   }
 }
-
 export async function DELETE() {
   try {
     const user = await getUser();
@@ -97,7 +97,7 @@ export async function DELETE() {
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error CLEAR BASKET" + error);
+    console.error("Internal Server Error CLEAR BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },

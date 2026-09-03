@@ -1,5 +1,4 @@
 import { ParamsProps } from "@/@types/params";
-import { BasketCard } from "@/components/basket/basket-card";
 import { getUser } from "@/lib/get-user";
 import { updateBasket } from "@/lib/update-basket";
 import { prisma } from "@/prisma/prisma-client";
@@ -15,7 +14,7 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     const paramsId = (await params).id;
     if (!paramsId) {
       return NextResponse.json(
-        { error: "Params id bad request" },
+        { error: "params id bad request" },
         { status: 400 },
       );
     }
@@ -25,10 +24,7 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     };
 
     if (!body) {
-      return NextResponse.json(
-        { error: "Params id bad request" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "bad request" }, { status: 400 });
     }
 
     if (
@@ -53,19 +49,19 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     if (quantityType === "increment") {
       await prisma.basketCard.update({
         where: { id },
-        data: { quantity: { increment:1 } },
+        data: { quantity: { increment: 1 } },
       });
     }
     if (quantityType === "decrement" && findBasketCard.quantity > 1) {
       await prisma.basketCard.update({
         where: { id },
-        data: { quantity: { decrement: findBasketCard.quantity - 1 } },
+        data: { quantity: { decrement: 1 } },
       });
     }
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error PATCH BASKET" + error);
+    console.error("Internal Server Error PATCH BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },
@@ -83,7 +79,7 @@ export async function DELETE(_: NextRequest, { params }: ParamsProps) {
     const paramsId = (await params).id;
     if (!paramsId) {
       return NextResponse.json(
-        { error: "Params id bad request" },
+        { error: "params id bad request" },
         { status: 400 },
       );
     }
@@ -107,7 +103,7 @@ export async function DELETE(_: NextRequest, { params }: ParamsProps) {
     const upBasket = await updateBasket(userId);
     return NextResponse.json(upBasket, { status: 200 });
   } catch (error) {
-    console.error("Internal Server Error DELETE BASKET" + error);
+    console.error("Internal Server Error DELETE BASKET " + error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaasketItemsDTO, PostBasketValue } from "@/@types/basket";
+import { BasketItemDTO, PostBasketValue } from "@/@types/basket";
 import { ApiRoutes } from "@/constants/api-routes";
 import { useSession } from "@/lib/auth-client";
 import { fetcher } from "@/lib/fetcher";
 import { axiosInstance } from "@/lib/instance";
 import { useBasketStore } from "@/store/use-basket-store";
 import { Product } from "@prisma/client";
+import { error } from "console";
 import useSWR from "swr";
 
 export const useBasket = () => {
@@ -53,7 +54,6 @@ export const useBasket = () => {
     error: authError,
     mutate,
   } = useSWR(isAuthed ? ApiRoutes.BASKET : null, fetcher);
-  console.log("authProducts", authProducts);
   const dataAuthBasket = authProducts ?? { items: [], totalAmount: 0 };
 
   const basketItems = isAuthed

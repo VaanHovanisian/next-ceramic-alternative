@@ -28,8 +28,8 @@ export const ProductContent: React.FC<Props> = (props) => {
       await addProduct({ quantity, colorId, productId: id });
       toast.success("success add to basket");
     } catch (error) {
-      console.log(error);
-      toast.error("filed to basket");
+      console.error(error);
+      toast.error("failed add to basket");
     } finally {
       setLoading(false);
     }

@@ -9,7 +9,8 @@ export interface BasketItem {
   quantity: number;
   colorId: number;
 }
-export interface BaasketItemsDTO {
+
+export interface BasketItemDTO {
   id: number;
   name: string;
   price: number;
