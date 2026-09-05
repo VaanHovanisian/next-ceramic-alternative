@@ -2,7 +2,6 @@
 "use client";
 
 import * as React from "react";
-
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -23,10 +22,6 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-interface Props extends React.ComponentProps<typeof Sidebar> {
-  data: any;
-}
-
 const data = {
   user: {
     name: "shadcn",
@@ -36,7 +31,7 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "#",
+      url: "/dashboard/home",
       icon: <LayoutDashboardIcon />,
     },
     {
@@ -59,10 +54,17 @@ const data = {
       url: "#",
       icon: <UsersIcon />,
     },
+    {
+      title: "Product",
+      url: "#",
+      icon: <UsersIcon />,
+    },
   ],
 };
 
-export const AppSidebar = ({ data, ...props }: Props) => {
+export const AppSidebar = ({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) => {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>

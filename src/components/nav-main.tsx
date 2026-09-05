@@ -8,6 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { TabsList, TabsTrigger } from "./ui/tabs";
+import Link from "next/link";
 
 export function NavMain({
   items,
@@ -22,18 +23,14 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          <TabsList dir="ltr" className="w-full items-start">
-            {items.map((item) => (
-              <SidebarMenuItem className="w-full" key={item.title}>
-                <TabsTrigger className="w-full" value={item.title}>
-                  <SidebarMenuButton tooltip={item.title}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </SidebarMenuButton>
-                </TabsTrigger>
-              </SidebarMenuItem>
-            ))}
-          </TabsList>
+          {items.map((item) => (
+            <SidebarMenuItem className="w-full" key={item.title}>
+              <Link className="flex p-2 gap-5" href={item.url}>
+                {item.icon}
+                <span>{item.title}</span>
+              </Link>
+            </SidebarMenuItem>
+          ))}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
-import { useBasketStore } from "@/store/use-basket-store";
+import { useBasket } from "@/hooks/use-basket";
 
 interface Props {
   className?: string;
@@ -11,7 +11,7 @@ interface Props {
 
 export const BasketLink: React.FC<Props> = (props) => {
   const { className } = props;
-  const quantity = useBasketStore((state) => state.quantity);
+  const { quantity } = useBasket();
   return (
     <Link
       href="/basket"

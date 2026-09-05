@@ -13,6 +13,10 @@ import {
 } from "../ui/breadcrumb";
 import { toast } from "sonner";
 import { useBasket } from "@/hooks/use-basket";
+<<<<<<< HEAD
+=======
+import { BasketItemDTO } from "@/@types/basket";
+>>>>>>> test-admin
 
 interface Props {
   className?: string;
@@ -26,13 +30,22 @@ export const Basket: React.FC<Props> = (props) => {
     updateProduct,
     quantity,
     clearBasket,
+<<<<<<< HEAD
     authLoading,
     localLoading,
+=======
+    isLoading,
+    error,
+>>>>>>> test-admin
   } = useBasket();
 
   const deleteAll = () => {
     clearBasket();
+<<<<<<< HEAD
     toast.success("delete all");
+=======
+    toast.success("clear basket");
+>>>>>>> test-admin
   };
 
   return (
@@ -82,7 +95,11 @@ export const Basket: React.FC<Props> = (props) => {
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 {basket.items?.map((item) => (
+=======
+                {basket.items?.map((item: BasketItemDTO) => (
+>>>>>>> test-admin
                   <BasketCard
                     key={item.id}
                     item={item}

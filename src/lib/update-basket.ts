@@ -5,6 +5,7 @@ export const updateBasket = async (userId: string) => {
     where: { userId },
     include: {
       basketCard: {
+        orderBy: { createdAt: "desc" },
         include: {
           product: true,
         },
@@ -16,6 +17,7 @@ export const updateBasket = async (userId: string) => {
     (acc, el) => acc + el.product.price * el.quantity,
     0,
   );
+
   await prisma.basket.update({
     where: { id: basket.id },
     data: { totalAmount },

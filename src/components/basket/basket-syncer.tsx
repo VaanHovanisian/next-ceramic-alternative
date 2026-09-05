@@ -17,10 +17,10 @@ export const BasketSyncer = () => {
       return;
     }
 
-    // if (basket.length === 0) {
-    //   mutate(ApiRoutes.BASKET);
-    //   return;
-    // }
+    if (basket.length === 0) {
+      mutate(ApiRoutes.BASKET);
+      return;
+    }
 
     (async () => {
       try {
