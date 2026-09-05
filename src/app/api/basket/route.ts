@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
     if (!basket) {
       return NextResponse.json({ error: "basket not found" }, { status: 404 });
     }
-
     await prisma.basketCard.upsert({
       where: {
         basketId_productId_colorId: { basketId: basket.id, productId, colorId },

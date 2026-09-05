@@ -47,14 +47,12 @@ export const useBasket = () => {
     (acc, el: any) => acc + el.price * el.quantity,
     0,
   );
-
   const {
     data: authProducts,
     isLoading: authBasketLoading,
     error: authError,
     mutate,
   } = useSWR(isAuthed ? ApiRoutes.BASKET : null, fetcher);
-
   const dataAuthBasket = authProducts ?? { items: [], totalAmount: 0 };
 
   const basketItems = isAuthed

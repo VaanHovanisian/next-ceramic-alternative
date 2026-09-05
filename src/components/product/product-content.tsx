@@ -34,7 +34,6 @@ export const ProductContent: React.FC<Props> = (props) => {
       setLoading(false);
     }
   };
-
   return (
     <div className={cn("grid", className)}>
       <h2 className="text-xl font-semibold leading-[140%] tracking-[0.06em] uppercase mb-12.5">

@@ -4,6 +4,10 @@ model HomeHero {
     color         String
     imgUrlMobile  String
     imgUrlDesktop String
+<<<<<<< HEAD
     updatedAt     DateTime @updatedAt
+=======
+    updateAt      DateTime @updatedAt
+>>>>>>> Tagavor
     createdAt     DateTime @default(now())
 }
