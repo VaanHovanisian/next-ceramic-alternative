@@ -10,13 +10,8 @@ model Product {
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
 
-<<<<<<< HEAD
   color      Color[]
   basketCard BasketCard[]
-=======
-  color        Color[]
-  bascketCards BasketCard[]
->>>>>>> 855627fb70e37f5429500e054767eff1d2ed6bf0
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
