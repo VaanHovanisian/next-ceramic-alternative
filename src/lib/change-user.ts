@@ -26,10 +26,7 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
       await authClient.updateUser({ image: img });
       toast.success("success update avatar");
     },
-    async email(val: string) {
-      await authClient.updateUser({ email: val });
-      toast.success("success update email");
-    },
+    async email(value) {},
   };
   Object.keys(dirtyField).forEach((el: any) => userObj[el](data));
 };

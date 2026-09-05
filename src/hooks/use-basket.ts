@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BasketItemDTO, PostBasketValue } from "@/@types/basket";
+import { PostBasketValue } from "@/@types/basket";
 import { ApiRoutes } from "@/constants/api-routes";
 import { useSession } from "@/lib/auth-client";
 import { fetcher } from "@/lib/fetcher";
 import { axiosInstance } from "@/lib/instance";
 import { useBasketStore } from "@/store/use-basket-store";
 import { Product } from "@prisma/client";
-import { error } from "console";
 import useSWR from "swr";
 
 export const useBasket = () => {

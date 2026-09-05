@@ -33,7 +33,6 @@ export default function Layout({
     >
       <body className="h-full">
         {children}
-
         <Toaster />
       </body>
     </html>
