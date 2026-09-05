@@ -36,7 +36,7 @@ const data = {
     },
     {
       title: "Contact",
-      url: "#",
+      url: "/dashboard/contact",
       icon: <ListIcon />,
     },
     {
