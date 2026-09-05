@@ -13,14 +13,16 @@ import {
 } from "@/constants/form-schema/admin-hero.schema";
 import { toast } from "sonner";
 import { HomeHero } from "@prisma/client";
+import { adminHeroAction } from "@/actions/admin/admin-hero";
 
 interface Props {
   className?: string;
   data: HomeHero | null;
+  type: "home" | "contact";
 }
 
 export const AdminHero: React.FC<Props> = (props) => {
-  const { className, data } = props;
+  const { className, data, type } = props;
 
   const form = useForm({
     resolver: zodResolver(adminHeroSchema),
@@ -34,6 +36,8 @@ export const AdminHero: React.FC<Props> = (props) => {
 
   const onSubmit = async (data: AdminHeroSchemaType) => {
     try {
+      await adminHeroAction(data, type);
+      toast.success("success save");
     } catch (error) {
       console.error(error);
       toast.error("failed save");
@@ -49,8 +53,16 @@ export const AdminHero: React.FC<Props> = (props) => {
         >
           <FormInput name="title" placeholder="Title" type="text" />
           <FormInput name="color" placeholder="Color" type="color" />
-          <FormInputImage name="imgUrlDesktop" label="Desktop" />
-          <FormInputImage name="imgUrlMobile" label="Mobile" />
+          <FormInputImage
+            imgUrl={data?.imgUrlDesktop}
+            name="imgUrlDesktop"
+            label="Desktop"
+          />
+          <FormInputImage
+            imgUrl={data?.imgUrlMobile}
+            name="imgUrlMobile"
+            label="Mobile"
+          />
           <Button disabled={!form.formState.isDirty} className="min-w-50">
             save
           </Button>
