@@ -40,24 +40,9 @@ const data = {
       icon: <ListIcon />,
     },
     {
-      title: "Category",
-      url: "#",
+      title: "Shop",
+      url: "/dashboard/shop",
       icon: <ChartBarIcon />,
-    },
-    {
-      title: "Color",
-      url: "#",
-      icon: <FolderIcon />,
-    },
-    {
-      title: "Price",
-      url: "#",
-      icon: <UsersIcon />,
-    },
-    {
-      title: "Product",
-      url: "#",
-      icon: <UsersIcon />,
     },
   ],
 };
