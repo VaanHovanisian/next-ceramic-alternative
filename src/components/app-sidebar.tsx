@@ -14,13 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { CommandIcon } from "lucide-react";
-import {
-  ChartBarIcon,
-  FolderIcon,
-  LayoutDashboardIcon,
-  ListIcon,
-  UsersIcon,
-} from "lucide-react";
+import { ChartBarIcon, LayoutDashboardIcon, ListIcon } from "lucide-react";
 
 const data = {
   user: {
@@ -40,24 +34,9 @@ const data = {
       icon: <ListIcon />,
     },
     {
-      title: "Category",
-      url: "#",
+      title: "Shop",
+      url: "/dashboard/shop",
       icon: <ChartBarIcon />,
-    },
-    {
-      title: "Color",
-      url: "#",
-      icon: <FolderIcon />,
-    },
-    {
-      title: "Price",
-      url: "#",
-      icon: <UsersIcon />,
-    },
-    {
-      title: "Product",
-      url: "#",
-      icon: <UsersIcon />,
     },
   ],
 };
