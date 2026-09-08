@@ -22,6 +22,26 @@ export const AuthModal: React.FC<Props> = (props) => {
         <DialogTitle hidden />
         {!toggle ? <FormRegister /> : <FormLogin />}
         <div className="flex">
+          <Button
+            onClick={() =>
+              signIn.social({
+                provider: "google",
+                callbackURL: "/",
+                fetchOptions: {
+                  onSuccess() {
+                    toast.success("Successfuly signin google");
+                  },
+                  onError(error) {
+                    console.log(error);
+                    toast.error("failed signin");
+                  },
+                },
+              })
+            }
+            className="grow"
+          >
+            Google
+          </Button>
           <Button className="grow">Google</Button>
           <Button
             onClick={() =>
@@ -30,6 +50,7 @@ export const AuthModal: React.FC<Props> = (props) => {
                 callbackURL: "/",
                 fetchOptions: {
                   onSuccess() {
+                    toast.success("Successfuly signin github");
                     toast.success("Successfully signin GitHub");
                   },
                   onError(error) {
