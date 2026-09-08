@@ -13,14 +13,16 @@ import {
 } from "@/constants/form-schema/admin-hero.schema";
 import { toast } from "sonner";
 import { HomeHero } from "@prisma/client";
+import { adminHeroAction } from "@/actions/admin/admin-hero";
 
 interface Props {
   className?: string;
   data: HomeHero | null;
+  type: "home" | "contact";
 }
 
 export const AdminHero: React.FC<Props> = (props) => {
-  const { className, data } = props;
+  const { className, data, type } = props;
   const form = useForm({
     resolver: zodResolver(adminHeroSchema),
     defaultValues: {
@@ -32,9 +34,11 @@ export const AdminHero: React.FC<Props> = (props) => {
   });
   const onSubmit = async (data: AdminHeroSchemaType) => {
     try {
+      await adminHeroAction(data, type);
+      toast.success("filed save");
     } catch (error) {
       console.log(error);
-      toast.error("filed save");
+      toast.error("failed to save");
     }
   };
   return (

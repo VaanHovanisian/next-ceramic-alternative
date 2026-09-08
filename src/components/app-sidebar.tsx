@@ -36,27 +36,27 @@ const data = {
     },
     {
       title: "Contact",
-      url: "#",
+      url: "/dashboard/contact",
       icon: <ListIcon />,
     },
     {
       title: "Category",
-      url: "#",
+      url: "/dashboard/category",
       icon: <ChartBarIcon />,
     },
     {
       title: "Color",
-      url: "#",
+      url: "/dashboard/color",
       icon: <FolderIcon />,
     },
     {
       title: "Price",
-      url: "#",
+      url: "/dashboard/price",
       icon: <UsersIcon />,
     },
     {
       title: "Product",
-      url: "#",
+      url: "/dashboard/product",
       icon: <UsersIcon />,
     },
   ],
