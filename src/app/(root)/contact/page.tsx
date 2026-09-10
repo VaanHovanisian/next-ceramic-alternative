@@ -1,4 +1,4 @@
 import { Contact } from "@/components/contact";
-export default function ContactPage() {
+export default async function ContactPage() {
   return <Contact />;
 }
