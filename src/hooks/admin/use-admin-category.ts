@@ -1,10 +1,14 @@
+import { adminAllAction } from "@/actions/admin/admin-category.action";
 import { Category } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useSet } from "react-use";
 import { toast } from "sonner";
 
-export const useAdminCategory = (data: Category[]) => {
+export const useAdminCategory = (
+  data: Category[],
+  property: "category" | "color",
+) => {
   const [loading, setLoading] = React.useState(false);
   const [categories, setCategories] = React.useState(
     Object.fromEntries(data.map((el) => [el.id, el.name])),
@@ -29,7 +33,11 @@ export const useAdminCategory = (data: Category[]) => {
         toast.warning("name is required");
         return;
       }
-      // await adminCategoryAction({ state: "create", name: createInputValue });
+      await adminAllAction({
+        state: "create",
+        name: createInputValue,
+        property,
+      });
       setCreateInputValue("");
       router.refresh();
       toast.success("success create");
@@ -44,15 +52,16 @@ export const useAdminCategory = (data: Category[]) => {
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      // await Promise.all(
-      //   Array.from(checked).map((id) =>
-      //     adminCategoryAction({
-      //       state: "update",
-      //       name: categories[id],
-      //       id: Number(id),
-      //     }),
-      //   ),
-      // );
+      await Promise.all(
+        Array.from(checked).map((id) =>
+          adminAllAction({
+            state: "update",
+            name: categories[id],
+            id: Number(id),
+            property,
+          }),
+        ),
+      );
       clear();
       router.refresh();
       toast.success("success update");
@@ -67,21 +76,22 @@ export const useAdminCategory = (data: Category[]) => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      // await Promise.all(
-      //   Array.from(checked).map((id) =>
-      //     adminCategoryAction({
-      //       state: "delete",
-      //       name: categories[id],
-      //       id: Number(id),
-      //     }),
-      //   ),
-      // );
+      await Promise.all(
+        Array.from(checked).map((id) =>
+          adminAllAction({
+            state: "delete",
+            name: categories[id],
+            id: Number(id),
+            property,
+          }),
+        ),
+      );
       clear();
       router.refresh();
       toast.success("success delete");
     } catch (error) {
       console.error(error);
-      toast.error("failed delete");
+      toast.error("failed delete: " + error);
     } finally {
       setLoading(false);
     }
@@ -99,5 +109,6 @@ export const useAdminCategory = (data: Category[]) => {
     handleAllChecked,
     toggle,
     isAllChecked,
+    checked,
   };
 };
