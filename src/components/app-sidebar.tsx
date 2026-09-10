@@ -40,27 +40,13 @@ const data = {
       icon: <ListIcon />,
     },
     {
-      title: "Category",
-      url: "/dashboard/category",
+      title: "Shop",
+      url: "/dashboard/shop",
       icon: <ChartBarIcon />,
-    },
-    {
-      title: "Color",
-      url: "/dashboard/color",
-      icon: <FolderIcon />,
-    },
-    {
-      title: "Price",
-      url: "/dashboard/price",
-      icon: <UsersIcon />,
-    },
-    {
-      title: "Product",
-      url: "/dashboard/product",
-      icon: <UsersIcon />,
     },
   ],
 };
+
 export const AppSidebar = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {

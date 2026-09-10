@@ -32,27 +32,37 @@ export const AdminHero: React.FC<Props> = (props) => {
       imgUrlMobile: data?.imgUrlMobile,
     },
   });
+
   const onSubmit = async (data: AdminHeroSchemaType) => {
     try {
       await adminHeroAction(data, type);
-      toast.success("filed save");
+      toast.success("success save");
     } catch (error) {
-      console.log(error);
-      toast.error("failed to save");
+      console.error(error);
+      toast.error("failed save");
     }
   };
+
   return (
     <Container className={cn("", className)}>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={cn("grid flex-col items-center gap-5")}
+          className={cn("flex flex-col items-center gap-5")}
         >
           <FormInput name="title" placeholder="Title" type="text" />
           <FormInput name="color" placeholder="Color" type="color" />
-          <FormInputImage name="imgUrlDesktop" label="Desktop" />
-          <FormInputImage name="imgUrlMobile" label="Mobile" />
-          <Button disabled={!form.formState.isDirty} className="min w- 50">
+          <FormInputImage
+            imgUrl={data?.imgUrlDesktop}
+            name="imgUrlDesktop"
+            label="Desktop"
+          />
+          <FormInputImage
+            imgUrl={data?.imgUrlMobile}
+            name="imgUrlMobile"
+            label="Mobile"
+          />
+          <Button disabled={!form.formState.isDirty} className="min-w-50">
             save
           </Button>
         </form>

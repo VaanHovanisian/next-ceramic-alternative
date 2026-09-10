@@ -72,6 +72,7 @@ async function reset() {
   await prisma.$executeRaw`TRUNCATE TABLE "HomeHero" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "ContactHero" RESTART IDENTITY CASCADE`;
 }
+
 async function main() {
   try {
     await reset();

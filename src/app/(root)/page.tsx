@@ -10,5 +10,6 @@ const cachedData = unstable_cache(
 
 export default async function HomePage() {
   const products = await cachedData();
-  return <Home products={products} />;
+  const hero = await prisma.homeHero.findFirst();
+  return <Home products={products} hero={hero} />;
 }

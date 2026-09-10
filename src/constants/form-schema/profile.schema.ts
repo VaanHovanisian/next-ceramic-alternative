@@ -9,10 +9,10 @@ export const imgSchema = z
       .refine((data) => data.type.includes("image/"), "Only Image"),
   ])
   .optional();
-
 export const profileFormSchema = z.object({
   name: z.string(),
   email: z.email(),
   avatar: imgSchema,
 });
+
 export type ProfileFormSchemaType = z.infer<typeof profileFormSchema>;

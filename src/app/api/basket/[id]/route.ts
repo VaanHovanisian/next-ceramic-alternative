@@ -33,13 +33,11 @@ export async function PATCH(req: NextRequest, { params }: ParamsProps) {
     ) {
       return NextResponse.json({ error: "bad request" }, { status: 400 });
     }
-
     const quantityType = body.quantityType;
 
     const findBasketCard = await prisma.basketCard.findUnique({
       where: { id },
     });
-
     if (!findBasketCard) {
       return NextResponse.json(
         { error: "basket card not found" },
@@ -88,7 +86,6 @@ export async function DELETE(_: NextRequest, { params }: ParamsProps) {
     const findBasketCard = await prisma.basketCard.findUnique({
       where: { id },
     });
-
     if (!findBasketCard) {
       return NextResponse.json(
         { error: "basket card not found" },
