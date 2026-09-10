@@ -5,7 +5,6 @@ import {
 } from "@/constants/form-schema/admin-hero.schema";
 import { prisma } from "@/prisma/prisma-client";
 import z from "zod";
-import { uploadImage } from "../upload-image";
 import { createImage } from "@/lib/create-image";
 
 export const adminHeroAction = async (
