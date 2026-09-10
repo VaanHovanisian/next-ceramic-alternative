@@ -43,13 +43,34 @@ async function create() {
       },
     });
   }
+
+  await prisma.homeHero.create({
+    data: {
+      title: "BAT TRANG DINNER SET",
+      color: "#826f66",
+      imgUrlDesktop: "/hero/1.jpg",
+      imgUrlMobile: "/hero/1-mobile.jpg",
+    },
+  });
+
+  await prisma.contactHero.create({
+    data: {
+      title: "BAT TRANG DINNER SET",
+      color: "#3a3845",
+      imgUrlDesktop: "/hero/2.jpg",
+      imgUrlMobile: "/hero/2-mobile.jpg",
+    },
+  });
 }
+
 async function reset() {
   await prisma.$executeRaw`TRUNCATE TABLE "User" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Color" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "PriceRange" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "HomeHero" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "ContactHero" RESTART IDENTITY CASCADE`;
 }
 async function main() {
   try {
