@@ -32,10 +32,10 @@ export const AdminShop: React.FC<Props> = async (props) => {
         </TabsList>
         <hr />
         <TabsContent value="category">
-          <AdminCategory data={category} />
+          <AdminCategory property="category" data={category} />
         </TabsContent>
         <TabsContent value="color">
-          <AdminColor data={color} />
+          <AdminCategory property="color" data={color} />
         </TabsContent>
         <TabsContent value="priceRange">
           <AdminPrice data={priceRange} />
