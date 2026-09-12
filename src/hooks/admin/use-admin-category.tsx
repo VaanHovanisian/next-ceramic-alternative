@@ -99,5 +99,6 @@ export const useAdminCategory = (data: Category[]) => {
     handleAllChecked,
     toggle,
     isAllChecked,
+    checked,
   };
 };
