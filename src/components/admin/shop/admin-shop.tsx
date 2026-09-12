@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma-client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminCategory } from "./admin-category";
-import { AdminColor } from "./admin-color";
 import { AdminPrice } from "./admin-price";
 import { AdminProduct } from "./admin-product";
 

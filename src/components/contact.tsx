@@ -4,6 +4,7 @@ import { Title } from "./title";
 import { Container } from "./container";
 import { ContactInfo } from "./contact-info";
 import { FormContact } from "./form/form-contact";
+import { ContactHero } from "@prisma/client";
 
 // const socialLinks = [
 //   {
@@ -28,18 +29,25 @@ import { FormContact } from "./form/form-contact";
 //   },
 // ];
 
-export const Contact: React.FC = () => {
+
+
+interface Props {
+  hero: ContactHero;
+}
+export const Contact: React.FC<Props> = (props) => {
+  const { hero } = props;
+
   return (
     <>
       <Hero
         className="text-[#c69b7b]"
-        color="#3a3845"
-        desctopImgUrl="/hero/2.jpg"
-        mobileImgUrl="/hero/2-mobile.jpg"
+        color={hero.color}
+        desctopImgUrl={hero.imgUrlDesktop}
+        mobileImgUrl={hero.imgUrlMobile}
       >
         <div className="max-w-70 mx-auto text-center text-[#fffdfb]">
           <Title className="pb-7.5 mb-7.5 border-b border-grey-400" size="l">
-            CONTACT US
+            {hero.title}
           </Title>
 
           <p className="text-[14px] text-semibold leading-[143%] mb-5">

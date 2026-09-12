@@ -1,4 +1,13 @@
 import { Contact } from "@/components/contact";
-export default function ContactPage() {
-  return <Contact />;
+import { prisma } from "@/prisma/prisma-client";
+
+
+export default async function ContactPage() {
+  const hero = await prisma.contactHero.findUnique({
+    where: {
+      id: 1,
+    },
+  });
+
+  return <Contact hero={hero!} />;
 }
