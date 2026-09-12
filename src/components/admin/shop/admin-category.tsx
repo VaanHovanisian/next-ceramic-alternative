@@ -11,17 +11,19 @@ import { useAdminCategory } from "@/hooks/admin/use-admin-category";
 interface Props {
   className?: string;
   data: Category[];
+  property: "category" | "color";
 }
 
 export const AdminCategory: React.FC<Props> = (props) => {
-  const { className, data } = props;
+  const { className, data, property } = props;
 
-  const admin = useAdminCategory(data);
+  const admin = useAdminCategory(data, property);
 
   return (
     <div className={cn("", className)}>
       <div className="flex gap-5 mb-5">
         <Input
+          type={property === "category" ? "text" : "color"}
           className="flex-1"
           value={admin.createInputValue}
           onChange={(e) => admin.setCreateInputValue(e.target.value)}
@@ -35,18 +37,22 @@ export const AdminCategory: React.FC<Props> = (props) => {
           <Checkbox
             checked={admin.isAllChecked}
             onCheckedChange={admin.handleAllChecked}
-          />{" "}
+          />
           All
         </Label>
         <div className="flex gap-5">
           <Button
             onClick={admin.handleUpdate}
-            variant={"secondary"}
             disabled={admin.checked.size === 0 || admin.loading}
+            variant={"secondary"}
           >
             update
           </Button>
-          <Button variant={"destructive"} onClick={admin.handleDelete}>
+          <Button
+            onClick={admin.handleDelete}
+            disabled={admin.checked.size === 0 || admin.loading}
+            variant={"destructive"}
+          >
             delete
           </Button>
         </div>
@@ -55,11 +61,13 @@ export const AdminCategory: React.FC<Props> = (props) => {
         {data.map((el) => (
           <li className="flex w-fit gap-5 items-center " key={el.id}>
             <Checkbox
-              checked={admin.checked.has(el.id)}
               onCheckedChange={() => admin.toggle(el.id)}
+              checked={admin.checked.has(el.id)}
             />
             <Input
-              aria-readonly={admin.checked.has(el.id)}
+              className="min-w-100"
+              type={property === "category" ? "text" : "color"}
+              readOnly={!admin.checked.has(el.id)}
               onChange={(e) => {
                 admin.setCategories((prev) => ({
                   ...prev,

@@ -4,6 +4,7 @@ import { Title } from "./title";
 import { Container } from "./container";
 import { ContactInfo } from "./contact-info";
 import { FormContact } from "./form/form-contact";
+import { ContactHero } from "@prisma/client";
 
 // const socialLinks = [
 //   {
@@ -28,7 +29,12 @@ import { FormContact } from "./form/form-contact";
 //   },
 // ];
 
-export const Contact: React.FC = () => {
+interface Props {
+  hero: ContactHero;
+}
+
+export const Contact: React.FC<Props> = (props) => {
+  const { hero } = props;
   return (
     <>
       <Hero

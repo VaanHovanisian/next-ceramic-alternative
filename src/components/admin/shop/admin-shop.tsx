@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma-client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminCategory } from "./admin-category";
-import { AdminColor } from "./admin-color";
 import { AdminPrice } from "./admin-price";
 import { AdminProduct } from "./admin-product";
 
@@ -31,10 +30,10 @@ export const AdminShop: React.FC<Props> = async (props) => {
         </TabsList>
         <hr />
         <TabsContent value="category">
-          <AdminCategory data={category} />
+          <AdminCategory property="category" data={category} />
         </TabsContent>
         <TabsContent value="color">
-          <AdminColor data={color} />
+          <AdminCategory property="color" data={color} />
         </TabsContent>
         <TabsContent value="priceRange">
           <AdminPrice data={priceRange} />
