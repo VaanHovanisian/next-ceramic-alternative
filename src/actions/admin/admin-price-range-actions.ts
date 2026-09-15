@@ -1,5 +1,6 @@
 "use server"
 import { AdminState } from "@/@types/admin";
+import { isAdmin } from "@/lib/is-admin";
 import { prisma } from "@/prisma/prisma-client";
 interface Props {
     from: number;
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export const adminPriceRangeAction = async (data: Props) => {
+    if (!(await isAdmin())) {
+        throw new Error("Forbidden");
+    }
     if (data.state === "create" && data.from > 0) {
         await prisma.priceRange.create({
             data:

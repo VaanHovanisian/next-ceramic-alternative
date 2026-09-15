@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { isAdmin } from "@/lib/is-admin";
+import { notFound } from "next/navigation";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,11 +23,14 @@ export const metadata: Metadata = {
   keywords: ["ceramic", "design", "home"],
 };
 
-export default function Layout({
+export default async function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (!(await isAdmin())) {
+    return notFound();
+  }
   return (
     <html
       lang="en"

@@ -14,13 +14,13 @@ import {
 import { toast } from "sonner";
 import { HomeHero } from "@prisma/client";
 import { adminHeroAction } from "@/actions/admin/admin-hero";
+import { isAdmin } from "@/lib/is-admin";
 
 interface Props {
   className?: string;
   data: HomeHero | null;
   type: "home" | "contact";
 }
-
 export const AdminHero: React.FC<Props> = (props) => {
   const { className, data, type } = props;
 
