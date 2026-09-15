@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminCategory } from "./admin-category";
 import { AdminColor } from "./admin-color";
 import { AdminPrice } from "./admin-price";
-import { AdminProduct } from "./admin-product";
+import { AdminProduct } from "./product/admin-product";
 
 interface Props {
   className?: string;
@@ -18,7 +18,9 @@ export const AdminShop: React.FC<Props> = async (props) => {
     prisma.category.findMany(),
     prisma.color.findMany(),
     prisma.priceRange.findMany(),
-    prisma.product.findMany(),
+    prisma.product.findMany({
+      include: { color: true },
+    }),
   ]);
 
   return (
@@ -41,7 +43,7 @@ export const AdminShop: React.FC<Props> = async (props) => {
           <AdminPrice data={priceRange} />
         </TabsContent>
         <TabsContent value="product">
-          <AdminProduct data={product} />
+          <AdminProduct data={product} categories={category} colors={color} />
         </TabsContent>
       </Tabs>
     </div>
