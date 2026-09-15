@@ -5,15 +5,16 @@ import React from "react";
 import { useSet } from "react-use";
 import { toast } from "sonner";
 
-export const useAdminCategory = (
+export const useAdminPriceRange = (
   data: Category[],
   property: "category" | "color",
 ) => {
   const [loading, setLoading] = React.useState(false);
-  const [categories, setCategories] = React.useState(
-    Object.fromEntries(data.map((el) => [el.id, el.name])),
+  const [ranges, setRanges] = React.useState(
+    Object.fromEntries(data.map((el) => [el.id, { from: el.from, to: el.to }])),
   );
-  const [createInputValue, setCreateInputValue] = React.useState("");
+  const [newFrom, setNewFrom] = React.useState("");
+  const [newTo, setNewTo] = React.useState("");
   const [checked, { toggle, clear, add }] = useSet(new Set<number>());
   const isAllChecked = checked.size === data.length && data.length > 0;
   const router = useRouter();
@@ -29,16 +30,18 @@ export const useAdminCategory = (
   const handleCreate = async () => {
     setLoading(true);
     try {
-      if (!createInputValue.trim()) {
-        toast.warning("name is required");
+      if (!newFrom.trim() || !newTo.trim()) {
+        toast.warning("from and to are required");
         return;
       }
-      await adminAllAction({
+      await adminPriceRangeAction({
         state: "create",
-        name: createInputValue,
-        property,
+        from: Number(newFrom),
+        to: newNumber(newTo) :null,
+        
       });
-      setCreateInputValue("");
+      setNewFrom("");
+      setNewTo("");
       router.refresh();
       toast.success("success create");
     } catch (error) {
@@ -56,9 +59,12 @@ export const useAdminCategory = (
         Array.from(checked).map((id) =>
           adminAllAction({
             state: "update",
+            from: ranges[id].from,
+            to: ranges[id].to ? Number(ranges[id].to) : null,
             name: categories[id],
+            
             id: Number(id),
-            property,
+            
           }),
         ),
       );
@@ -78,9 +84,11 @@ export const useAdminCategory = (
     try {
       await Promise.all(
         Array.from(checked).map((id) =>
-          adminAllAction({
+          adminPriceRangeAction({
             state: "delete",
-            name: categories[id],
+            from: ranges[id].from,
+            to: ranges[id].to ? Number(ranges[id].to) : null,
+            from: categories[id],
             id: Number(id),
             property,
           }),
@@ -99,10 +107,11 @@ export const useAdminCategory = (
 
   return {
     loading,
-    categories,
+    ranges,
     createInputValue,
-    setCreateInputValue,
-    setCategories,
+    setNewFrom,
+    setNewTo,
+    setRanges,
     handleCreate,
     handleUpdate,
     handleDelete,
