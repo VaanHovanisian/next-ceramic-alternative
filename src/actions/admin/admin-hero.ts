@@ -5,13 +5,16 @@ import {
 } from "@/constants/form-schema/admin-hero.schema";
 import { prisma } from "@/prisma/prisma-client";
 import z from "zod";
-import { uploadImage } from "../upload-image";
 import { createImage } from "@/lib/create-image";
+import { isAdmin } from "@/lib/is-admin";
 
 export const adminHeroAction = async (
   value: AdminHeroSchemaType,
   type: "home" | "contact",
 ) => {
+  if (!(await isAdmin())) {
+    throw new Error("Forbidden");
+  }
   const parsed = z.safeParse(adminHeroSchema, value);
 
   if (!parsed.success) {

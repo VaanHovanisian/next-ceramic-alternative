@@ -4,6 +4,7 @@ import { Color, Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useSet } from "react-use";
+import { toast } from "sonner";
 
 export interface AdminProductProps {
   newFields: NewFields;
@@ -104,8 +105,12 @@ export const useAdminProduct = (
         imgUrl,
         images,
       });
+      toast.success("success create");
       setNewFields({ name: "", price: "", text: "", colorIds: [] });
       router.refresh();
+    } catch (error) {
+      console.error(error);
+      toast.error("failed create");
     } finally {
       setUploading(false);
     }
@@ -136,30 +141,41 @@ export const useAdminProduct = (
           });
         }),
       );
+      toast.success("success update");
       clear();
       router.refresh();
+    } catch (error) {
+      console.error(error);
+      toast.error("failed update");
     } finally {
       setUploading(false);
     }
   };
 
   const handleDelete = async () => {
-    await Promise.all(
-      Array.from(checked).map((id) =>
-        AdminProductAction({
-          type: "delete",
-          id,
-          name: "",
-          price: 0,
-          text: "",
-          categoryId: 0,
-          colorIds: [],
-          images: [],
-        }),
-      ),
-    );
-    clear();
-    router.refresh();
+    try {
+      await Promise.all(
+        Array.from(checked).map((id) =>
+          AdminProductAction({
+            type: "delete",
+            id,
+            name: "",
+            price: 0,
+            text: "",
+            categoryId: 0,
+            colorIds: [],
+            images: [],
+          }),
+        ),
+      );
+      toast.success("success delete");
+      clear();
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+
+      toast.error("failed delete");
+    }
   };
 
   return {
