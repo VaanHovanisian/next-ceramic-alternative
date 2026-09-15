@@ -18,7 +18,6 @@ export const AdminCategory: React.FC<Props> = (props) => {
   const { className, data, property } = props;
 
   const admin = useAdminCategory(data, property);
-
   return (
     <div className={cn("", className)}>
       <div className="flex gap-5 mb-5">

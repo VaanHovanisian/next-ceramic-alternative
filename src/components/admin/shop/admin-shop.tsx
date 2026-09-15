@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminCategory } from "./admin-category";
 import { AdminPrice } from "./admin-price";
 import { AdminProduct } from "./admin-product";
-
 interface Props {
   className?: string;
 }
