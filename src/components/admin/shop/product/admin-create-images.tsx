@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { AdminProductProps } from "@/hooks/admin/shop/admin-product";
+import { AdminProductProps } from "@/hooks/admin/admin-product";
 import { FilePicker, ImageThumb } from "./admin-image-controls";
 
 interface Props {

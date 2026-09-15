@@ -70,8 +70,8 @@ const productMode = {
 };
 
 export async function AdminProductAction(payload: Payload) {
-      if (!(await isAdmin())) {
-          throw new Error("Forbidden");
-      }
+  if (!(await isAdmin())) {
+    throw new Error("Forbidden");
+  }
   await productMode[payload.type](payload);
 }

@@ -1,4 +1,4 @@
-import { AdminProductAction } from "@/actions/shop/admin-product-action";
+import { AdminProductAction } from "@/actions/admin/admin-product-action";
 import { uploadImage } from "@/actions/upload-image";
 import { Color, Product } from "@prisma/client";
 import { useRouter } from "next/navigation";

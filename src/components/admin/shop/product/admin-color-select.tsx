@@ -3,7 +3,7 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui";
+} from "@/components/ui/dropdown-menu";
 import { Color } from "@prisma/client";
 import { ChevronDown } from "lucide-react";
 

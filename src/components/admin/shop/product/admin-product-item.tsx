@@ -1,18 +1,19 @@
 import React from "react";
+
+import { AdminColorSelect } from "./admin-color-select";
+import { AdminProductProps } from "@/hooks/admin/admin-product";
+import { Category, Color, Product } from "@prisma/client";
+import { FilePicker, ImageThumb } from "./admin-image-controls";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import {
-  Checkbox,
-  Input,
-  Label,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
-import { AdminColorSelect } from "./admin-color-select";
-import { AdminProductProps } from "@/hooks/admin/shop/admin-product";
-import { Category, Color, Product } from "@prisma/client";
-import { FilePicker, ImageThumb } from "./admin-image-controls";
+} from "@/components/ui/select";
 
 type Item = Product & { color: Color[] };
 

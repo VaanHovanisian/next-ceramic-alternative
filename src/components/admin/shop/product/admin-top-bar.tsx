@@ -1,7 +1,10 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Button, Checkbox, Label } from "@/components/ui";
-import { AdminProductProps } from "@/hooks/admin/shop/admin-product";
+
+import { AdminProductProps } from "@/hooks/admin/admin-product";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   className?: string;
