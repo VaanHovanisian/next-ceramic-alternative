@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useBasketStore } from "@/store/use-basket-store";
 import { toast } from "sonner";
 import { Product } from "@prisma/client";
 import { useBasket } from "@/hooks/use-basket";
@@ -30,7 +28,7 @@ export const Card: React.FC<Props> = (props) => {
         <Image
           src={product.imgUrl}
           alt={product.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-63.75 h-81.25 object-cover hover:scale-105 transition-transform duration-300"
           width={255}
           height={325}
         />
