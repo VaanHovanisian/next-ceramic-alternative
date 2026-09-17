@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Category, Color, Product } from "@prisma/client";
-import { useAdminProduct } from "@/hooks/admin/shop/admin-product";
+import { useAdminProduct } from "@/hooks/admin/admin-product";
 import { AdminProductCreate } from "./admin-product-create";
 import { AdminProductList } from "./admin-product-list";
 import { AdminTopBar } from "./admin-top-bar";

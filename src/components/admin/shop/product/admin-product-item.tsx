@@ -1,5 +1,4 @@
 import React from "react";
-
 import { AdminColorSelect } from "./admin-color-select";
 import { AdminProductProps } from "@/hooks/admin/admin-product";
 import { Category, Color, Product } from "@prisma/client";

@@ -19,7 +19,7 @@ export const auth = betterAuth({
         type: "string",
         defaultValue: "USER",
         input: false,
-        returned: false, // this field will not be returned in the user object
+        returned: false,
       },
     },
     deleteUser: {

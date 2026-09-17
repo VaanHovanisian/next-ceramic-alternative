@@ -17,9 +17,7 @@ export const AdminShop: React.FC<Props> = async (props) => {
     prisma.color.findMany(),
     prisma.priceRange.findMany(),
     prisma.product.findMany({
-      include: {
-        color: true,
-      },
+      include: { color: true },
     }),
   ]);
 

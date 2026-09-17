@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-
 import { AdminProductProps } from "@/hooks/admin/admin-product";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
