@@ -1,8 +1,8 @@
 import React from "react";
 import { AdminColorSelect } from "./admin-color-select";
+import { AdminProductProps } from "@/hooks/admin/admin-product";
 import { Category, Color, Product } from "@prisma/client";
 import { FilePicker, ImageThumb } from "./admin-image-controls";
-import { AdminProductProps } from "@/hooks/admin/admin-product";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";

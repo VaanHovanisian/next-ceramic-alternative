@@ -173,7 +173,6 @@ export const useAdminProduct = (
       router.refresh();
     } catch (error) {
       console.error(error);
-
       toast.error("failed delete");
     }
   };

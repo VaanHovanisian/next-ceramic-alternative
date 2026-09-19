@@ -11,19 +11,19 @@ import { HomeHero, Product } from "@prisma/client";
 interface Props {
   className?: string;
   products: Product[];
-  hero: HomeHero[];
+  hero: HomeHero | null;
 }
 
 export const Home: React.FC<Props> = (props) => {
-  const { className, products } = props;
+  const { className, products, hero } = props;
   return (
     <div className={cn("", className)}>
       <Hero
-        color="#826f66"
-        desctopImgUrl="/hero/1.jpg"
-        mobileImgUrl="/hero/1-mobile.jpg"
+        color={hero?.color}
+        desctopImgUrl={hero?.imgUrlDesktop}
+        mobileImgUrl={hero?.imgUrlMobile}
       >
-        <p>Handcrafted in Viet Nam since 1650</p>
+        <h2 className="my-5">{hero?.title}</h2>
       </Hero>
       <PlateServices items={servicesHome} />
       <Post

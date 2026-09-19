@@ -53,7 +53,7 @@ async function create() {
     },
   });
 
-  await prisma.homeHero.create({
+  await prisma.contactHero.create({
     data: {
       title: "BAT TRANG DINNER SET",
       color: "#3a3845",
@@ -72,6 +72,7 @@ async function reset() {
   await prisma.$executeRaw`TRUNCATE TABLE "HomeHero" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "ContactHero" RESTART IDENTITY CASCADE`;
 }
+
 async function main() {
   try {
     await reset();
