@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -14,12 +13,6 @@ const garamond = EB_Garamond({
   weight: "700",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Next Ceramic",
-  description: "The best ceramic on the world",
-  keywords: ["ceramic", "design", "home"],
-};
 
 export default function Layout({
   children,
