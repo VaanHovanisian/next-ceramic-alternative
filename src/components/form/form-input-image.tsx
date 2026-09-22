@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { useFormContext } from "react-hook-form";
+import { User } from "lucide-react";
 
 interface Props {
   className?: string;
@@ -34,13 +35,17 @@ export const FormInputImage: React.FC<Props> = (props) => {
   return (
     <div className={cn("relative w-25", className)}>
       {label && <span>{label}</span>}
-      <Image
-        className="w-full h-25 object-cover"
-        src={preview}
-        alt=""
-        width={100}
-        height={100}
-      />
+      {preview ? (
+        <Image
+          className="w-full h-25 object-cover"
+          src={preview}
+          alt=""
+          width={100}
+          height={100}
+        />
+      ) : (
+        <User />
+      )}
       <Input
         className="absolute opacity-0 w-full h-full inset-0 cursor-pointer"
         name={name}
