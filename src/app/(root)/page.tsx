@@ -1,7 +1,7 @@
 import { Home } from "@/components/home";
 import { prisma } from "@/prisma/prisma-client";
 import { unstable_cache } from "next/cache";
-
+// ISR
 // export const revalidate = 3600;
 
 const cachedData = unstable_cache(
