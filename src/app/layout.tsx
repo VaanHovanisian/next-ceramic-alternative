@@ -16,11 +16,6 @@ const garamond = EB_Garamond({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Next Ceramic",
-  description: "The best ceramic on the world",
-  keywords: ["ceramic", "design", "home"],
-};
 
 export default async function AdminLayout({
   children,
