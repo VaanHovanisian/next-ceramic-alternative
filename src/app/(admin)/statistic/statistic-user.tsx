@@ -35,7 +35,7 @@ export const StatisticUser: React.FC<Props> = (props) => {
                         </TableCell>
                         <TableCell>{el.name}</TableCell>
                         <TableCell>{el.email}</TableCell>
-                        <TableCell>{el.createdAt?.toString()}</TableCell>
+                        <TableCell>{el.createdAt?.toString().split("T")[0]}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

@@ -38,7 +38,7 @@ export const StatisticTabs: React.FC<Props> = (props) => {
             <TabsContent value="user">
                 <StatisticUser data={data.users} />
             </TabsContent>
-            <TabsContent value="user">
+            <TabsContent value="order">
                 <StatisticOrder data={data.order} />
             </TabsContent>
         </Tabs>
