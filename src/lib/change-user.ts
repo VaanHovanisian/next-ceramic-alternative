@@ -3,6 +3,7 @@
 import { toast } from "sonner";
 import { authClient } from "./auth-client";
 import { uploadImage } from "@/actions/upload-image";
+import { keyof } from "zod";
 
 type DirtyProps = Partial<
   Readonly<{
@@ -26,7 +27,7 @@ export const changeUser = async (data: any, dirtyField: DirtyProps) => {
       await authClient.updateUser({ image: img });
       toast.success("success update avatar");
     },
-    async email(value) {},
   };
-  Object.keys(dirtyField).forEach((el: any) => userObj[el](data));
+  const keys = Object.keys(dirtyField) as Array<keyof typeof userObj>;
+  keys.forEach((el) => userObj[el](data));
 };
