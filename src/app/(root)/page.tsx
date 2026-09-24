@@ -2,14 +2,19 @@ import { Home } from "@/components/home";
 import { prisma } from "@/prisma/prisma-client";
 import { unstable_cache } from "next/cache";
 
+export const revalidate = 3600; // revalidate every hour
+
 const cachedData = unstable_cache(
-  async () => await prisma.product.findMany(),
+  async () =>
+    await Promise.all([prisma.product.findMany(), prisma.homeHero.findFirst()]),
   ["home"],
-  { revalidate: 3600 },
+  {
+    revalidate: 3600,
+  },
 );
 
 export default async function HomePage() {
-  const products = await cachedData();
-  const hero = await prisma.homeHero.findFirst();
+  const [products, hero] = await cachedData();
+
   return <Home products={products} hero={hero} />;
 }

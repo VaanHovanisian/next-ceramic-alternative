@@ -30,7 +30,7 @@ export const Card: React.FC<Props> = (props) => {
         <Image
           src={product.imgUrl}
           alt={product.name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-63.75 h-81.25 object-cover hover:scale-105 transition-transform duration-300"
           width={255}
           height={325}
         />
