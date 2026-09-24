@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useBasketStore } from "@/store/use-basket-store";
 import { toast } from "sonner";
 import { Product } from "@prisma/client";
 import { useBasket } from "@/hooks/use-basket";

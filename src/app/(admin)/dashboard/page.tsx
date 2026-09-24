@@ -1,3 +1,5 @@
+import { StatisticTabs } from "@/components/admin/statistic/statistic-tabs";
+
 export default function Page() {
-  return <h1>barev</h1>;
+  return <StatisticTabs />;
 }

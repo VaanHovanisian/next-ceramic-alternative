@@ -1,6 +1,8 @@
 import { Home } from "@/components/home";
 import { prisma } from "@/prisma/prisma-client";
 import { unstable_cache } from "next/cache";
+// ISR
+// export const revalidate = 3600;
 
 export const revalidate = 3600; // revalidate every hour
 
@@ -12,6 +14,11 @@ const cachedData = unstable_cache(
     revalidate: 3600,
   },
 );
+
+// const data = async () => {
+//   const res = await fetch("url");
+//   const data = await res.json();
+// };
 
 export default async function HomePage() {
   const [products, hero] = await cachedData();
