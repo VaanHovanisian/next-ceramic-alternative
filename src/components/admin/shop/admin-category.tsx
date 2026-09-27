@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useAdminCategory } from "@/hooks/admin/us-price-range";
+import { useAdminCategory } from "@/hooks/admin/use-admin-category";
 
 interface Props {
   className?: string;
