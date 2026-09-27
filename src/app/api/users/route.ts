@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    if (!(await isAdmin)) {
+    if (!(await isAdmin())) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

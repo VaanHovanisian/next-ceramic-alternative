@@ -11,10 +11,10 @@ model Order {
   message   String?
   products  Json
 
-  paymentId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  paymentId   String
+  totalAmount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum OrderStatus {

@@ -26,7 +26,7 @@ export const StatisticUser: React.FC<Props> = (props) => {
           <TableHead>Avatar</TableHead>
           <TableHead>Name</TableHead>
           <TableHead>Mail</TableHead>
-          <TableHead>Register Data</TableHead>
+          <TableHead>Register Date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

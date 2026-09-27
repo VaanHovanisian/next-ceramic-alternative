@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    if (!(await isAdmin)) {
+    if (!(await isAdmin())) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const orders = await prisma.user.findMany();
+    const orders = await prisma.order.findMany();
 
     return NextResponse.json(orders, { status: 200 });
   } catch (error) {

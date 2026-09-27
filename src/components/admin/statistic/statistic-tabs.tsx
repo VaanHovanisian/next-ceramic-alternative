@@ -1,9 +1,9 @@
 "use client";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StatisticUser } from "./statistic-user";
 import { StatisticOrder } from "./statistic-order";
-import React from "react";
 import { Order, User } from "@prisma/client";
 
 interface Props {
@@ -37,9 +37,10 @@ export const StatisticTabs: React.FC<Props> = (props) => {
       </TabsList>
       <TabsContent value="user">
         <StatisticUser data={data.users} />
+      </TabsContent>
+      <TabsContent value="order">
         <StatisticOrder data={data.orders} />
       </TabsContent>
-      <TabsContent value="order"></TabsContent>
     </Tabs>
   );
 };
