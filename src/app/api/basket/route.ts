@@ -10,6 +10,7 @@ export async function GET() {
     if (!user) {
       return NextResponse.json({ totalAmount: 0, items: [] }, { status: 200 });
     }
+
     const userId = user.id;
     const basket = await updateBasket(userId);
 

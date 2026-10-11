@@ -17,11 +17,6 @@ export const BasketSyncer = () => {
       return;
     }
 
-    if (basket.length === 0) {
-      mutate(ApiRoutes.BASKET);
-      return;
-    }
-
     (async () => {
       try {
         await axiosInstance.post(ApiRoutes.BASKET_MERGE, {
