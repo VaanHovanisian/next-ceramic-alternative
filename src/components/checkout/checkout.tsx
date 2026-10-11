@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/cn";
 import { FormCheckout } from "../form/form-checkout";
 import { CheckoutTotal } from "./checkout-total";
 import {
@@ -10,7 +10,7 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
 } from "../ui/breadcrumb";
-import { Container } from "../container";
+import { Container } from "../../shared/ui/container";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {

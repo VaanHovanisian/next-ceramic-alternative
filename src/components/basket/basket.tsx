@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/cn";
 import { Trash2 } from "lucide-react";
 import { BasketCard } from "./basket-card";
 import { BasketTotal } from "./basket-total";
