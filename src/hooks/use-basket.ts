@@ -2,8 +2,8 @@
 import { PostBasketValue } from "@/@types/basket";
 import { ApiRoutes } from "@/constants/api-routes";
 import { useSession } from "@/lib/auth-client";
-import { fetcher } from "@/lib/fetcher";
-import { axiosInstance } from "@/lib/instance";
+import { fetcher } from "@/shared/api/fetcher";
+import { axiosInstance } from "@/shared/api/instance";
 import { useBasketStore } from "@/store/use-basket-store";
 import { Product } from "@prisma/client";
 import useSWR from "swr";

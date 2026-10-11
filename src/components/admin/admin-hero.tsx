@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { cn } from "@/lib/utils";
-import { Container } from "../container";
+import { cn } from "@/shared/lib/cn";
+import { Container } from "../../shared/ui/container";
 import { FormInput } from "../form/form-input";
 import { FormInputImage } from "../form/form-input-image";
 import { Button } from "../ui/button";

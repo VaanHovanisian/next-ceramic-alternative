@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/cn";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
 } from "../ui/breadcrumb";
 import { ProductImage } from "./product-image";
-import { Container } from "../container";
+import { Container } from "../../shared/ui/container";
 import { ProductContent } from "./product-content";
 import { Catalog } from "../catalog";
 import { productIdes } from "@/constants/products";
